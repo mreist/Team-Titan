@@ -18,6 +18,8 @@ class Question(spyral.Sprite):
 
 		self.image = self.font.render(str(self.num1) + "+" + str(self.num2) + "= ?")
 
+class Car(spyral.Sprite):
+
 class SpeedSolver(spyral.Scene):
     def __init__(self, *args, **kwargs):
         #What is this?
