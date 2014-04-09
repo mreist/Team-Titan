@@ -18,7 +18,29 @@ class Question(spyral.Sprite):
 
 		self.image = self.font.render(str(self.num1) + "+" + str(self.num2) + "= ?")
 
+class Player(spyral.Sprite):
+    def __init__(self, scene, location):
+        spyral.Sprite.__init__(self, scene)
+        self.color = 'pink'
+        self.name = 'NO_NAME'
+        
+class Race(spyral.Sprite):
+    def __init__(self, scene, location):
+        spyral.Sprite.__init__(self, scene)
+        self.distance = 0
+        self.Difficulty = 0
+
+class Store(spyral.Sprite):
+    def __init__(self, scene, location):
+        spyral.Sprite.__init__(self, scene)
+        self.parts = 'lasers'
+
+        
 class Car(spyral.Sprite):
+    def __init__(self, scene, location):
+        spyral.Sprite.__init__(self, scene)
+        self.speed = 0
+        self.color = player.color
 
 class SpeedSolver(spyral.Scene):
     def __init__(self, *args, **kwargs):
