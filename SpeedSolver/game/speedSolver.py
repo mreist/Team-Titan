@@ -1,12 +1,26 @@
 import spyral
 import random
 import math
+import pygame
 
 WIDTH = 1200
 HEIGHT = 900
 BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
+DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
+
+
+class Vehicle(spyral.Sprite):
+    def __init__(self, scene):
+        spyral.Sprite.__init__(self, scene)
+        
+        self.image = spyral.Image(size=(300, 100))
+        #Based on which vehicle they select use a switch statement to select self.image
+        self.image = spyral.Image("libraries/spyral/resources/images/car.png")
+        self.anchor = 'center'     #Default anchor is 'topleft'
+
+        self.speed = 0
 
 class Question(spyral.Sprite):
     def __init__(self, scene, location):
@@ -23,6 +37,13 @@ class SpeedSolver(spyral.Scene):
         #What is this?
         #global manager
         spyral.Scene.__init__(self, SIZE)
-        self.background = spyral.Image(size=SIZE).fill(BG_COLOR)
+        #self.background = spyral.Image(size=SIZE).fill(BG_COLOR)
 
+        #Replace with real background
+        self.background = spyral.Image("libraries/spyral/resources/images/testBackground.png")
+
+        self.playerVehicle = Vehicle(self)
+        self.playerVehicle.pos = (WIDTH/2, HEIGHT/2)
+
+        spyral.event.register('input.keyboard.down.esc', spyral.director.pop)
         spyral.event.register("system.quit", spyral.director.pop)
