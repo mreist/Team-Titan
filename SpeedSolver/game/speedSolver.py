@@ -34,33 +34,30 @@ class Question(spyral.Sprite):
 
 class SpeedSolver(spyral.Scene):
 	def __init__(self, *args, **kwargs):
-		#What is this?
-        #global manager
-		spyral.Scene.__init__(self, SIZE)
-        #self.background = spyral.Image(size=SIZE).fill(BG_COLOR)
-        #Replace with real background
+		super(SpeedSolver, self).__init__(SIZE)
+       
     	self.background = spyral.Image("libraries/spyral/resources/images/TrackBack.png")
 		self.playerVehicle = Vehicle(self)
 		self.playerVehicle.pos = (WIDTH/2, (HEIGHT/2)-100)
     
 
-	class RegisterForm(spyral.Form):
+		class RegisterForm(spyral.Form):
 			StartGame = spyral.widgets.Button("Start Game")
 			Options = spyral.widgets.Button("Options")
     	self.my_form = RegisterForm(self)
-	self.my_form.focus()
-	self.my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2)-100)
-	self.my_form.Options.pos = ((WIDTH/2)-50, HEIGHT/2)
-	self.Title = Title(self, DEF_FONT, (150, 100), 0)
-	#spyral.event.register("input.mouse.down", self.StartGame)
-	#spyral.event.register("input.mouse.down", self.Options)
+		self.my_form.focus()
+		self.my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2)-100)
+		self.my_form.Options.pos = ((WIDTH/2)-50, HEIGHT/2)
+		self.Title = Title(self, DEF_FONT, (150, 100), 0)
+		#spyral.event.register("input.mouse.down", self.StartGame)
+		#spyral.event.register("input.mouse.down", self.Options)
 
-    #def StartGame(self,pos):
+   		 #def StartGame(self,pos):
 	
-    #def Options(self,pos):
+   		 #def Options(self,pos):
 	
-	spyral.event.register('input.keyboard.down.esc', spyral.director.pop)
-    	spyral.event.register("system.quit", spyral.director.pop)
+		spyral.event.register('input.keyboard.down.esc', spyral.director.pop)
+   		spyral.event.register("system.quit", spyral.director.pop)
 
 	def create_title(self):
 		Title(self, default_Font, pos)
