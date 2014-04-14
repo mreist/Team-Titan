@@ -17,7 +17,7 @@ class Vehicle(spyral.Sprite):
         
         self.image = spyral.Image(size=(300, 100))
         #Based on which vehicle they select use a switch statement to select self.image
-        self.image = spyral.Image("libraries/spyral/resources/images/car.png")
+        self.image = spyral.Image("images/Car.png")
         self.anchor = 'center'     #Default anchor is 'topleft'
 
         self.speed = 0
@@ -47,7 +47,7 @@ class Title(spyral.Sprite):
         spyral.Sprite.__init__(self, scene)
         
         self.image = spyral.Image(size=(300, 100))
-        self.image = spyral.Image("libraries/spyral/resources/images/Title.png")
+        self.image = spyral.Image("images/Title.png")
         self.anchor = 'center'     '
 
 
@@ -76,7 +76,7 @@ class Title(spyral.Sprite):
 class Options(spyral.Scene):
     def __init__(self, *args, **kwargs):
         spyral.Scene.__init__(self, SIZE)
-        self.background = spyral.Image("libraries/spyral/resources/images/testBackground.png")
+        self.background = spyral.Image("images/Background.png")
         
     
 >>>>>>> Jason-Branch
@@ -86,7 +86,7 @@ class SpeedSolver(spyral.Scene):
 		super(SpeedSolver, self).__init__(SIZE)
        
     		
-		self.background = spyral.Image("libraries/spyral/resources/images/Background.png")
+		self.background = spyral.Image("images/Background.png")
 		self.playerVehicle = Vehicle(self)
 		self.playerVehicle.pos = (WIDTH/2, (HEIGHT/2)+200)
     
