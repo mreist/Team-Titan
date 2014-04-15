@@ -17,33 +17,97 @@ class Vehicle(spyral.Sprite):
         
         self.image = spyral.Image(size=(300, 100))
         #Based on which vehicle they select use a switch statement to select self.image
-        self.image = spyral.Image("libraries/spyral/resources/images/car.png")
+        self.image = spyral.Image("images/Car.png")
         self.anchor = 'center'     #Default anchor is 'topleft'
 
         self.speed = 0
 
 class Question(spyral.Sprite):
-    def __init__(self, scene, location):
+    def __init__(self, scene, location, operator, digits):
         spyral.Sprite.__init__(self, scene)
-        self.num1 = random.randint(1, 10)
-        self.num2 = random.randint(1, 10)
-        self.answer = self.num1 + self.num2
+        if digits == 1:
+            self.num1 = random.randint(1, 10)
+            self.num2 = random.randint(1, 10)
+        elif digits == 2:
+            self.num1 = random.randint(10, 100)
+            self.num2 = random.randint(10, 100)
+        elif digits == 3:
+            self.num1 = random.randint(100, 1000)
+            self.num2 = random.randint(100, 1000)
+        else:
+            self.num1 = random.randint(1, 10000000)
+            self.num2 = random.randint(1, 10000000)
+            
         self.font = spyral.Font(DEF_FONT, 36)
+        
+          if operator == 'addition':
+            self.answer = self.num1 + self.num2
+            self.image = self.font.render(str(self.num1) + "+" + str(self.num2) + "= ?")
+        elif operator == 'multiplication':
+            self.answer = self.num1*self.num2
+            self.image = self.font.render(str(self.num1) + "x" + str(self.num2) + "= ?")
+        elif operator == 'subtraction':
+            self.answer = self.num1-self.num2
+            self.image = self.font.render(str(self.num1) + "-" + str(self.num2) + "= ?")
+        elif operator == 'division':
+            checkdivision(self.num1, self.num2)
+        
 
-        self.image = self.font.render(str(self.num1) + "+" + str(self.num2) + "= ?")
-
-class SpeedSolver(spyral.Scene):
+    
+      
+        
+    def checkdivision(self, num1, num2):
+        if self.num1 % self.num2 == 0:
+            self.answer = num1/num2
+            self.image = self.font.render(str(self.num1) + "/" + str(self.num2) + "= ?")
+        else:
+            self.num1 = random.randint(1, 10)
+            self.num2 = random.randint(1, 10)
+            checkdivision(num1, num2)
+            
+class Options(spyral.Scene):
     def __init__(self, *args, **kwargs):
-        #What is this?
-        #global manager
         spyral.Scene.__init__(self, SIZE)
-        #self.background = spyral.Image(size=SIZE).fill(BG_COLOR)
+        self.background = spyral.Image("images/Background.png")
+        
+class Title(spyral.Sprite):
+    def __init__(self, scene):
+        spyral.Sprite.__init__(self, scene)
+        
+        self.image = spyral.Image(size=(300, 100))
+        self.image = spyral.Image("images/Title.png")
+        self.anchor = 'center' 
+        
+>>>>>>> Jason-Branch
+class SpeedSolver(spyral.Scene):
+	def __init__(self, *args, **kwargs):
 
-        #Replace with real background
-        self.background = spyral.Image("libraries/spyral/resources/images/testBackground.png")
+		super(SpeedSolver, self).__init__(SIZE)
+       
+    		
+		self.background = spyral.Image("images/Background.png")
+		self.playerVehicle = Vehicle(self)
+		self.playerVehicle.pos = (WIDTH/2, (HEIGHT/2)+200)
+    
+		self.Title = Title(self)
+		self.Title.pos = (WIDTH/2, (HEIGHT/2) - 300)
 
-        self.playerVehicle = Vehicle(self)
-        self.playerVehicle.pos = (WIDTH/2, HEIGHT/2)
+		class RegisterForm(spyral.Form):
+			StartGame = spyral.widgets.Button("Start Game")
+			Options = spyral.widgets.Button("Options")
+    		self.my_form = RegisterForm(self)
+		self.my_form.focus()
+		self.my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
+		self.my_form.Options.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
+		
+		#spyral.event.register("input.mouse.down", self.StartGame)
+		#spyral.event.register("input.mouse.down", self.Options)
 
-        spyral.event.register('input.keyboard.down.esc', spyral.director.pop)
-        spyral.event.register("system.quit", spyral.director.pop)
+   		#def StartGame(self,pos):
+	
+   		#def Options(self,pos):
+	
+		spyral.event.register('input.keyboard.down.esc', spyral.director.pop)
+   		spyral.event.register("system.quit", spyral.director.pop)
+
+	
