@@ -1,0 +1,20 @@
+import random
+import math
+class question
+int[] numerals
+char operator
+int result
+
+void generate(){
+numerals[0] = randint(1,10)
+numerals[1] = randint(1,10)
+result = numerals[0] = numerals[1]
+}
+int[] getNumerals(){
+return numerals
+}
+int getResult(){
+return result
+}
+
+I will pythonize it wednesday or so, if there are any issues with the basic alg let me know.
