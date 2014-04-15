@@ -78,7 +78,6 @@ class Title(spyral.Sprite):
         self.image = spyral.Image("images/Title.png")
         self.anchor = 'center' 
         
->>>>>>> Jason-Branch
 class SpeedSolver(spyral.Scene):
 	def __init__(self, *args, **kwargs):
 
