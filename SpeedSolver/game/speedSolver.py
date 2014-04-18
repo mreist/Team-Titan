@@ -37,22 +37,10 @@ class Question(spyral.Sprite):
         else:
             self.num1 = random.randint(1, 10000000)
             self.num2 = random.randint(1, 10000000)
+            
         self.font = spyral.Font(DEF_FONT, 36)
-<<<<<<< HEAD
-
-        self.image = self.font.render(str(self.num1) + "+" + str(self.num2) + "= ?")
-
-class Title(spyral.Sprite):
-    def __init__(self, scene):
-        spyral.Sprite.__init__(self, scene)
         
-        self.image = spyral.Image(size=(300, 100))
-        self.image = spyral.Image("images/Title.png")
-        self.anchor = 'center'     '
-
-
-=======
-        if operator == 'addition':
+          if operator == 'addition':
             self.answer = self.num1 + self.num2
             self.image = self.font.render(str(self.num1) + "+" + str(self.num2) + "= ?")
         elif operator == 'multiplication':
@@ -63,6 +51,10 @@ class Title(spyral.Sprite):
             self.image = self.font.render(str(self.num1) + "-" + str(self.num2) + "= ?")
         elif operator == 'division':
             checkdivision(self.num1, self.num2)
+        
+
+    
+      
         
     def checkdivision(self, num1, num2):
         if self.num1 % self.num2 == 0:
@@ -78,8 +70,14 @@ class Options(spyral.Scene):
         spyral.Scene.__init__(self, SIZE)
         self.background = spyral.Image("images/Background.png")
         
-    
->>>>>>> Jason-Branch
+class Title(spyral.Sprite):
+    def __init__(self, scene):
+        spyral.Sprite.__init__(self, scene)
+        
+        self.image = spyral.Image(size=(300, 100))
+        self.image = spyral.Image("images/Title.png")
+        self.anchor = 'center' 
+        
 class SpeedSolver(spyral.Scene):
 	def __init__(self, *args, **kwargs):
 
