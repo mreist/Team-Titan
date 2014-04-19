@@ -3,6 +3,7 @@ import random
 import math
 import Vehicle
 import Options
+import Race
 
 WIDTH = 1200
 HEIGHT = 900
@@ -32,7 +33,12 @@ class MainMenu(spyral.Scene):
 		self.my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
 
 		spyral.event.register("form.RegisterForm.OptionButton.clicked", self.goToOptions)
+		spyral.event.register("form.RegisterForm.StartGame.clicked", self.goToRace)
 		
 	def goToOptions(self):
 		spyral.director.pop
 		spyral.director.push(Options.OptionScene()) 
+		
+	def goToRace(self):
+	    spyral.director.pop
+	    spyral.director.push(Race.RaceScene())

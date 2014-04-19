@@ -21,9 +21,6 @@ class MainMenu(spyral.Scene):
 		self.background = spyral.Image("images/Background.png")
 		playerVehicle = Vehicle.Vehicles(self)
 		playerVehicle.pos = (WIDTH/2, (HEIGHT/2)+200)
-    
-		self.Title = Title(self)
-		self.Title.pos = (WIDTH/2, (HEIGHT/2) - 300)
 
 		class RegisterForm(spyral.Form):
 			StartGame = spyral.widgets.Button("Start Game")
@@ -35,7 +32,12 @@ class MainMenu(spyral.Scene):
 		self.my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
 
 		spyral.event.register("form.RegisterForm.OptionButton.clicked", self.goToOptions)
+		spyral.event.register("form.RegisterForm.StartGame.clicked", self.goToRace)
 		
 	def goToOptions(self):
 		spyral.director.pop
 		spyral.director.push(Options.OptionScene()) 
+		
+	def goToRace(self):
+	    spyral.director.pop
+	    spyral.director.push(Race.RaceScene())
