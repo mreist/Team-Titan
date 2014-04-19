@@ -11,14 +11,6 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
-class Title(spyral.Sprite):
-    def __init__(self, scene):
-        spyral.Sprite.__init__(self, scene)
-        
-        self.image = spyral.Image(size=(300, 100))
-        self.image = spyral.Image("images/Title.png")
-        self.anchor = 'center' 
-
 class MainMenu(spyral.Scene):
 	def __init__(self):
 		super(MainMenu, self).__init__(SIZE)

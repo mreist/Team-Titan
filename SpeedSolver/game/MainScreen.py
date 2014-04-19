@@ -11,14 +11,6 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
-class Title(spyral.Sprite):
-    def __init__(self, scene):
-        spyral.Sprite.__init__(self, scene)
-        
-        self.image = spyral.Image(size=(300, 100))
-        self.image = spyral.Image("images/Title.png")
-        self.anchor = 'center' 
-
 class MainMenu(spyral.Scene):
 	def __init__(self):
 		super(MainMenu, self).__init__(SIZE)
@@ -29,9 +21,6 @@ class MainMenu(spyral.Scene):
 		self.background = spyral.Image("images/Background.png")
 		playerVehicle = Vehicle.Vehicles(self)
 		playerVehicle.pos = (WIDTH/2, (HEIGHT/2)+200)
-    
-		self.Title = Title(self)
-		self.Title.pos = (WIDTH/2, (HEIGHT/2) - 300)
 
 		class RegisterForm(spyral.Form):
 			StartGame = spyral.widgets.Button("Start Game")
