@@ -14,6 +14,9 @@ class OptionScene(spyral.Scene):
 	def __init__(self):
 		super(OptionScene, self).__init__(SIZE)
 
+		spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
+		spyral.event.register("system.quit", spyral.director.quit)
+
 		self.background = spyral.Image("images/Option_Menu.png")
 
 		class RegisterForm(spyral.Form):
