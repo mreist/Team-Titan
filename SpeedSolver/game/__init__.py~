@@ -1,5 +1,7 @@
 import spyral
-import pong
+import speedSolver
+import Options
+import MainScreen
 
 def main():
-    spyral.director.push(pong.Pong())
+    spyral.director.push(TitleScreen.Title())
