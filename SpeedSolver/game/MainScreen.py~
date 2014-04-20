@@ -3,6 +3,7 @@ import random
 import math
 import Vehicle
 import Options
+import Race
 
 WIDTH = 1200
 HEIGHT = 900
