@@ -3,6 +3,7 @@ import random
 import math
 import MainScreen
 import Vehicle
+import Questions
 
 WIDTH = 1200
 HEIGHT = 900
@@ -22,7 +23,9 @@ class RaceScene(spyral.Scene):
 
         playerVehicle = Vehicle.Vehicles(self)
         playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
-
+        
+        currentQuestion = Questions.Question(self, 'addition', 1)
+        currentQuestion.pos = (WIDTH/2, (HEIGHT/2)+435)
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
             
