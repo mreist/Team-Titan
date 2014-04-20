@@ -22,3 +22,17 @@ class RaceScene(spyral.Scene):
 
         playerVehicle = Vehicle.Vehicles(self)
         playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
+
+        class RegisterForm(spyral.Form):
+            QuitButton = spyral.widgets.Button("Quit")
+            
+        self.my_form = RegisterForm(self)
+
+        self.my_form.focus()
+        self.my_form.QuitButton.pos = ((WIDTH-100), (HEIGHT-50))
+
+        spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
+
+    def goToMenu(self):
+        spyral.director.pop
+        spyral.director.push(MainScreen.MainMenu())
