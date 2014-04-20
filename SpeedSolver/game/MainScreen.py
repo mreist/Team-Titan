@@ -20,13 +20,13 @@ class MainMenu(spyral.Scene):
         spyral.event.register("system.quit", spyral.director.quit)
 
         self.background = spyral.Image("images/Background.png")
-        playerVehicle = Vehicle.Vehicles(self)
+        playerVehicle = Vehicle.Vehicles(self, "images/Car.png")
         playerVehicle.pos = (WIDTH/2, (HEIGHT/2)+200)
 
         class RegisterForm(spyral.Form):
             StartGame = spyral.widgets.Button("Start Game")
             OptionButton = spyral.widgets.Button("Options")
-        
+ 
         self.my_form = RegisterForm(self)
 
         self.my_form.focus()
