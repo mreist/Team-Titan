@@ -10,31 +10,6 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
-<<<<<<< HEAD
-class OptionScene(spyral.Scene):
-    def __init__(self):
-        super(OptionScene, self).__init__(SIZE)
-
-        spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
-        spyral.event.register("system.quit", spyral.director.quit)
-
-        self.background = spyral.Image("images/Option_Menu.png")
-
-        class RegisterForm(spyral.Form):
-            BackButton = spyral.widgets.Button("Go Back")
-		
-        self.my_form = RegisterForm(self)
-
-        self.my_form.focus()
-        self.my_form.BackButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
-
-        spyral.event.register("form.RegisterForm.BackButton.clicked", self.goToMenu)
-
-	
-    def goToMenu(self):
-        spyral.director.pop
-        spyral.director.push(MainScreen.MainMenu()) 
-=======
 #Box dimensions are 85x 80
 class EasyBox(spyral.Sprite):
     def __init__(self, scene):
@@ -96,7 +71,6 @@ class CheckMark(spyral.Sprite):
 class OptionScene(spyral.Scene):
     def __init__(self):
         super(OptionScene, self).__init__(SIZE)
->>>>>>> origin/master
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
