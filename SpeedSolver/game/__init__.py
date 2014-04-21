@@ -1,5 +1,9 @@
 import spyral
 import speedSolver
+import Options
+import MainScreen
+import TitleScreen
+import Race
 
 def main():
-    spyral.director.push(speedSolver.SpeedSolver())
+    spyral.director.push(TitleScreen.Title())
