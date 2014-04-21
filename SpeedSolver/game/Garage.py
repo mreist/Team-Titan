@@ -10,14 +10,26 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
-class OptionScene(spyral.Scene):
+
+class Garage(spyral.Sprite):
+    def __init__(self, scene):
+        super(Garage, self).__init__(scene)
+        
+        self.image = spyral.Image(size =(5, 5))
+        self.image = spyral.Image("images/Garage.png")
+        self.anchor = 'center'
+
+class GarageScene(spyral.Scene):
     def __init__(self):
-        super(OptionScene, self).__init__(SIZE)
+        super(GarageScene, self).__init__(SIZE)
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
 
-        self.background = spyral.Image("images/Option_Menu.png")
+        self.background = spyral.Image("images/Background.png")
+        
+        CarGarage = Garage(self)
+        CarGarage.pos = ((WIDTH/2), (HEIGHT/2)-100)
 
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")

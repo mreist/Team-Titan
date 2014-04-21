@@ -10,14 +10,14 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
-class OptionScene(spyral.Scene):
+class LeaderboardScene(spyral.Scene):
     def __init__(self):
-        super(OptionScene, self).__init__(SIZE)
+        super(LeaderboardScene, self).__init__(SIZE)
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
 
-        self.background = spyral.Image("images/Option_Menu.png")
+        #self.background = spyral.Image("images/Leaderboard.png")
 
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")
