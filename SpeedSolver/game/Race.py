@@ -29,23 +29,22 @@ class RaceScene(spyral.Scene):
         
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
-        class Enter(spyral.Form):
             EnterButton = spyral.widgets.Button("Enter")
-        class TextInput(spyral.Form):
             AnswerInput = spyral.widgets.TextInput(100, "Answer")
+            
         self.my_form = RegisterForm(self)
-        self.my_form.add_widget.Enter(self)
-        self.my_form.add_widget.TextInput(self)
+        # self.my_form.add_widget.EnterButton(self)
+#         self.my_form.add_widget.AnswerInput(self)
 
         self.my_form.focus()
         
         self.my_form.QuitButton.pos = ((WIDTH-100), (HEIGHT-50))
-        self.my_form.EnterButton.pos = ((WIDTH/2 + 40), (HEIGHT/2)+435)
-        self.my_form.AnswerInput.pos = ((WIDTH/2 + 30), (HEIGHT/2)+435)
+        self.my_form.EnterButton.pos = ((WIDTH/2 + 70), (HEIGHT/2)+400)
+        self.my_form.AnswerInput.pos = ((WIDTH/2 + 30), (HEIGHT/2)+400)
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
 
         
-        if answerForm.answer == currentQuestion.answer:
+        if self.my_form.AnswerInput.value == currentQuestion.answer:
             print "CORRECT"
         else:
             print "INCORRECT"
