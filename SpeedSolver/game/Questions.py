@@ -39,7 +39,6 @@ class Question(spyral.Sprite):
             self.image = self.font.render(str(self.num1) + "-" + str(self.num2) + "= ?")
         elif operator == 'division':
             checkdivision(self.num1, self.num2)
-        
 
     
       
