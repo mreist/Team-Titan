@@ -23,10 +23,17 @@ class RaceScene(spyral.Scene):
         playerVehicle = Vehicle.Vehicles(self, "images/Apple-Tree.png")        
 
         playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
+<<<<<<< HEAD
         
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
 
+=======
+
+        class RegisterForm(spyral.Form):
+            QuitButton = spyral.widgets.Button("Quit")
+            
+>>>>>>> origin/master
         self.my_form = RegisterForm(self)
 
         self.my_form.focus()
