@@ -75,6 +75,7 @@ class OptionScene(spyral.Scene):
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
 
+<<<<<<< HEAD
 
         mediumCheck = CheckMark(self.scene, (75, 450))
         easy = EasyBox(self)
@@ -91,6 +92,24 @@ class OptionScene(spyral.Scene):
             EasyBox = spyral.widgets.Checkbox()
 
         my_form = RegisterForm(self)
+=======
+        self.background = spyral.Image("images/Option_Menu.png")
+
+        class RegisterForm(spyral.Form):
+            BackButton = spyral.widgets.Button("Go Back")
+		
+        self.my_form = RegisterForm(self)
+
+        self.my_form.focus()
+        self.my_form.BackButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
+
+        spyral.event.register("form.RegisterForm.BackButton.clicked", self.goToMenu)
+
+	
+    def goToMenu(self):
+        spyral.director.pop
+        spyral.director.push(MainScreen.MainMenu()) 
+>>>>>>> 4481b20bebffb2cbfe40a28031c712e57e40ef50
 
         my_form.focus()
        # my_form.EasyBox {
