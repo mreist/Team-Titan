@@ -33,13 +33,17 @@ class MainMenu(spyral.Scene):
 		class RegisterForm(spyral.Form):
 			StartGame = spyral.widgets.Button("Start Game")
 			OptionButton = spyral.widgets.Button("Options")
+                        GarageButton = spyral.widgets.Button("Enter Garage")
     		self.my_form = RegisterForm(self)
 
 		self.my_form.focus()
 		self.my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
 		self.my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
+                self.my_form.GarageButton.pos = ((WIDTH/2)-50, (HEIGHT/2) - 200)
 
 		spyral.event.register("form.RegisterForm.OptionButton.clicked", self.goToOptions)
+                spyral.event.register("form.RegisterForm.GarageButton.clicked", self.goToGarage)
+
 
                 #spyral.event.register("input.mouse.down.left", self.goToGarage)
                 
@@ -48,9 +52,9 @@ class MainMenu(spyral.Scene):
 		spyral.director.pop
 		spyral.director.push(Options.OptionScene()) 
 
-       # def goToGarage(self, pos):
+        def goToGarage(self):
                # if pos.x > 300 and pos.x < 600 and pos.y > 350 and pos.y < 500:
-                  #  spyral.director.pop
-                   # spyral.director.push(Garage.GarageScene())
+               spyral.director.pop
+               spyral.director.push(Garage.GarageScene())
 
 
