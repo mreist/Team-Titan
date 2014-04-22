@@ -1,4 +1,4 @@
-import spyral
+import spyral 
 import random
 import math
 import MainScreen
@@ -21,7 +21,7 @@ class RaceScene(spyral.Scene):
         super(RaceScene, self).__init__(SIZE)
         
         global timeStart
-        timeStart = time.time()
+        timeStart = time.time() 
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
@@ -33,7 +33,7 @@ class RaceScene(spyral.Scene):
         playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
 
         self.currentQuestion = Questions.Question(self, 'addition', 1)
-        self.currentQuestion.pos = (WIDTH/2, (HEIGHT-50))
+        self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
         
 
         class RegisterForm(spyral.Form):
@@ -64,7 +64,7 @@ class RaceScene(spyral.Scene):
         print ("previous answer: " + str(self.currentQuestion.answer))
         self.currentQuestion.kill()
         self.currentQuestion = Questions.Question(self, 'addition', 1)
-        self.currentQuestion.pos = (WIDTH/2, (HEIGHT - 50))
+        self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
         print ("new answer: " + str(self.currentQuestion.answer))
         self.my_form.focus()
         self.level += 1
@@ -75,10 +75,12 @@ class RaceScene(spyral.Scene):
             #eventually: go to score screen
     
 
-    def update(self):
-        self.timeText.update("Current Time: %.2f" % (time.time() - timeStart))
+    def update(self): 
+        self.timeText.update("Current Time: %.2f" % (time.time() - timeStart)) 
        
     def goToMenu(self):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
 
+
+        
