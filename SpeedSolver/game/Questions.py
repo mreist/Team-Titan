@@ -10,7 +10,7 @@ SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
 class Question(spyral.Sprite):
-    def __init__(self, scene, location, operator, digits):
+    def __init__(self, scene, operator, digits):
         spyral.Sprite.__init__(self, scene)
         if digits == 1:
             self.num1 = random.randint(1, 10)
