@@ -9,6 +9,7 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
+#Vehicle Sprite that creates the car image with a speed
 class Vehicles(spyral.Sprite):
     def __init__(self, scene):
 		super(Vehicles, self).__init__(scene)
