@@ -38,13 +38,13 @@ class RaceScene(spyral.Scene):
         self.my_form.QuitButton.pos = ((WIDTH-100), (HEIGHT-50))
 
         spyral.event.register('director.update', self.update)
-        self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH - 100, 100), str(time.time() - timeStart))
-        #spyral.event.register('director.update', timeText.update(str(time.time() - timeStart))) 
+        self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH - 300, 100), str(time.time() - timeStart))
 
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
 
     def update(self): 
         print(time.time() - timeStart)
+        self.timeText.update("Current Time: %.2f" % (time.time() - timeStart)) 
        
     def goToMenu(self):
         spyral.director.pop
