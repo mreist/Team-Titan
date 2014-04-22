@@ -15,6 +15,7 @@ DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 class RaceScene(spyral.Scene):
     def __init__(self):
         super(RaceScene, self).__init__(SIZE)
+        self.layers = ['top', 'bottom']
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
@@ -30,13 +31,11 @@ class RaceScene(spyral.Scene):
         
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
-            EnterButton = spyral.widgets.Button("Enter")
             AnswerInput = spyral.widgets.TextInput(100, "Answer")
             
         self.my_form = RegisterForm(self)
         self.my_form.focus()
         self.my_form.QuitButton.pos = ((WIDTH-100), (HEIGHT-50))
-        self.my_form.EnterButton.pos = ((WIDTH/2 + 150), (HEIGHT/2)+400)
         self.my_form.AnswerInput.pos = ((WIDTH/2 + 30), (HEIGHT/2)+400)
         
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
@@ -46,7 +45,7 @@ class RaceScene(spyral.Scene):
     def checkAnswer(self):
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
             print "CORRECT"
-            self.feedback = TextInterface(self, DEF_FONT, (WIDTH/2, 50), "Correct!")
+            self.feedback = TextInterface(self, spyral.Font(DEF_FONT, 24, (0,255,0)), (WIDTH/2, 50), "Correct!")
         else:
             print "INCORRECT"
             
@@ -54,9 +53,15 @@ class RaceScene(spyral.Scene):
         self.currentQuestion.kill()
         self.currentQuestion = Questions.Question(self, 'addition', 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT/2)+435)
+        self.currentQuestion.layer = 'bottom'
         print ("new answer: " + str(self.currentQuestion.answer))
+        self.my_form.AnswerInput.pos = ((WIDTH/2 + 30), (HEIGHT/2)+400)
+        self.my_form.focus()
+        self.my_form.layer = 'top'
         self.level += 1
+        print str(self.level)
         if self.level > 10:
+            print 'gameover'
             self.goToMenu
             #eventually: go to score screen
 
