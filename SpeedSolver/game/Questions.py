@@ -13,19 +13,7 @@ class Question(spyral.Sprite):
     def __init__(self, scene, operator, digits):
         spyral.Sprite.__init__(self, scene)
         self.anchor = 'midbottom'
-        if digits == 1:
-            self.num1 = random.randint(1, 10)
-            self.num2 = random.randint(1, 10)
-        elif digits == 2:
-            self.num1 = random.randint(10, 100)
-            self.num2 = random.randint(10, 100)
-        elif digits == 3:
-            self.num1 = random.randint(100, 1000)
-            self.num2 = random.randint(100, 1000)
-        else:
-            self.num1 = random.randint(1, 10000000)
-            self.num2 = random.randint(1, 10000000)
-            
+        generateNumbers(digits)  
         self.font = spyral.Font(DEF_FONT, 36)
         
         if operator == 'addition':
@@ -44,6 +32,21 @@ class Question(spyral.Sprite):
         elif operator == 'division':
             checkdivision(self.num1, self.num2)
 
+            
+    def generateNumbers(digits):
+        if digits == 1:
+            self.num1 = random.randint(1, 10)
+            self.num2 = random.randint(1, 10)
+        elif digits == 2:
+            self.num1 = random.randint(10, 100)
+            self.num2 = random.randint(10, 100)
+        elif digits == 3:
+            self.num1 = random.randint(100, 1000)
+            self.num2 = random.randint(100, 1000)
+        else:
+            self.num1 = random.randint(1, 10000000)
+            self.num2 = random.randint(1, 10000000)
+          
     
       
         
@@ -52,7 +55,6 @@ class Question(spyral.Sprite):
             self.answer = num1/num2
             self.image = self.font.render(str(self.num1) + "/" + str(self.num2) + "= ?")
         else:
-            self.num1 = random.randint(1, 10)
-            self.num2 = random.randint(1, 10)
+            generateNumbers(digits)
             checkdivision(num1, num2)
        
