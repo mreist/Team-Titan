@@ -5,6 +5,7 @@ import MainScreen
 import Vehicle
 import pygame
 import time
+import TextInterface
 
 WIDTH = 1200
 HEIGHT = 900
@@ -37,6 +38,8 @@ class RaceScene(spyral.Scene):
         self.my_form.QuitButton.pos = ((WIDTH-100), (HEIGHT-50))
 
         spyral.event.register('director.update', self.update)
+        self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH - 100, 100), str(time.time() - timeStart))
+        #spyral.event.register('director.update', timeText.update(str(time.time() - timeStart))) 
 
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
 
@@ -48,16 +51,5 @@ class RaceScene(spyral.Scene):
         spyral.director.push(MainScreen.MainMenu())
         print(time.time() - timeStart)
 
-class TextInterface(Sprite):
-	def __init__(self, scene, font, position, string):
-		super(TextInterface, self).__init__(scene)
-		self.font = font
-		self.pos = position
-		self.text = string
-		self.anchor = 'topleft'
-		self.image = self.font.render(self.text)
 
-	def update(self, string):
-		self.text = string
-		self.image = self.font.render(self.text)
         
