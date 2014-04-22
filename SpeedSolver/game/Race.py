@@ -33,7 +33,7 @@ class RaceScene(spyral.Scene):
         playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
 
         self.currentQuestion = Questions.Question(self, 'addition', 1)
-        self.currentQuestion.pos = (WIDTH/2, (HEIGHT-50))
+        self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
         
 
         class RegisterForm(spyral.Form):
@@ -64,7 +64,7 @@ class RaceScene(spyral.Scene):
         print ("previous answer: " + str(self.currentQuestion.answer))
         self.currentQuestion.kill()
         self.currentQuestion = Questions.Question(self, 'addition', 1)
-        self.currentQuestion.pos = (WIDTH/2, (HEIGHT - 50))
+        self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
         print ("new answer: " + str(self.currentQuestion.answer))
         self.my_form.focus()
         self.level += 1
