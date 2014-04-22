@@ -35,8 +35,12 @@ class Question(spyral.Sprite):
             self.answer = self.num1*self.num2
             self.image = self.font.render(str(self.num1) + "x" + str(self.num2) + "= ?")
         elif operator == 'subtraction':
-            self.answer = self.num1-self.num2
-            self.image = self.font.render(str(self.num1) + "-" + str(self.num2) + "= ?")
+		    if self.num1 < self.num2:
+			    self.answer = self.num2-self.num1
+                self.image = self.font.render(str(self.num2) + "-" + str(self.num1) + "= ?")
+			else:
+                self.answer = self.num1-self.num2
+                self.image = self.font.render(str(self.num1) + "-" + str(self.num2) + "= ?")
         elif operator == 'division':
             checkdivision(self.num1, self.num2)
 
