@@ -1,4 +1,4 @@
-import spyral 
+import spyral
 import random
 import math
 import MainScreen
@@ -15,14 +15,13 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
+
 class RaceScene(spyral.Scene):
     def __init__(self):
         super(RaceScene, self).__init__(SIZE)
-
         
         global timeStart
-        timeStart = time.time() 
-
+        timeStart = time.time()
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
@@ -32,47 +31,6 @@ class RaceScene(spyral.Scene):
         
         playerVehicle = Vehicle.Vehicles(self)
         playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
-
-        
-        self.currentQuestion = Questions.Question(self, 'addition', 1)
-        self.currentQuestion.pos = (WIDTH/2, (HEIGHT/2)+435)
-        
-        class RegisterForm(spyral.Form):
-            QuitButton = spyral.widgets.Button("Quit")
-            EnterButton = spyral.widgets.Button("Enter")
-            AnswerInput = spyral.widgets.TextInput(100, "Answer")
-            
-        self.my_form = RegisterForm(self)
-        self.my_form.focus()
-        self.my_form.QuitButton.pos = ((WIDTH-100), (HEIGHT-50))
-        self.my_form.AnswerInput.pos = ((WIDTH/2 + 150), (HEIGHT/2)+400)
-        
-        spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
-        
-        spyral.event.register("input.keyboard.down.space", self.checkAnswer)
-
-    def checkAnswer(self):
-        if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
-            print "CORRECT"
-            self.feedback = TextInterface(self, DEF_FONT, (WIDTH/2, 50), "Correct!")
-        else:
-            print "INCORRECT"
-            
-        print ("previous answer: " + str(self.currentQuestion.answer))
-        self.currentQuestion.kill()
-        self.currentQuestion = Questions.Question(self, 'addition', 1)
-        self.currentQuestion.pos = (WIDTH/2, (HEIGHT/2)+50)
-        print ("new answer: " + str(self.currentQuestion.answer))
-        self.level += 1
-        if self.level > 10:
-            self.goToMenu
-            #eventually: go to score screen
-
-            
-    def goToMenu(self):
-        spyral.director.pop
-        spyral.director.push(MainScreen.MainMenu())
-
 
         self.currentQuestion = Questions.Question(self, 'addition', 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT-50))
@@ -117,11 +75,10 @@ class RaceScene(spyral.Scene):
             #eventually: go to score screen
     
 
-    def update(self): 
-        self.timeText.update("Current Time: %.2f" % (time.time() - timeStart)) 
+    def update(self):
+        self.timeText.update("Current Time: %.2f" % (time.time() - timeStart))
        
     def goToMenu(self):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
-
 
