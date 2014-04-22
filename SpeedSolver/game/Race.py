@@ -48,6 +48,8 @@ class RaceScene(spyral.Scene):
     def checkAnswer(self):
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
             print "CORRECT"
+            self.feedback = self.currentQuestion.font.render("Correct!")
+            self.feedback.pos = ((WIDTH/2), 50)
         else:
             print "INCORRECT"
             
@@ -67,3 +69,11 @@ class RaceScene(spyral.Scene):
     def goToMenu(self):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
+
+class Feedback(spyral.Sprite)
+    def __init__(self, scene, font, location):
+		spyral.Sprite.__init__(self, scene)
+		big_font = spyral.Font(font, 200, (255, 0, 0))
+		anchor = "center"
+		self.pos = location
+		self.image = big_font.render("O WINS!!")
