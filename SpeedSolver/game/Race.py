@@ -3,12 +3,9 @@ import random
 import math
 import MainScreen
 import Vehicle
-<<<<<<< HEAD
-=======
 import pygame
 import time
 import TextInterface
->>>>>>> origin/MaxxTesting
 import Questions
 
 WIDTH = 1200
@@ -21,12 +18,11 @@ DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 class RaceScene(spyral.Scene):
     def __init__(self):
         super(RaceScene, self).__init__(SIZE)
-<<<<<<< HEAD
-=======
+
         
         global timeStart
         timeStart = time.time() 
->>>>>>> origin/MaxxTesting
+
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
@@ -36,7 +32,7 @@ class RaceScene(spyral.Scene):
         
         playerVehicle = Vehicle.Vehicles(self)
         playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
-<<<<<<< HEAD
+
         
         self.currentQuestion = Questions.Question(self, 'addition', 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT/2)+435)
@@ -77,7 +73,7 @@ class RaceScene(spyral.Scene):
     def goToMenu(self):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
-=======
+
 
         self.currentQuestion = Questions.Question(self, 'addition', 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT-50))
@@ -130,17 +126,3 @@ class RaceScene(spyral.Scene):
         spyral.director.push(MainScreen.MainMenu())
 
 
->>>>>>> origin/MaxxTesting
-        
-class TextInterface(spyral.Sprite):
-	def __init__(self, scene, font, position, string):
-		super(TextInterface, self).__init__(scene)
-		self.font = font
-		self.pos = position
-		self.text = string
-		self.anchor = 'topleft'
-		self.image = self.font.render(self.text)
-
-	def update(self, string):
-		self.text = string
-		self.image = self.font.render(self.text)
