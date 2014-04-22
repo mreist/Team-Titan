@@ -16,7 +16,7 @@ class Garage(spyral.Sprite):
         super(Garage, self).__init__(scene)
         
         self.image = spyral.Image(size =(5, 5))
-        self.image = spyral.Image("image/Garage.png")
+        self.image = spyral.Image("images/Garage.png")
         self.anchor = 'center'
 
 class GarageScene(spyral.Scene):
