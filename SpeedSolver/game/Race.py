@@ -52,8 +52,9 @@ class RaceScene(spyral.Scene):
             print "INCORRECT"
             
         print ("previous answer: " + str(self.currentQuestion.answer))
-        del self.currentQuestion
+        self.currentQuestion.kill()
         self.currentQuestion = Questions.Question(self, 'addition', 1)
+        self.currentQuestion.pos = (WIDTH/2, (HEIGHT/2)+435)
         print ("new answer: " + str(self.currentQuestion.answer))
         self.level += 1
         if self.level > 10:
