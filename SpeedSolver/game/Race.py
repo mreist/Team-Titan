@@ -4,6 +4,7 @@ import math
 import MainScreen
 import Vehicle
 import Questions
+import time
 
 WIDTH = 1200
 HEIGHT = 900
@@ -15,7 +16,6 @@ DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 class RaceScene(spyral.Scene):
     def __init__(self):
         super(RaceScene, self).__init__(SIZE)
-        self.layers = ['top', 'bottom']
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
@@ -45,19 +45,18 @@ class RaceScene(spyral.Scene):
     def checkAnswer(self):
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
             print "CORRECT"
-            self.feedback = TextInterface(self, spyral.Font(DEF_FONT, 24, (0,255,0)), (WIDTH/2, 50), "Correct!")
+            self.feedback = TextInterface(self, spyral.Font(DEF_FONT, 50, (255,0,0)), (WIDTH/2, 50), "Correct!")
+            self.feedback.kill()
         else:
             print "INCORRECT"
-            
+            self.feedback = TextInterface(self, spyral.Font(DEF_FONT, 50, (0,255,0)), (WIDTH/2, 50), "Incorrect!")
+            self.feedback.kill()
         print ("previous answer: " + str(self.currentQuestion.answer))
         self.currentQuestion.kill()
         self.currentQuestion = Questions.Question(self, 'addition', 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT/2)+435)
-        self.currentQuestion.layer = 'bottom'
         print ("new answer: " + str(self.currentQuestion.answer))
-        self.my_form.AnswerInput.pos = ((WIDTH/2 + 30), (HEIGHT/2)+400)
         self.my_form.focus()
-        self.my_form.layer = 'top'
         self.level += 1
         print str(self.level)
         if self.level > 10:
