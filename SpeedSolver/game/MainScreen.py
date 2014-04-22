@@ -39,7 +39,7 @@ class MainMenu(spyral.Scene):
 
         spyral.event.register("form.RegisterForm.OptionButton.clicked", self.goToOptions)
         spyral.event.register("form.RegisterForm.StartGame.clicked", self.goToRace)
-        spyral.event.register("input.mouse.down", self.goToGarage)
+       # spyral.event.register("input.mouse.down", self.goToGarage)
         
     def goToOptions(self):
         spyral.director.pop
@@ -49,8 +49,8 @@ class MainMenu(spyral.Scene):
         spyral.director.pop
         spyral.director.push(Race.RaceScene())
         
-    def goToGarage(self, pos):
-        pos = spyral.Vec2D(pos)
-        if pos.x > 390 and pos.x < 870 and pos.y >50 and pos.y < 475:
-            spyral.director.pop
-            spyral.director.push(Garage.GarageScene())
+#    def goToGarage(self, pos):
+ #       pos = spyral.Vec2D(pos)
+  #      if pos.x > 390 and pos.x < 870 and pos.y >50 and pos.y < 475:
+   #         spyral.director.pop
+    #        spyral.director.push(Garage.GarageScene())
