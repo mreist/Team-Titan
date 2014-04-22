@@ -40,10 +40,8 @@ class RaceScene(spyral.Scene):
         self.my_form.AnswerInput.pos = ((WIDTH/2 + 30), (HEIGHT/2)+400)
         
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
-    
-        spyral.event.register("form.RegisterForm.EnterButton.clicked", self.checkAnswer)
-    
-       
+        
+        spyral.event.register("input.keyboard.down.space", self.checkAnswer)
 
     def checkAnswer(self):
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
@@ -70,10 +68,9 @@ class RaceScene(spyral.Scene):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
 
-class Feedback(spyral.Sprite)
+class Feedback(spyral.Sprite):
     def __init__(self, scene, font, location):
 		spyral.Sprite.__init__(self, scene)
-		big_font = spyral.Font(font, 200, (255, 0, 0))
-		anchor = "center"
+		anchor = "midtop"
 		self.pos = location
 		self.image = big_font.render("O WINS!!")
