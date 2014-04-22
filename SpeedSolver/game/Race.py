@@ -40,14 +40,13 @@ class RaceScene(spyral.Scene):
         self.my_form.AnswerInput.pos = ((WIDTH/2 + 30), (HEIGHT/2)+400)
         
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
-    
-        spyral.event.register("form.RegisterForm.EnterButton.clicked", self.checkAnswer)
-    
-       
+        
+        spyral.event.register("input.keyboard.down.space", self.checkAnswer)
 
     def checkAnswer(self):
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
             print "CORRECT"
+            self.feedback = TextInterface(self, DEF_FONT, (WIDTH/2, 50), "Correct!")
         else:
             print "INCORRECT"
             
@@ -60,10 +59,21 @@ class RaceScene(spyral.Scene):
         if self.level > 10:
             self.goToMenu
             #eventually: go to score screen
-            
-#     def newQuestion(self):
-#         p
+
             
     def goToMenu(self):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
+        
+class TextInterface(spyral.Sprite):
+	def __init__(self, scene, font, position, string):
+		super(TextInterface, self).__init__(scene)
+		self.font = font
+		self.pos = position
+		self.text = string
+		self.anchor = 'topleft'
+		self.image = self.font.render(self.text)
+
+	def update(self, string):
+		self.text = string
+		self.image = self.font.render(self.text)
