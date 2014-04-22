@@ -45,8 +45,7 @@ class RaceScene(spyral.Scene):
         self.my_form = RegisterForm(self)
         self.my_form.focus()
         self.my_form.QuitButton.pos = ((WIDTH-100), (HEIGHT-50))
-        self.my_form.EnterButton.pos = ((WIDTH/2 + 150), (HEIGHT/2)+400)
-        self.my_form.AnswerInput.pos = ((WIDTH/2 + 30), (HEIGHT/2)+400)
+        self.my_form.AnswerInput.pos = ((WIDTH/2 + 150), (HEIGHT/2)+400)
         
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
         
@@ -62,7 +61,7 @@ class RaceScene(spyral.Scene):
         print ("previous answer: " + str(self.currentQuestion.answer))
         self.currentQuestion.kill()
         self.currentQuestion = Questions.Question(self, 'addition', 1)
-        self.currentQuestion.pos = (WIDTH/2, (HEIGHT/2)+435)
+        self.currentQuestion.pos = (WIDTH/2, (HEIGHT/2)+50)
         print ("new answer: " + str(self.currentQuestion.answer))
         self.level += 1
         if self.level > 10:
