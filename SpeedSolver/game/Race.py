@@ -73,10 +73,11 @@ class RaceScene(spyral.Scene):
 
         #When 3 questions are answered correctly        
         if self.level > 3:
-            spyral.director.pop
-            spyral.director.push(MainScreen.MainMenu())
             finishTime = time.time() - timeStart                      
-            print "Finish Time = %.2f" % finishTime
+            print "Finish Time = %.2f" % finishTime            
+            self.goToMenu()
+
+
 
     def update(self): 
         self.timeText.update("Current Time: %.2f" % (time.time() - timeStart)) 
