@@ -9,8 +9,13 @@ BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
+<<<<<<< HEAD
+
+#Creates the Leaderboard scene which shows the Fastest cars
+=======
 #Creates a leaderboard scene so that we can display the fastest student
 #Not sure if we are going to display an image or text list of the students
+>>>>>>> origin/master
 class LeaderboardScene(spyral.Scene):
     def __init__(self):
         super(LeaderboardScene, self).__init__(SIZE)
@@ -19,7 +24,7 @@ class LeaderboardScene(spyral.Scene):
         spyral.event.register("system.quit", spyral.director.quit)
 
         #self.background = spyral.Image("images/Leaderboard.png")
-
+        #creates a back button to go back to the main menu
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")
 		
@@ -30,7 +35,7 @@ class LeaderboardScene(spyral.Scene):
 
         spyral.event.register("form.RegisterForm.BackButton.clicked", self.goToMenu)
 
-	
+	#Pops the leaderboard scene and pushes the MainMenu scene forward
     def goToMenu(self):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu()) 
