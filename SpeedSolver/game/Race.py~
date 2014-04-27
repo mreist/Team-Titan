@@ -7,6 +7,7 @@ import pygame
 import time
 import TextInterface
 import Questions
+from spyral import Animation, easing
 
 WIDTH = 1200
 HEIGHT = 900
@@ -29,11 +30,14 @@ class RaceScene(spyral.Scene):
         self.background = spyral.Image("images/Background.png")
         self.level = 1
         
-        playerVehicle = Vehicle.Vehicles(self)
-        playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
+        self.playerVehicle = Vehicle.Vehicles(self)
+        self.playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
+
+        animation = ('Linear', Animation('x', easing.Linear(0, 600), duration = 3.0, loop = True))
+        self.playerVehicle.animate(animation)
 
         self.currentQuestion = Questions.Question(self, 'addition', 1)
-        self.currentQuestion.pos = (WIDTH/2, (HEIGHT-50))
+        self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
         
 
         class RegisterForm(spyral.Form):
@@ -64,7 +68,7 @@ class RaceScene(spyral.Scene):
         print ("previous answer: " + str(self.currentQuestion.answer))
         self.currentQuestion.kill()
         self.currentQuestion = Questions.Question(self, 'addition', 1)
-        self.currentQuestion.pos = (WIDTH/2, (HEIGHT - 50))
+        self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
         print ("new answer: " + str(self.currentQuestion.answer))
         self.my_form.focus()
         self.level += 1

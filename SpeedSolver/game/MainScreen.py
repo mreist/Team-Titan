@@ -6,6 +6,8 @@ import Options
 import Race
 import Garage
 
+from spyral import Animation, easing
+
 WIDTH = 1200
 HEIGHT = 900
 BG_COLOR = (0,0,0)
@@ -40,7 +42,7 @@ class MainMenu(spyral.Scene):
         my_form = RegisterForm(self)
         my_form.focus()
         my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
-        my_form.OptionButton.pos = (450, 650)
+        my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
 
 
 #Functions that will take you to garage/game/options depending on which button is clicked

@@ -8,6 +8,8 @@ import time
 import TextInterface
 import Questions
 
+
+
 WIDTH = 1200
 HEIGHT = 900
 BG_COLOR = (0,0,0)
@@ -31,6 +33,8 @@ class RaceScene(spyral.Scene):
         
         playerVehicle = Vehicle.Vehicles(self)
         playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
+
+
 
         self.currentQuestion = Questions.Question(self, 'addition', 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
