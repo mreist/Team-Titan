@@ -20,7 +20,7 @@ class MainMenu(spyral.Scene):
         super(MainMenu, self).__init__(SIZE)
 
 #Loads custom start/option buttons
-        self.load_style("game/style.spys")
+        #self.load_style("game/style.spys")
 
 #Allows users to quit game via quit button or esc key
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)

@@ -44,9 +44,6 @@ class MainMenu(spyral.Scene):
         my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
         my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
 
-        animation = Animation('x', easing.Linear(0, 600), duration = 3.0, loop = True)
-        my_form.OptionButton.animate(animation)
-
 
 #Functions that will take you to garage/game/options depending on which button is clicked
         spyral.event.register("form.RegisterForm.OptionButton.clicked", self.goToOptions)
