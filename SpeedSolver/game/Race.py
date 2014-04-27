@@ -51,7 +51,6 @@ class RaceScene(spyral.Scene):
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
         spyral.event.register("input.keyboard.down.space", self.checkAnswer)
 
-
     def checkAnswer(self):
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
             print "CORRECT"
@@ -60,7 +59,9 @@ class RaceScene(spyral.Scene):
         else:
             print "INCORRECT"
             self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 50, (0,255,0)), (WIDTH/2, 50), "Incorrect!")
+            self.feedback.pos = (100, 100)
             self.feedback.kill()
+
         print ("previous answer: " + str(self.currentQuestion.answer))
         self.currentQuestion.kill()
         self.currentQuestion = Questions.Question(self, 'addition', 1)
@@ -69,11 +70,14 @@ class RaceScene(spyral.Scene):
         self.my_form.focus()
         self.level += 1
         print str(self.level)
-        if self.level > 10:
-            print 'gameover'
-            self.goToMenu
-            #eventually: go to score screen
-    
+
+        #When 3 questions are answered correctly        
+        if self.level > 3:
+            finishTime = time.time() - timeStart                      
+            print "Finish Time = %.2f" % finishTime            
+            self.goToMenu()
+
+
 
     def update(self): 
         self.timeText.update("Current Time: %.2f" % (time.time() - timeStart)) 
