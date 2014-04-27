@@ -9,7 +9,7 @@ BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
-
+#Creates a Title Screen scene
 class Title(spyral.Scene):
     def __init__(self):
         super(Title, self).__init__(SIZE)
@@ -18,7 +18,7 @@ class Title(spyral.Scene):
         spyral.event.register("system.quit", spyral.director.quit)
 
         self.background = spyral.Image("images/Title_Menu.png")
-
+#Clicking anywhere will pop the title sceen and push to the Main Menu
         spyral.event.register("input.mouse.down", self.GoToMainMenu)
 		
     def GoToMainMenu(self):
