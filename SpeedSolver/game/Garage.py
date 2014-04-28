@@ -13,7 +13,7 @@ DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
 #Creates the Garage Image sprite
 
-#Creates a Garage Sprite with its image
+
 
 class Garage(spyral.Sprite):
     def __init__(self, scene):
@@ -25,7 +25,6 @@ class Garage(spyral.Sprite):
 
 #Creates the Garage Scene
 
-#Creates a Garage scene
 
 class GarageScene(spyral.Scene):
     def __init__(self):
@@ -41,7 +40,7 @@ class GarageScene(spyral.Scene):
 
         #creates a back button to go back to the Main Menu
 
-	#Creates a back button to go back to the Main Menu
+
 
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")
@@ -53,8 +52,6 @@ class GarageScene(spyral.Scene):
 
         spyral.event.register("form.RegisterForm.BackButton.clicked", self.goToMenu)
 
-
-	#Pops the Garage scene then pushes the Main Menu Scene
 
 #Pops the Garage Scene and pushes the Main Menu to the front	
 
