@@ -43,28 +43,27 @@ class RaceScene(spyral.Scene):
         self.background = spyral.Image("images/Background.png")
         self.level = 1
 
-        Chassis = Vehicle.Car(self)
-        LeftWheel = Vehicle.Wheels(self)
-        RightWheel = Vehicle.Wheels(self)        
+        self.Chassis = Vehicle.Car(self)
+        self.LeftWheel = Vehicle.Wheels(self)
+        self.RightWheel = Vehicle.Wheels(self)        
 
 
-        Chassis.pos = (WIDTH/4, (HEIGHT/2)+200)
-        LeftWheel.pos.x = Chassis.pos.x - 100
-        LeftWheel.pos.y = Chassis.pos.y + 35
-        RightWheel.pos.x = Chassis.pos.x + 125
-        RightWheel.pos.y = Chassis.pos.y + 35
+        self.Chassis.pos = (WIDTH/4, (HEIGHT/2)+200)
+        self.LeftWheel.pos.x = self.Chassis.pos.x - 100
+        self.LeftWheel.pos.y = self.Chassis.pos.y + 35
+        self.RightWheel.pos.x = self.Chassis.pos.x + 125
+        self.RightWheel.pos.y = self.Chassis.pos.y + 35
 
 
         #playerVehicle = Vehicle.Vehicles(self)
         #playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
 
         animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
-        RightWheel.animate(animation)
-        LeftWheel.animate(animation)
+        self.RightWheel.animate(animation)
+        self.LeftWheel.animate(animation)
 
         self.currentQuestion = Questions.Question(self, 'addition', 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
-        
 
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
@@ -80,6 +79,8 @@ class RaceScene(spyral.Scene):
 
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
         spyral.event.register("input.keyboard.down.space", self.checkAnswer)
+        spyral.event.register("input.keyboard.down.down", self.moveDown)
+        spyral.event.register("input.keyboard.down.up", self.moveUp)
 
     def checkAnswer(self):
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
@@ -107,14 +108,25 @@ class RaceScene(spyral.Scene):
             print "Finish Time = %.2f" % finishTime            
             self.goToMenu()
 
-
-
     def update(self): 
         self.timeText.update("Current Time: %.2f" % (time.time() - timeStart)) 
-       
+
     def goToMenu(self):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
 
+    def moveUp(self):
+        chassisUp = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y-100), 1)
+        leftWheelUp = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y-100), 1)
+        rightWheelUp = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y-100), 1)
+        self.Chassis.animate(chassisUp)
+        self.LeftWheel.animate(leftWheelUp)
+        self.RightWheel.animate(rightWheelUp)
 
-        
+    def moveDown(self):
+        chassisDown = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y+100), 1)
+        leftWheelDown = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y+100), 1)
+        rightWheelDown = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y+100), 1)
+        self.Chassis.animate(chassisDown)
+        self.LeftWheel.animate(leftWheelDown)
+        self.RightWheel.animate(rightWheelDown)
