@@ -104,17 +104,19 @@ class RaceScene(spyral.Scene):
         spyral.director.push(MainScreen.MainMenu())
 
     def moveUp(self):
-        chassisUp = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y-100), 1)
-        leftWheelUp = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y-100), 1)
-        rightWheelUp = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y-100), 1)
-        self.Chassis.animate(chassisUp)
-        self.LeftWheel.animate(leftWheelUp)
-        self.RightWheel.animate(rightWheelUp)
+        if(self.Chassis.pos.y >= (HEIGHT/2 + 200)):
+            chassisUp = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y-100), 1)
+            leftWheelUp = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y-100), 1)
+            rightWheelUp = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y-100), 1)
+            self.Chassis.animate(chassisUp)
+            self.LeftWheel.animate(leftWheelUp)
+            self.RightWheel.animate(rightWheelUp)
 
     def moveDown(self):
-        chassisDown = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y+100), 1)
-        leftWheelDown = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y+100), 1)
-        rightWheelDown = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y+100), 1)
-        self.Chassis.animate(chassisDown)
-        self.LeftWheel.animate(leftWheelDown)
-        self.RightWheel.animate(rightWheelDown)
+        if(self.Chassis.pos.y <= (HEIGHT/2 + 200)):
+            chassisDown = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y+100), 1)
+            leftWheelDown = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y+100), 1)
+            rightWheelDown = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y+100), 1)
+            self.Chassis.animate(chassisDown)
+            self.LeftWheel.animate(leftWheelDown)
+            self.RightWheel.animate(rightWheelDown)
