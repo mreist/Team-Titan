@@ -1,3 +1,9 @@
+#Team Titan
+#Maxx Reist
+#Jason Rubenstein
+#Anthony Pedicone
+#Jason Walsh
+#Nicholas Avelleyra
 import spyral
 import random
 import math

@@ -6,6 +6,8 @@ import Options
 import Race
 import Garage
 
+from spyral import Animation, easing
+
 WIDTH = 1200
 HEIGHT = 900
 BG_COLOR = (0,0,0)
@@ -18,7 +20,7 @@ class MainMenu(spyral.Scene):
         super(MainMenu, self).__init__(SIZE)
 
 #Loads custom start/option buttons
-        self.load_style("game/style.spys")
+        #self.load_style("game/style.spys")
 
 #Allows users to quit game via quit button or esc key
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
@@ -41,7 +43,6 @@ class MainMenu(spyral.Scene):
         my_form.focus()
         my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
         my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
-
 
 
 
