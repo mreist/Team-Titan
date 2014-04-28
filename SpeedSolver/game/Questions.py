@@ -26,7 +26,7 @@ class Question(spyral.Sprite):
 		    if self.num1 < self.num2:
 			    self.answer = self.num2-self.num1
                 self.image = self.font.render(str(self.num2) + "-" + str(self.num1) + "= ?")
-			else:
+            else:
                 self.answer = self.num1-self.num2
                 self.image = self.font.render(str(self.num1) + "-" + str(self.num2) + "= ?")
         elif operator == 'division': #guarantees int division for now
