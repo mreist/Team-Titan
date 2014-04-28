@@ -7,8 +7,6 @@ import pygame
 import time
 import TextInterface
 import Questions
-from spyral import Animation, easing
-
 
 WIDTH = 1200
 HEIGHT = 900
@@ -30,25 +28,9 @@ class RaceScene(spyral.Scene):
 
         self.background = spyral.Image("images/Background.png")
         self.level = 1
-
-        Chassis = Vehicle.Car(self)
-        LeftWheel = Vehicle.Wheels(self)
-        RightWheel = Vehicle.Wheels(self)        
-
-
-        Chassis.pos = (WIDTH/4, (HEIGHT/2)+200)
-        LeftWheel.pos.x = Chassis.pos.x - 100
-        LeftWheel.pos.y = Chassis.pos.y + 35
-        RightWheel.pos.x = Chassis.pos.x + 125
-        RightWheel.pos.y = Chassis.pos.y + 35
-
-
-        #playerVehicle = Vehicle.Vehicles(self)
-        #playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
-
-        animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
-        RightWheel.animate(animation)
-        LeftWheel.animate(animation)
+        
+        playerVehicle = Vehicle.Vehicles(self)
+        playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
 
         self.currentQuestion = Questions.Question(self, 'addition', 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
