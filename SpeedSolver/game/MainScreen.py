@@ -42,7 +42,11 @@ class MainMenu(spyral.Scene):
         my_form = RegisterForm(self)
         my_form.focus()
         my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
+<<<<<<< HEAD
         my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
+=======
+        my_form.OptionButton.pos = (WIDTH/2 - 50, HEIGHT/2 + 250)
+>>>>>>> master
 
 
 #Functions that will take you to garage/game/options depending on which button is clicked
