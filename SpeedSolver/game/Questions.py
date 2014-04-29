@@ -1,7 +1,7 @@
 import spyral 
 import random
 import math
-import array
+from array import *
 
 WIDTH = 1200
 HEIGHT = 900
@@ -11,8 +11,8 @@ SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
 class Question(spyral.Sprite):
-    nums = zeros(3, Int)
-    ops = array('w', ['','','',''])
+    nums = array('i', [0,0,0])
+    ops = array('c', [' ',' ',' ',' '])
     def __init__(self, scene, operator, digits):
         spyral.Sprite.__init__(self, scene)
         self.anchor = 'midbottom'  
@@ -55,8 +55,8 @@ class Question(spyral.Sprite):
     def checkdivision(num1, num2):#continuously generates numbers until answer is int
         if (num1 % num2 == 0):
             self.answer = num1/num2
-            self.image = self.font.render(str(num1 + "/" + str(num2) + "= ?")
-        else:
+            self.image = self.font.render(str(num1 + "/" + str(num2) + "= ?"))
+        elif(num1 % num2 != 0):
             if digits == 1:
                 num1 = random.randint(1, 10)
                 num2 = random.randint(1, 10)
