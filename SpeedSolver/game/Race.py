@@ -50,7 +50,7 @@ class RaceScene(spyral.Scene):
         self.RightWheel.animate(animation)
         self.LeftWheel.animate(animation)
 
-        self.currentQuestion = Questions.Question(self, 'addition', 1)
+        self.currentQuestion = Questions.Question(self, 'a', 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
 
         class RegisterForm(spyral.Form):
@@ -83,7 +83,7 @@ class RaceScene(spyral.Scene):
 
         print ("previous answer: " + str(self.currentQuestion.answer))
         self.currentQuestion.kill()
-        self.currentQuestion = Questions.Question(self, 'addition', 1)
+        self.currentQuestion = Questions.Question(self, 'a', 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
         print ("new answer: " + str(self.currentQuestion.answer))
         self.my_form.focus()

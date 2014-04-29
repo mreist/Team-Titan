@@ -1,6 +1,7 @@
 import spyral 
 import random
 import math
+import array
 
 WIDTH = 1200
 HEIGHT = 900
@@ -10,52 +11,63 @@ SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
 class Question(spyral.Sprite):
+    nums = zeros(3, Int)
+    ops = array('w', ['','','',''])
     def __init__(self, scene, operator, digits):
         spyral.Sprite.__init__(self, scene)
-        self.anchor = 'midbottom'
-        generateNumbers(digits)  
+        self.anchor = 'midbottom'  
         self.font = spyral.Font(DEF_FONT, 36)
         # for beta: have multiple operators for order of op problems
-        if operator == 'addition':
-            self.answer = self.num1 + self.num2
-            self.image = self.font.render(str(self.num1) + "+" + str(self.num2) + "= ?")
-        elif operator == 'multiplication':
-            self.answer = self.num1*self.num2
-            self.image = self.font.render(str(self.num1) + "x" + str(self.num2) + "= ?")
-        elif operator == 'subtraction': #we don't know if the students know about negative numbers
-		    if self.num1 < self.num2:
-			    self.answer = self.num2-self.num1
-                self.image = self.font.render(str(self.num2) + "-" + str(self.num1) + "= ?")
-            else:
-                self.answer = self.num1-self.num2
-                self.image = self.font.render(str(self.num1) + "-" + str(self.num2) + "= ?")
-        elif operator == 'division': #guarantees int division for now
-            checkdivision(self.num1, self.num2)
-
-    # generates 2 numbers of specified digits
-    #we hope to modify to allow for multiple numbers of differing digit ranges
-    def generateNumbers(digits): 
+        self.ops[0] = operator 
         if digits == 1:
-            self.num1 = random.randint(1, 10)
-            self.num2 = random.randint(1, 10)
+            self.nums[0] = random.randint(1, 10)
+            self.nums[1] = random.randint(1, 10)
         elif digits == 2:
-            self.num1 = random.randint(10, 100)
-            self.num2 = random.randint(10, 100)
+            self.nums[0] = random.randint(10, 100)
+            self.nums[1] = random.randint(10, 100)
         elif digits == 3:
-            self.num1 = random.randint(100, 1000)
-            self.num2 = random.randint(100, 1000)
+            self.nums[0] = random.randint(100, 1000)
+            self.nums[1] = random.randint(100, 1000)
         else:
-            self.num1 = random.randint(1, 10000000)
-            self.num2 = random.randint(1, 10000000)
-          
+            self.nums[0] = random.randint(1, 10000000)
+            self.nums[1] = random.randint(1, 10000000)
+        if self.ops[0] == 'a':
+            self.answer = self.nums[0] + self.nums[1]
+            self.image = self.font.render(str(self.nums[0]) + "+" + str(self.nums[1]) + "= ?")
+        elif self.ops[0] == 'm':
+            self.answer = self.nums[0]*self.nums[1]
+            self.image = self.font.render(str(self.nums[0]) + "x" + str(self.nums[1]) + "= ?")
+        elif self.ops[0] == 's': #students know about negative numbers, but can't manipulate them yet
+	    if (self.nums[0] < self.nums[1]):
+                self.answer = self.nums[1]-self.nums[0]
+                self.image = self.font.render(str(self.nums[1]) + "-" + str(self.nums[0]) + "= ?")
+            else:
+                self.answer = self.nums[0]-self.nums[1]
+                self.image = self.font.render(str(self.nums[0]) + "-" + str(self.nums[1]) + "= ?")
+        elif self.ops[0] == 'd': #guarantees int division for now
+            self.checkdivision(self.nums[0], self.nums[1])
+
+            
+                
     
       
         
-    def checkdivision(self, num1, num2):#continuously generates numbers until answer is int
-        if self.num1 % self.num2 == 0:
+    def checkdivision(num1, num2):#continuously generates numbers until answer is int
+        if (num1 % num2 == 0):
             self.answer = num1/num2
-            self.image = self.font.render(str(self.num1) + "/" + str(self.num2) + "= ?")
+            self.image = self.font.render(str(num1 + "/" + str(num2) + "= ?")
         else:
-            generateNumbers(digits)
-            checkdivision(num1, num2)
+            if digits == 1:
+                num1 = random.randint(1, 10)
+                num2 = random.randint(1, 10)
+            elif digits == 2:
+                num1 = random.randint(10, 100)
+                num2 = random.randint(10, 100)
+            elif digits == 3:
+                num1 = random.randint(100, 1000)
+                num2 = random.randint(100, 1000)
+            else:
+                num1 = random.randint(1, 10000000)
+                num2 = random.randint(1, 10000000)
+            self.checkdivision(num1, num2)
        
