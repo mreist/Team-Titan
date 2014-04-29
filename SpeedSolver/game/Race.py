@@ -8,6 +8,7 @@ import time
 import TextInterface
 import Questions
 from spyral import Animation, easing
+import Garage
 
 
 WIDTH = 1200
@@ -16,7 +17,7 @@ BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
-
+Background_Music = True;
 
 class RaceScene(spyral.Scene):
     def __init__(self):
@@ -27,7 +28,18 @@ class RaceScene(spyral.Scene):
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
-
+        pygame.mixer.init()
+        
+        Game_music = pygame.mixer.Sound("SandStorm.wav")
+       
+        if(Background_Music == True):
+           Game_music.play(10)
+            
+            
+            
+         
+        
+        
         self.background = spyral.Image("images/Background.png")
         self.level = 1
 
