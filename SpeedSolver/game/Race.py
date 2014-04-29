@@ -30,10 +30,10 @@ class RaceScene(spyral.Scene):
         spyral.event.register("system.quit", spyral.director.quit)
         pygame.mixer.init()
         
-        Game_music = pygame.mixer.Sound("SandStorm.wav")
+        #Game_music = pygame.mixer.Sound("SandStorm.wav")
        
-        if(Background_Music == True):
-           Game_music.play(10)
+        #if(Background_Music == True):
+        #   Game_music.play(10)
             
             
             
@@ -67,7 +67,7 @@ class RaceScene(spyral.Scene):
 
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
-            AnswerInput = spyral.widgets.TextInput(100, "Answer")
+            AnswerInput = spyral.widgets.TextInput(100, "")
         
         self.my_form = RegisterForm(self)
         self.my_form.focus()
