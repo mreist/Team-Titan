@@ -18,6 +18,9 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 Background_Music = True;
+pygame.mixer.pre_init(44100, -16, 2, 2048)
+pygame.mixer.init()
+Game_music = pygame.mixer.Sound("SandStorm.wav")
 
 class RaceScene(spyral.Scene):
     def __init__(self):
@@ -31,10 +34,10 @@ class RaceScene(spyral.Scene):
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
         
-        #pygame.mixer.init()
-        #Game_music = pygame.mixer.Sound("SandStorm.wav")
-        #if(Background_Music == True):
-        #   Game_music.play(10)
+        
+       
+        if(Background_Music == True):
+           Game_music.play(-1)
         
         self.background = spyral.Image("images/Background.png")
         self.level = 0
@@ -63,12 +66,14 @@ class RaceScene(spyral.Scene):
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
             AnswerInput = spyral.widgets.TextInput(100, "")
+            Sound = spyral.widgets.Button("Sound")
         
         self.my_form = RegisterForm(self)
         self.my_form.focus()
         self.my_form.QuitButton.pos = ((WIDTH-100), (HEIGHT-50))
         self.my_form.AnswerInput.pos = ((WIDTH/2 + 150), (HEIGHT/2)+400)
-
+        self.my_form.Sound.pos = ((WIDTH-100), (HEIGHT-850))
+        
         spyral.event.register('director.update', self.update)
         self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH - 300, 100), str(time.time() - timeStart))
 
@@ -78,6 +83,7 @@ class RaceScene(spyral.Scene):
         spyral.event.register("input.keyboard.down.space", self.checkAnswer)
         spyral.event.register("input.keyboard.down.down", self.moveDown)
         spyral.event.register("input.keyboard.down.up", self.moveUp)
+        spyral.event.register("form.RegisterForm.Sound.clicked", self.SwitchSound)
 
     def checkAnswer(self):
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
@@ -101,17 +107,34 @@ class RaceScene(spyral.Scene):
 
         #When 3 questions are answered correctly        
         if self.level >= 3:
+            global Game_music
+            Game_music.stop()
             finishTime = time.time() - timeStart                      
             print "Finish Time = %.2f" % finishTime            
             self.goToMenu()
 
     def update(self): 
-        self.timeText.update("Current Time: %.2f" % (time.time() - timeStart)) 
-
+        self.timeText.update("Current Time: %.2f" % (time.time() - timeStart))
+         
+#Quit button method that stops the music and goes back to Main Menu
     def goToMenu(self):
+        global Game_music
+        Game_music.stop()
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
-
+        
+    #Button that allows the player to turn on/off the sound    
+    def SwitchSound(self):
+        global Game_music
+        global Background_Music
+        
+        if(Background_Music == True):
+            Game_music.stop()
+            Background_Music = False
+        elif(Background_Music == False):
+            Game_music.play(-1)
+            Background_Music = True
+        
     def moveUp(self):
         if(self.Chassis.pos.y >= (HEIGHT/2 + 200) and self.isMoving == 0):
             self.isMoving = 1
