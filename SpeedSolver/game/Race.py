@@ -26,27 +26,22 @@ class RaceScene(spyral.Scene):
         global timeStart
         timeStart = time.time() 
 
+        self.isMoving = 0
+
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
-        pygame.mixer.init()
         
+        #pygame.mixer.init()
         #Game_music = pygame.mixer.Sound("SandStorm.wav")
-       
         #if(Background_Music == True):
         #   Game_music.play(10)
-            
-            
-            
-         
-        
         
         self.background = spyral.Image("images/Background.png")
-        self.level = 1
+        self.level = 0
 
         self.Chassis = Vehicle.Car(self)
         self.LeftWheel = Vehicle.Wheels(self)
         self.RightWheel = Vehicle.Wheels(self)        
-
 
         self.Chassis.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.LeftWheel.pos.x = self.Chassis.pos.x - 100
@@ -77,6 +72,8 @@ class RaceScene(spyral.Scene):
         spyral.event.register('director.update', self.update)
         self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH - 300, 100), str(time.time() - timeStart))
 
+        #Not sure why this is Car.y.animation and not Chassis.y.animation, but it works?
+        spyral.event.register('Car.y.animation.end', self.endMoving)
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
         spyral.event.register("input.keyboard.down.space", self.checkAnswer)
         spyral.event.register("input.keyboard.down.down", self.moveDown)
@@ -86,6 +83,7 @@ class RaceScene(spyral.Scene):
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
             print "CORRECT"
             self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 50, (255,0,0)), (WIDTH/2, 50), "Correct!")
+            self.level += 1
             self.feedback.kill()
         else:
             print "INCORRECT"
@@ -99,11 +97,10 @@ class RaceScene(spyral.Scene):
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
         print ("new answer: " + str(self.currentQuestion.answer))
         self.my_form.focus()
-        self.level += 1
         print str(self.level)
 
         #When 3 questions are answered correctly        
-        if self.level > 3:
+        if self.level >= 3:
             finishTime = time.time() - timeStart                      
             print "Finish Time = %.2f" % finishTime            
             self.goToMenu()
@@ -116,19 +113,25 @@ class RaceScene(spyral.Scene):
         spyral.director.push(MainScreen.MainMenu())
 
     def moveUp(self):
-        if(self.Chassis.pos.y >= (HEIGHT/2 + 200)):
-            chassisUp = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y-100), 1)
-            leftWheelUp = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y-100), 1)
-            rightWheelUp = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y-100), 1)
+        if(self.Chassis.pos.y >= (HEIGHT/2 + 200) and self.isMoving == 0):
+            isMoving = 1
+            chassisUp = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y-100), .5)
+            leftWheelUp = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y-100), .5)
+            rightWheelUp = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y-100), .5)
             self.Chassis.animate(chassisUp)
             self.LeftWheel.animate(leftWheelUp)
             self.RightWheel.animate(rightWheelUp)
 
     def moveDown(self):
-        if(self.Chassis.pos.y <= (HEIGHT/2 + 200)):
-            chassisDown = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y+100), 1)
-            leftWheelDown = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y+100), 1)
-            rightWheelDown = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y+100), 1)
+        if(self.Chassis.pos.y <= (HEIGHT/2 + 200) and self.isMoving == 0):
+            self.isMoving = 1
+            chassisDown = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y+100), .5)
+            leftWheelDown = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y+100), .5)
+            rightWheelDown = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y+100), .5)
             self.Chassis.animate(chassisDown)
             self.LeftWheel.animate(leftWheelDown)
             self.RightWheel.animate(rightWheelDown)
+
+
+    def endMoving(self):
+        self.isMoving = 0
