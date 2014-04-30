@@ -114,7 +114,7 @@ class RaceScene(spyral.Scene):
 
     def moveUp(self):
         if(self.Chassis.pos.y >= (HEIGHT/2 + 200) and self.isMoving == 0):
-            isMoving = 1
+            self.isMoving = 1
             chassisUp = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y-100), .5)
             leftWheelUp = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y-100), .5)
             rightWheelUp = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y-100), .5)
