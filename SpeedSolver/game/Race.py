@@ -7,6 +7,8 @@ import pygame
 import time
 import TextInterface
 import Questions
+import ResultsScreen
+import Player
 
 WIDTH = 1200
 HEIGHT = 900
@@ -28,7 +30,7 @@ class RaceScene(spyral.Scene):
 
         self.background = spyral.Image("images/Background.png")
         self.level = 1
-        
+        self.finishtime = 0
         playerVehicle = Vehicle.Vehicles(self)
         playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
 
@@ -74,8 +76,9 @@ class RaceScene(spyral.Scene):
         #When 3 questions are answered correctly        
         if self.level > 3:
             finishTime = time.time() - timeStart                      
-            print "Finish Time = %.2f" % finishTime            
-            self.goToMenu()
+            print "Finish Time = %.2f" % finishTime   
+            Player.currentTime = finishTime
+            self.goToResults()
 
 
 
@@ -85,6 +88,10 @@ class RaceScene(spyral.Scene):
     def goToMenu(self):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
+        
+    def goToResults(self):
+        spyral.director.pop
+        spyral.director.push(ResultsScreen.ResultsScreen())
 
 
         
