@@ -83,6 +83,8 @@ class RaceScene(spyral.Scene):
         
         spyral.event.register('director.update', self.update)
         self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH - 300, 100), str(time.time() - timeStart))
+        self.speedText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (100, 100), str(self.speed))
+        self.distanceText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (350, 100), str(self.currentDistance))
 
         #Not sure why this is Car.y.animation and not Chassis.y.animation, but it works?
         spyral.event.register('Car.y.animation.end', self.endMoving)
@@ -116,6 +118,8 @@ class RaceScene(spyral.Scene):
     def update(self, delta): 
         self.currentTime = time.time() - timeStart 
         self.timeText.update("Current Time: %.2f" % self.currentTime) 
+        self.speedText.update("Speed: %d mph" % self.speed)
+        self.distanceText.update("Distance: %d" % self.currentDistance)
         self.currentDistance += self.speed * delta
         print self.currentDistance
         if(self.currentDistance >= self.raceDistance):
