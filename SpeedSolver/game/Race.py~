@@ -7,8 +7,6 @@ import pygame
 import time
 import TextInterface
 import Questions
-import ResultsScreen
-import Player
 from spyral import Animation, easing
 import Garage
 
@@ -115,12 +113,6 @@ class RaceScene(spyral.Scene):
         self.my_form.focus()
         print str(self.level)
 
-        if self.level > 3:
-            finishTime = time.time() - timeStart
-            print "Finish Time = %.2f" % finishTime
-            Player.currentTime = finishTime
-            self.goToResults()
-
     def update(self, delta): 
         self.currentTime = time.time() - timeStart 
         self.timeText.update("Current Time: %.2f" % self.currentTime) 
@@ -140,10 +132,6 @@ class RaceScene(spyral.Scene):
         Game_music.stop()
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
-
-    def goToResults(self):
-        spyral.director.pop
-        spyral.director.push(ResultsScreen.ResultsScreen())
 
         
     #Button that allows the player to turn on/off the sound    
