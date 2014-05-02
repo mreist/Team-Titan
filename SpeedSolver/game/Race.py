@@ -1,5 +1,6 @@
 import spyral 
 import random
+import Images
 import math
 import MainScreen
 import Vehicle
@@ -32,6 +33,7 @@ class RaceScene(spyral.Scene):
 
         self.isMoving = 0
 
+
         #Start game with speed of 10        
         self.speed = 10
         #Race distace is set to 100        
@@ -42,8 +44,8 @@ class RaceScene(spyral.Scene):
         spyral.event.register("system.quit", spyral.director.quit)
         
        
-        if(Background_Music == True):
-           Game_music.play(-1)
+        #if(Background_Music == True):
+        #   Game_music.play(-1)
 
         
         self.background = spyral.Image("images/Background.png")
@@ -51,7 +53,21 @@ class RaceScene(spyral.Scene):
 
         self.Chassis = Vehicle.Car(self)
         self.LeftWheel = Vehicle.Wheels(self)
-        self.RightWheel = Vehicle.Wheels(self)        
+        self.RightWheel = Vehicle.Wheels(self)      
+
+        self.SmCloud = Images.SmallCloud(self)
+        self.LrgCloud = Images.LargeCloud(self)
+        self.Tree = Images.Tree(self)
+
+        small = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 3.0, loop = True)
+        self.SmCloud.animate(small)
+
+
+        large = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 5.5, loop = True)
+        self.LrgCloud.animate(large)
+
+        tree = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 4.5, loop = True)
+        self.Tree.animate(tree)
 
         self.Chassis.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.LeftWheel.pos.x = self.Chassis.pos.x - 100
@@ -105,6 +121,7 @@ class RaceScene(spyral.Scene):
         spyral.event.register("input.keyboard.down.up", self.moveUp)
         spyral.event.register("form.RegisterForm.Sound.clicked", self.SwitchSound)
 
+
     def checkAnswer(self):
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
             print "CORRECT"
@@ -142,6 +159,7 @@ class RaceScene(spyral.Scene):
             Player.currentTime = finishTime                      
             print "Finish Time = %.2f" % finishTime            
             self.goToResults()
+
          
 #Quit button method that stops the music and goes back to Main Menu
 
@@ -188,9 +206,9 @@ class RaceScene(spyral.Scene):
             self.LeftWheel.animate(leftWheelDown)
             self.RightWheel.animate(rightWheelDown)
 
-
     def endMoving(self):
         self.isMoving = 0
+
         
 class miniMap(spyral.Sprite):
     def __init__(self, scene):
