@@ -7,11 +7,10 @@ import pygame
 import time
 import TextInterface
 import Questions
-import ResultsScreen
-import Player
 from spyral import Animation, easing
 import Garage
-
+import ResultsScreen
+import Player
 
 WIDTH = 1200
 HEIGHT = 900
@@ -115,12 +114,6 @@ class RaceScene(spyral.Scene):
         self.my_form.focus()
         print str(self.level)
 
-        if self.level > 3:
-            finishTime = time.time() - timeStart
-            print "Finish Time = %.2f" % finishTime
-            Player.currentTime = finishTime
-            self.goToResults()
-
     def update(self, delta): 
         self.currentTime = time.time() - timeStart 
         self.timeText.update("Current Time: %.2f" % self.currentTime) 
@@ -129,9 +122,10 @@ class RaceScene(spyral.Scene):
         if(self.currentDistance >= self.raceDistance):
             global Game_music
             Game_music.stop()
-            finishTime = time.time() - timeStart                      
+            finishTime = time.time() - timeStart
+            Player.currentTime = finishTime                      
             print "Finish Time = %.2f" % finishTime            
-            self.goToMenu()
+            self.goToResults()
          
 #Quit button method that stops the music and goes back to Main Menu
 
@@ -140,7 +134,7 @@ class RaceScene(spyral.Scene):
         Game_music.stop()
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
-
+        
     def goToResults(self):
         spyral.director.pop
         spyral.director.push(ResultsScreen.ResultsScreen())
