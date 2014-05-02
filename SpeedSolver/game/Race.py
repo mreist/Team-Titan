@@ -31,6 +31,12 @@ class RaceScene(spyral.Scene):
 
         self.isMoving = 0
 
+        #Start game with speed of 10        
+        self.speed = 10
+        #Race distace is set to 100        
+        self.raceDistance = 1000
+        self.currentDistance = 0
+
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
         
@@ -91,6 +97,7 @@ class RaceScene(spyral.Scene):
             print "CORRECT"
             self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 50, (255,0,0)), (WIDTH/2, 50), "Correct!")
             self.level += 1
+            self.speed += 5
             self.feedback.kill()
         else:
             print "INCORRECT"
@@ -106,17 +113,17 @@ class RaceScene(spyral.Scene):
         self.my_form.focus()
         print str(self.level)
 
-        #When 3 questions are answered correctly        
-        if self.level >= 3:
+    def update(self, delta): 
+        self.currentTime = time.time() - timeStart 
+        self.timeText.update("Current Time: %.2f" % self.currentTime) 
+        self.currentDistance += self.speed * delta
+        print self.currentDistance
+        if(self.currentDistance >= self.raceDistance):
             global Game_music
             Game_music.stop()
             finishTime = time.time() - timeStart                      
             print "Finish Time = %.2f" % finishTime            
             self.goToMenu()
-
-    def update(self): 
-        self.timeText.update("Current Time: %.2f" % (time.time() - timeStart)) 
-        self.timeText.update("Current Time: %.2f" % (time.time() - timeStart))
          
 #Quit button method that stops the music and goes back to Main Menu
 
