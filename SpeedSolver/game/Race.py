@@ -127,17 +127,11 @@ class RaceScene(spyral.Scene):
 
     def update(self, delta): 
         self.currentTime = time.time() - timeStart 
-        self.timeText.update("Current Time: %.2f" % self.currentTime) 
-        self.speedText.update("Speed: %d mph" % self.speed)
-        self.distanceText.update("Distance: %d" % self.currentDistance)
-        self.currentDistance += self.speed * delta
-        self.miniMapBall.x = (100 + (self.currentDistance / self.raceDistance) * 600)
         self.timeText.update("Current Time: %.2f" % self.currentTime)
         self.speedText.update("Speed: %d mph" % self.speed)
         self.distanceText.update("Distance: %d" % self.currentDistance) 
         self.currentDistance += self.speed * delta
         self.miniMapBall.x = (100 + (self.currentDistance / self.raceDistance) * 600)
-        print self.currentDistance
 
         print self.miniMapBall.pos.x
         if(self.currentDistance >= self.raceDistance):

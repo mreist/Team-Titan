@@ -33,7 +33,7 @@ class ResultsScreen(spyral.Scene):
         self.background = spyral.Image("images/Background.png")
         time = Player.currentTime
         
-        self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 100), 'You did it!! Your time was ' + str(time) + '.')
+        self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 100), 'You did it!! Your time was %.2f.' %time)
         if (time < Player.bestTime):
             lasttime = Player.bestTime
             Player.bestTime = time
