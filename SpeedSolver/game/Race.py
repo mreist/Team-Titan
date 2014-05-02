@@ -9,7 +9,8 @@ import TextInterface
 import Questions
 from spyral import Animation, easing
 import Garage
-
+import ResultsScreen
+import Player
 
 WIDTH = 1200
 HEIGHT = 900
@@ -121,9 +122,10 @@ class RaceScene(spyral.Scene):
         if(self.currentDistance >= self.raceDistance):
             global Game_music
             Game_music.stop()
-            finishTime = time.time() - timeStart                      
+            finishTime = time.time() - timeStart
+            Player.currentTime = finishTime                      
             print "Finish Time = %.2f" % finishTime            
-            self.goToMenu()
+            self.goToResults()
          
 #Quit button method that stops the music and goes back to Main Menu
 
@@ -132,6 +134,10 @@ class RaceScene(spyral.Scene):
         Game_music.stop()
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
+        
+    def goToResults(self):
+        spyral.director.pop
+        spyral.director.push(ResultsScreen.ResultsScreen())
 
         
     #Button that allows the player to turn on/off the sound    
