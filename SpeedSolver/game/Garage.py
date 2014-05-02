@@ -2,7 +2,6 @@ import spyral
 import random
 import math
 import MainScreen
-import Vehicle
 
 WIDTH = 1200
 HEIGHT = 900
@@ -11,7 +10,7 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
-#Creates a Garage Sprite with the Garage image
+#Creates a Garage Sprite with its image
 class Garage(spyral.Sprite):
     def __init__(self, scene):
         super(Garage, self).__init__(scene)
@@ -19,7 +18,6 @@ class Garage(spyral.Sprite):
         self.image = spyral.Image(size =(5, 5))
         self.image = spyral.Image("images/Garage.png")
         self.anchor = 'center'
-        
 #Creates a Garage scene
 class GarageScene(spyral.Scene):
     def __init__(self):
@@ -29,21 +27,6 @@ class GarageScene(spyral.Scene):
         spyral.event.register("system.quit", spyral.director.quit)
 
         self.background = spyral.Image("images/Background.png")
-        
-        Chassis = Vehicle.Car(self)
-        LeftWheel = Vehicle.Wheels(self)
-        RightWheel = Vehicle.Wheels(self)        
-
-
-        Chassis.pos = (WIDTH/4, (HEIGHT/2)+200)
-        LeftWheel.pos.x = Chassis.pos.x - 100
-        LeftWheel.pos.y = Chassis.pos.y + 35
-        RightWheel.pos.x = Chassis.pos.x + 125
-        RightWheel.pos.y = Chassis.pos.y + 35
-        
-        
-        
-        
         
         CarGarage = Garage(self)
         CarGarage.pos = ((WIDTH/2), (HEIGHT/2)-100)

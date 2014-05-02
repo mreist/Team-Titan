@@ -9,7 +9,12 @@ import TextInterface
 import Questions
 from spyral import Animation, easing
 import Garage
+<<<<<<< HEAD
 
+=======
+import ResultsScreen
+import Player
+>>>>>>> origin/Nick's-Branch
 
 WIDTH = 1200
 HEIGHT = 900
@@ -95,7 +100,11 @@ class RaceScene(spyral.Scene):
         self.miniMapBall = miniMap(self)
         self.miniMapBall.x = 100
         self.miniMapBall.y = 300
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> origin/Nick's-Branch
         #Not sure why this is Car.y.animation and not Chassis.y.animation, but it works?
         spyral.event.register('Car.y.animation.end', self.endMoving)
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
@@ -127,18 +136,34 @@ class RaceScene(spyral.Scene):
 
     def update(self, delta): 
         self.currentTime = time.time() - timeStart 
+<<<<<<< HEAD
         self.timeText.update("Current Time: %.2f" % self.currentTime) 
         self.speedText.update("Speed: %d mph" % self.speed)
         self.distanceText.update("Distance: %d" % self.currentDistance)
         self.currentDistance += self.speed * delta
         self.miniMapBall.x = (100 + (self.currentDistance / self.raceDistance) * 600)
+=======
+        self.timeText.update("Current Time: %.2f" % self.currentTime)
+        self.speedText.update("Speed: %d mph" % self.speed)
+        self.distanceText.update("Distance: %d" % self.currentDistance) 
+        self.currentDistance += self.speed * delta
+        self.miniMapBall.x = (100 + (self.currentDistance / self.raceDistance) * 600)
+        print self.currentDistance
+>>>>>>> origin/Nick's-Branch
         print self.miniMapBall.pos.x
         if(self.currentDistance >= self.raceDistance):
             global Game_music
             Game_music.stop()
+<<<<<<< HEAD
             finishTime = time.time() - timeStart                      
             print "Finish Time = %.2f" % finishTime            
             self.goToMenu()
+=======
+            finishTime = time.time() - timeStart
+            Player.currentTime = finishTime                      
+            print "Finish Time = %.2f" % finishTime            
+            self.goToResults()
+>>>>>>> origin/Nick's-Branch
          
 #Quit button method that stops the music and goes back to Main Menu
 
@@ -147,6 +172,13 @@ class RaceScene(spyral.Scene):
         Game_music.stop()
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
+<<<<<<< HEAD
+=======
+        
+    def goToResults(self):
+        spyral.director.pop
+        spyral.director.push(ResultsScreen.ResultsScreen())
+>>>>>>> origin/Nick's-Branch
 
         
     #Button that allows the player to turn on/off the sound    
@@ -184,7 +216,11 @@ class RaceScene(spyral.Scene):
 
     def endMoving(self):
         self.isMoving = 0
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> origin/Nick's-Branch
 class miniMap(spyral.Sprite):
     def __init__(self, scene):
         super(miniMap, self).__init__(scene)
