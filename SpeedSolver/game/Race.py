@@ -83,8 +83,20 @@ class RaceScene(spyral.Scene):
         self.my_form.Sound.pos = ((WIDTH-100), (HEIGHT-850))
         
         spyral.event.register('director.update', self.update)
-        self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH - 300, 100), str(time.time() - timeStart))
+        
+        #Initialize on screen text
+        self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (WIDTH - 300, 100), str(time.time() - timeStart))
+        self.speedText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, 100), str(self.speed))
+        self.distanceText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (350, 100), str(self.currentDistance))
+        self.mapStart = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, 300), "Start")
+        self.mapStart.anchor = 'midright'
+        self.mapFinish = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (700, 300), "Finish")
+        self.mapFinish.anchor = 'midleft'
 
+        self.miniMapBall = miniMap(self)
+        self.miniMapBall.x = 100
+        self.miniMapBall.y = 300
+        
         #Not sure why this is Car.y.animation and not Chassis.y.animation, but it works?
         spyral.event.register('Car.y.animation.end', self.endMoving)
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
@@ -116,9 +128,13 @@ class RaceScene(spyral.Scene):
 
     def update(self, delta): 
         self.currentTime = time.time() - timeStart 
-        self.timeText.update("Current Time: %.2f" % self.currentTime) 
+        self.timeText.update("Current Time: %.2f" % self.currentTime)
+        self.speedText.update("Speed: %d mph" % self.speed)
+        self.distanceText.update("Distance: %d" % self.currentDistance) 
         self.currentDistance += self.speed * delta
+        self.miniMapBall.x = (100 + (self.currentDistance / self.raceDistance) * 600)
         print self.currentDistance
+        print self.miniMapBall.pos.x
         if(self.currentDistance >= self.raceDistance):
             global Game_music
             Game_music.stop()
@@ -175,3 +191,11 @@ class RaceScene(spyral.Scene):
 
     def endMoving(self):
         self.isMoving = 0
+        
+class miniMap(spyral.Sprite):
+    def __init__(self, scene):
+        super(miniMap, self).__init__(scene)
+
+        self.image = spyral.Image(size=(20, 20))
+        self.image.draw_circle(WHITE, (10, 10), 10)
+        self.anchor = 'center'
