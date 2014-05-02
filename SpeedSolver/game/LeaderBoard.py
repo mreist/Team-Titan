@@ -10,7 +10,7 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 #Creates a leaderboard scene so that we can display the fastest student
-#Not sure if we are going to display an image or text list of the student
+#Not sure if we are going to display an image or text list of the students
 class LeaderboardScene(spyral.Scene):
     def __init__(self):
         super(LeaderboardScene, self).__init__(SIZE)
