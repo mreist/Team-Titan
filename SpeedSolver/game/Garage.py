@@ -10,7 +10,7 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
-#Creates a Garage Sprite with the Garage image
+#Creates a Garage Sprite with its image
 class Garage(spyral.Sprite):
     def __init__(self, scene):
         super(Garage, self).__init__(scene)
