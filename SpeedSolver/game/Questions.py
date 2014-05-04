@@ -26,7 +26,7 @@ class Question(spyral.Sprite):
             self.num1 = random.randint(1, 10000000)
             self.num2 = random.randint(1, 10000000)
             
-        self.font = spyral.Font(DEF_FONT, 36)
+        self.font = spyral.Font(DEF_FONT, 36, WHITE)
         
         if operator == 'addition':
             self.answer = self.num1 + self.num2
