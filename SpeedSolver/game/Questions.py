@@ -12,7 +12,8 @@ DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
 class Question(spyral.Sprite):
     nums = array('i', [0,0,0])
-    ops = array('c', [' ',' ',' ',' '])
+    operands = array('c', ['a','s','m','d'])
+    ops = array('c', [' ', ' '])
     def __init__(self, scene, operator, digits):
         spyral.Sprite.__init__(self, scene)
         self.anchor = 'midbottom'  
@@ -45,14 +46,14 @@ class Question(spyral.Sprite):
                 self.answer = self.nums[0]-self.nums[1]
                 self.image = self.font.render(str(self.nums[0]) + "-" + str(self.nums[1]) + "= ?")
         elif self.ops[0] == 'd': #guarantees int division for now
-            self.checkdivision(self.nums[0], self.nums[1])
+            self.checkdivision(self, self.nums[0], self.nums[1], digits)
 
             
                 
     
       
         
-    def checkdivision(num1, num2):#continuously generates numbers until answer is int
+    def checkdivision(self,num1, num2,digits):#continuously generates numbers until answer is int
         if (num1 % num2 == 0):
             self.answer = num1/num2
             self.image = self.font.render(str(num1 + "/" + str(num2) + "= ?"))
@@ -69,5 +70,5 @@ class Question(spyral.Sprite):
             else:
                 num1 = random.randint(1, 10000000)
                 num2 = random.randint(1, 10000000)
-            self.checkdivision(num1, num2)
+            self.checkdivision(self, num1, num2, digits)
        
