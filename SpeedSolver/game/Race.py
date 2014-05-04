@@ -31,12 +31,15 @@ class RaceScene(spyral.Scene):
 
         self.isMoving = 0
         self.currentTurn = 0
-
+        self.currentDistance = 0
+        self.level = 0
+        
+        #Initializae race variables
         #Start game with speed of 10        
-        self.speed = 10
+        self.speed = 0
         #Race distace is set to 100        
         self.raceDistance = 1000
-        self.currentDistance = 0
+        
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
@@ -44,10 +47,8 @@ class RaceScene(spyral.Scene):
        
         if(Background_Music == True):
            Game_music.play(-1)
-
         
         self.background = spyral.Image("images/Background.png")
-        self.level = 0
 
         self.Chassis = Vehicle.Car(self)
         self.LeftWheel = Vehicle.Wheels(self)
@@ -59,19 +60,21 @@ class RaceScene(spyral.Scene):
         self.RightWheel.pos.x = self.Chassis.pos.x + 125
         self.RightWheel.pos.y = self.Chassis.pos.y + 35
 
-
-        #playerVehicle = Vehicle.Vehicles(self)
-        #playerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
-
         animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
         self.RightWheel.animate(animation)
         self.LeftWheel.animate(animation)
 
+        #initialize Questions
         self.currentQuestion = Questions.Question(self, 'addition', 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
-
-
+        self.questionOne = Questions.Question(self, 'addition', 1)
+        self.questionOne.pos = (WIDTH - 200, 600)
+        self.questionTwo = Questions.Question(self, 'addition', 1)
+        self.questionTwo.pos = (WIDTH - 200, 700)
+        self.questionThree = Questions.Question(self, 'addition', 1)
+        self.questionThree.pos = (WIDTH - 200, 800)
         
+        #questionAnimation = Animation('x', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y+100), .5)
 
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
@@ -161,8 +164,7 @@ class RaceScene(spyral.Scene):
             print "Finish Time = %.2f" % finishTime            
             self.goToResults()
 
-#Quit button method that stops the music and goes back to Main Menu
-
+    #Quit button method that stops the music and goes back to Main Menu
     def goToMenu(self):
         global Game_music
         Game_music.stop()
@@ -187,21 +189,21 @@ class RaceScene(spyral.Scene):
             Background_Music = True
         
     def moveUp(self):
-        if(self.Chassis.pos.y >= (HEIGHT/2 + 200) and self.isMoving == 0):
+        if(self.Chassis.y >= (HEIGHT/2 + 200) and self.isMoving == 0):
             self.isMoving = 1
-            chassisUp = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y-100), .5)
-            leftWheelUp = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y-100), .5)
-            rightWheelUp = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y-100), .5)
+            chassisUp = Animation('y', easing.Linear(self.Chassis.y, self.Chassis.y-100), .5)
+            leftWheelUp = Animation('y', easing.Linear(self.LeftWheel.y, self.LeftWheel.y-100), .5)
+            rightWheelUp = Animation('y', easing.Linear(self.RightWheel.y, self.RightWheel.y-100), .5)
             self.Chassis.animate(chassisUp)
             self.LeftWheel.animate(leftWheelUp)
             self.RightWheel.animate(rightWheelUp)
 
     def moveDown(self):
-        if(self.Chassis.pos.y <= (HEIGHT/2 + 200) and self.isMoving == 0):
+        if(self.Chassis.y <= (HEIGHT/2 + 200) and self.isMoving == 0):
             self.isMoving = 1
-            chassisDown = Animation('y', easing.Linear(self.Chassis.pos.y, self.Chassis.pos.y+100), .5)
-            leftWheelDown = Animation('y', easing.Linear(self.LeftWheel.pos.y, self.LeftWheel.pos.y+100), .5)
-            rightWheelDown = Animation('y', easing.Linear(self.RightWheel.pos.y, self.RightWheel.pos.y+100), .5)
+            chassisDown = Animation('y', easing.Linear(self.Chassis.y, self.Chassis.y+100), .5)
+            leftWheelDown = Animation('y', easing.Linear(self.LeftWheel.y, self.LeftWheel.y+100), .5)
+            rightWheelDown = Animation('y', easing.Linear(self.RightWheel.y, self.RightWheel.y+100), .5)
             self.Chassis.animate(chassisDown)
             self.LeftWheel.animate(leftWheelDown)
             self.RightWheel.animate(rightWheelDown)
