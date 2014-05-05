@@ -55,6 +55,7 @@ class RaceScene(spyral.Scene):
         self.LeftWheel = Vehicle.Wheels(self)
         self.RightWheel = Vehicle.Wheels(self)      
 
+        #Creates background images
         self.SmCloud = Images.SmallCloud(self)
         self.LrgCloud = Images.LargeCloud(self)
         self.Tree = Images.Tree(self)
