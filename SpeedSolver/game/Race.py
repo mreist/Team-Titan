@@ -34,6 +34,8 @@ class RaceScene(spyral.Scene):
         self.currentTurn = 0
         self.currentDistance = 0
         self.level = 0
+
+        self.layers = ["bottom", "top"]
         
         #Initializae race variables
         #Start game with speed of 10        
@@ -52,7 +54,10 @@ class RaceScene(spyral.Scene):
 
         self.Chassis = Vehicle.Car(self)
         self.LeftWheel = Vehicle.Wheels(self)
-        self.RightWheel = Vehicle.Wheels(self)      
+        self.RightWheel = Vehicle.Wheels(self)
+        self.Chassis.layer = "bottom"
+        self.LeftWheel.layer = "top"
+        self.RightWheel.layer = "top"
 
         #Creates background images
         self.SmCloud = Images.SmallCloud(self)
@@ -71,9 +76,9 @@ class RaceScene(spyral.Scene):
 
         self.Chassis.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.LeftWheel.pos.x = self.Chassis.pos.x - 100
-        self.LeftWheel.pos.y = self.Chassis.pos.y + 35
-        self.RightWheel.pos.x = self.Chassis.pos.x + 125
-        self.RightWheel.pos.y = self.Chassis.pos.y + 35
+        self.LeftWheel.pos.y = self.Chassis.pos.y + 30
+        self.RightWheel.pos.x = self.Chassis.pos.x + 120
+        self.RightWheel.pos.y = self.Chassis.pos.y + 30
 
         animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
         self.RightWheel.animate(animation)
