@@ -2,6 +2,9 @@ import spyral
 import random
 import math
 import MainScreen
+import model
+from model import resources
+
 
 from spyral import Animation, easing
 
@@ -16,6 +19,7 @@ class GameName(spyral.Sprite):
     def __init__(self, scene):
         super(GameName, self).__init__(scene)
 
+        
         self.image = spyral.Image("images/Title.png")
         self.pos = (250, -1000)
 
@@ -27,6 +31,12 @@ class Title(spyral.Scene):
     def __init__(self):
         super(Title, self).__init__(SIZE)
 
+        model.loadResources()
+        model.LWtype = "Lwheel"
+        model.RWtype = "Rwheel"
+        model.Vtype = "blue"
+
+        
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
 
