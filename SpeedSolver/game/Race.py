@@ -31,16 +31,11 @@ class RaceScene(spyral.Scene):
         timeStart = time.time() 
 
         self.isMoving = 0
-<<<<<<< HEAD
-
-
-=======
         self.currentTurn = 0
         self.currentDistance = 0
         self.level = 0
         
         #Initializae race variables
->>>>>>> origin/master
         #Start game with speed of 10        
         self.speed = 0
         #Race distace is set to 100        
@@ -49,16 +44,9 @@ class RaceScene(spyral.Scene):
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
-        
-       
-<<<<<<< HEAD
-        #if(Background_Music == True):
-        #   Game_music.play(-1)
 
-=======
         if(Background_Music == True):
            Game_music.play(-1)
->>>>>>> origin/master
         
         self.background = spyral.Image("images/Background.png")
 
@@ -137,12 +125,8 @@ class RaceScene(spyral.Scene):
         spyral.event.register("input.keyboard.down.down", self.moveDown)
         spyral.event.register("input.keyboard.down.up", self.moveUp)
         spyral.event.register("form.RegisterForm.Sound.clicked", self.SwitchSound)
-
-<<<<<<< HEAD
-
-=======
-    #Checks if answer is correct,
->>>>>>> origin/master
+    
+    #checks if answer is correct
     def checkAnswer(self):
         
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
@@ -194,12 +178,6 @@ class RaceScene(spyral.Scene):
             Player.currentTime = finishTime                      
             print "Finish Time = %.2f" % finishTime            
             self.goToResults()
-<<<<<<< HEAD
-
-         
-#Quit button method that stops the music and goes back to Main Menu
-=======
->>>>>>> origin/master
 
     #Quit button method that stops the music and goes back to Main Menu
     def goToMenu(self):
@@ -248,10 +226,6 @@ class RaceScene(spyral.Scene):
     def endMoving(self):
         self.isMoving = 0
 
-<<<<<<< HEAD
-        
-=======
->>>>>>> origin/master
 class miniMap(spyral.Sprite):
     def __init__(self, scene):
         super(miniMap, self).__init__(scene)
