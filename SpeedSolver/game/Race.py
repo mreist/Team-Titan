@@ -2,6 +2,7 @@ import spyral
 import random
 import math
 import MainScreen
+import Images
 import Vehicle
 import pygame
 import time
@@ -73,6 +74,24 @@ class RaceScene(spyral.Scene):
         #self.LeftWheel.pos.y = self.Chassis.pos.y + 35
         #self.RightWheel.pos.x = self.Chassis.pos.x + 125
         #self.RightWheel.pos.y = self.Chassis.pos.y + 35
+        
+        self.PlayerVehicle.layer = "bottom"
+        self.PlayerLWheels.layer = "top"
+        self.PlayerRWheels.layer = "top"
+        
+        
+        self.SmCloud = Images.SmallCloud(self)
+        self.LrgCloud = Images.LargeCloud(self)
+        self.Tree = Images.Tree(self)
+        
+        small = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 3.0, loop = True)
+        self.SmCloud.animate(small)
+        
+        large = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 5.5, loop = True)
+        self.LrgCloud.animate(large)
+        
+        tree = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 4.5, loop = True)
+        self.Tree.animate(tree)
 
         animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
         
