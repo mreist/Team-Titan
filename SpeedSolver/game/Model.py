@@ -5,6 +5,7 @@ class Model:
     Vtype = ""
     LWtype = ""
     RWtype = ""
+    RaceSelect = ""
 
 
 def loadResources():
@@ -14,3 +15,5 @@ def loadResources():
 	    resources["Rwheel"] = spyral.image.Image("images/Wheel.png")
 	    resources["LFwheel"] = spyral.image.Image("images/FancyWheel.png")
 	    resources["RFwheel"] = spyral.image.Image("images/FancyWheel.png")
+	    resources["Night"] = spyral.image.Image("images/NightBackground.png")
+	    resources["Day"] = spyral.image.Image("images/Background.png")

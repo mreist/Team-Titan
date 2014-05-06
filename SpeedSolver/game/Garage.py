@@ -55,7 +55,7 @@ class drawLeftWheelImage(spyral.Sprite):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/Wheel.png")
-	    self.pos = (WIDTH/6, (HEIGHT/2)+235)
+	    self.pos = (WIDTH/6, (HEIGHT/2)+270)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
@@ -67,12 +67,13 @@ class drawRightWheelImage(spyral.Sprite):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/Wheel.png")
-	    self.pos = ((WIDTH/4) + 125, (HEIGHT/2)+235)
+	    self.pos = ((WIDTH/4) + 125, (HEIGHT/2)+270)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
             Model.RWtype = "Rwheel"
+
 
 class drawLeftFWheelImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -92,6 +93,7 @@ class drawRightFWheelImage(spyral.Sprite):
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/FancyWheel.png")
 	    self.pos = (WIDTH-80, (HEIGHT/2)+270)
+
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
@@ -118,6 +120,7 @@ class GarageScene(spyral.Scene):
         self.RightWheelImage = drawRightWheelImage(self.scene)
         self.LeftFWheelImage = drawLeftFWheelImage(self.scene)
         self.RightFWheelImage = drawRightFWheelImage(self.scene)
+
 	#Creates a back button to go back to the Main Menu
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")
