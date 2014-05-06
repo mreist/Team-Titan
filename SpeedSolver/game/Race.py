@@ -70,7 +70,7 @@ class RaceScene(spyral.Scene):
         #Initializae race variables
         #Start game with speed of 10        
         self.speed = 5
-        #Race distace is set to 100        
+        #Race distace is set to 1000      
         self.raceDistance = 1000
         
 
