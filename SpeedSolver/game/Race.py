@@ -12,14 +12,12 @@ from spyral import Animation, easing
 import ResultsScreen
 import model
 import Player
-<<<<<<< HEAD
 from model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
 from Player import PlayerRWheels
-=======
 import sets
->>>>>>> origin/MaxxTesting
+
 
 WIDTH = 1200
 HEIGHT = 900
@@ -195,7 +193,6 @@ class RaceScene(spyral.Scene):
 
     #Checks if answer is correct,
     def checkAnswer(self):
-<<<<<<< HEAD
         
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
             if(self.currentTurn > 0):
@@ -221,7 +218,7 @@ class RaceScene(spyral.Scene):
         self.currentQuestion = Questions.Question(self, random.choice(operands), 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
         self.my_form.focus()
-=======
+
         if(self.my_form.AnswerInput.visible == True):
             try:
                 if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
@@ -271,7 +268,6 @@ class RaceScene(spyral.Scene):
 
             except ValueError:
                 print 'Nothing'
->>>>>>> origin/MaxxTesting
 
     def update(self, delta): 
         self.currentTime = time.time() - timeStart 
@@ -284,29 +280,25 @@ class RaceScene(spyral.Scene):
         tree = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
         large = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 10.0, loop = False)
 
-<<<<<<< HEAD
+
         if(self.currentTime%15 > 0 and self.currentTime%15 < .05):
             self.Tree.animate(tree)
 
         if(self.currentTime%20 > 0 and self.currentTime%20 < .05):
             self.LrgCloud.animate(large)
             
-=======
->>>>>>> origin/MaxxTesting
         if(self.currentDistance >= self.raceDistance):
             global Game_music
             Game_music.stop()
 
-<<<<<<< HEAD
             finishTime = time.time() - timeStart                      
             print "Finish Time = %.2f" % finishTime 
             Player.currentTime = finishTime                                            
 
-=======
             finishTime = time.time() - timeStart
             Player.currentTime = finishTime                      
             print "Finish Time = %.2f" % finishTime            
->>>>>>> origin/MaxxTesting
+
             self.goToResults()
 
         if (self.collide_sprites(self.Chassis, self.questionOne)):
