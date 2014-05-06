@@ -3,6 +3,7 @@ import Race
 import Player
 import TextInterface
 import MainScreen
+import pygame
 
 WIDTH = 1200
 HEIGHT = 900
@@ -10,10 +11,20 @@ BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
+Background_Music = True;
+pygame.mixer.pre_init(44100, -16, 2, 2048)
+pygame.mixer.init()
+yay = pygame.mixer.Sound("yay.wav")
+fanfare = pygame.mixer.Sound("fanfare.wav")
+
 
 class ResultsScreen(spyral.Scene):
     def __init__(self):
         super(ResultsScreen, self).__init__(SIZE)
+        
+       
+        fanfare.play(0)
+        
         
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
@@ -42,6 +53,7 @@ class ResultsScreen(spyral.Scene):
             Player.firstPlay = False
         elif (time < Player.bestTime):
             lasttime = Player.bestTime
+            yay.play(0)
             Player.bestTime = time
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 200), 'Wow! You beat your previous best time of ' + str(lasttime) + '.')
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 300), 'You got 2 tokens. Nice!')
