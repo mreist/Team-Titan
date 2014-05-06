@@ -14,11 +14,15 @@ BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
+pygame.mixer.pre_init(44100, -16, 2, 2048)
+pygame.mixer.init()
+seinfeld = pygame.mixer.Sound("seinfeld.wav")
 
 class GameName(spyral.Sprite):
     def __init__(self, scene):
         super(GameName, self).__init__(scene)
-
+        
+        seinfeld.play(0)
         
         self.image = spyral.Image("images/Title.png")
         self.pos = (250, -1000)
