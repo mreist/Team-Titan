@@ -44,5 +44,5 @@ class Question(spyral.Sprite):
             self.num3 = self.num1*self.num2
             self.answer = self.num3/self.num1
             self.image = self.font.render(str(self.num3) + "/" + str(self.num1) + "= ?")
-            self.output = (str(self.num3) + "/" + str(self.num2) + "=" + str(self.answer))
+            self.output = (str(self.num3) + "/" + str(self.num1) + "=" + str(self.answer))
 
