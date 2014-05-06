@@ -49,17 +49,6 @@ class Question(spyral.Sprite):
         #spyral.event.register('director.update', self.update)
       
         
-<<<<<<< HEAD
-#    def checkdivision(self, num1, num2):
-#        if self.num1 % self.num2 == 0:
-#            self.answer = num1/num2
-#            self.image = self.font.render(str(self.num1) + "/" + str(self.num2) + "= ?")
-#        else:
-#            self.num1 = random.randint(1, 10)
-#            self.num2 = random.randint(1, 10)
-#            checkdivision(num1, num2)
-#       
-=======
     def checkdivision(self, num1, num2):
         if self.num1 % self.num2 == 0:
             self.answer = num1/num2
@@ -73,4 +62,3 @@ class Question(spyral.Sprite):
      #   r = self.rect
       #  if r.left < 0:
        #     self.kill()
->>>>>>> origin/MaxxTesting
