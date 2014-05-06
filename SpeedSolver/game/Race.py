@@ -132,7 +132,7 @@ class RaceScene(spyral.Scene):
         self.miniMapBall.x = 100
         self.miniMapBall.y = 300
 
-        spyral.event.register('Car.y.animation.end', self.endMoving)
+        spyral.event.register('PlayerVehicle.y.animation.end', self.endMoving)
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
         spyral.event.register("input.keyboard.down.space", self.checkAnswer)
         spyral.event.register("input.keyboard.down.down", self.moveDown)
