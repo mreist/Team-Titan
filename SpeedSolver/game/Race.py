@@ -33,7 +33,9 @@ class RaceScene(spyral.Scene):
         super(RaceScene, self).__init__(SIZE)
         
         global timeStart
-        timeStart = time.time() 
+        timeStart = time.time()
+        self.layers = ["bottom", "top"]
+        
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.layers = ["bottom", "top"]
@@ -55,7 +57,7 @@ class RaceScene(spyral.Scene):
         self.currentDistance = 0
         self.level = 0
 
-        self.layers = ["bottom", "top"]
+        
         
         #Initializae race variables
         #Start game with speed of 10        
