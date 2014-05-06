@@ -17,6 +17,7 @@ from Player import PlayerVehicle
 from Player import PlayerLWheels
 from Player import PlayerRWheels
 import sets
+from RaceSelection import RaceSelect
 
 WIDTH = 1200
 HEIGHT = 900
@@ -63,7 +64,7 @@ class RaceScene(spyral.Scene):
         self.currentTurn = 0
         self.currentDistance = 0
         self.level = 0
-
+        self.PlayerVehicle.layer = "bottom"
         
         
         
@@ -80,20 +81,19 @@ class RaceScene(spyral.Scene):
        
         if(Background_Music == True):
            Game_music.play(-1)
+           
+        if(Model.RaceSelect == "Night"):
+            self.background = spyral.Image("images/NightBackground.png")
+            self.City = Images.City(self)
+            self.runningDeltaCity = 0
+        elif(Model.RaceSelect == "Day"):
+            self.background = spyral.Image("images/Background.png")
+            self.LrgCloud = Images.LargeCloud(self)
+            self.Tree = Images.Tree(self)
+            self.runningDeltaTree = 0
+            self.runningDeltaLrgCloud = 0
+            
         
-        self.background = spyral.Image("images/Background.png")
-
-
-        self.PlayerVehicle.layer = "bottom"
-        
-        self.runningDeltaTree = 0
-        self.runningDeltaLrgCloud = 0
-
-
-        #Creates background images
-
-        self.LrgCloud = Images.LargeCloud(self)
-        self.Tree = Images.Tree(self)
 
         #Creates Bottom Road Lines
         self.BottomLine1 = Images.RoadLines(self)
@@ -251,15 +251,24 @@ class RaceScene(spyral.Scene):
         
         tree = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
         large = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 10.0, loop = False)
+        
+        city = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 20, loop = False)
 
-        self.runningDeltaTree += delta
-        self.runningDeltaLrgCloud += delta
-        if(self.runningDeltaTree >= 15):
-            self.Tree.animate(tree)
-            self.runningDeltaTree = 0
-        if(self.runningDeltaLrgCloud >= 20):
-            self.LrgCloud.animate(large)
-            self.runningDeltaLrgCloud = 0
+        if(Model.RaceSelect == "Day"):
+            self.runningDeltaTree += delta
+            self.runningDeltaLrgCloud += delta
+            if(self.runningDeltaTree >= 15):
+                self.Tree.animate(tree)
+                self.runningDeltaTree = 0
+            if(self.runningDeltaLrgCloud >= 20):
+                self.LrgCloud.animate(large)
+                self.runningDeltaLrgCloud = 0
+                
+        if(Model.RaceSelect == "Night"):
+            self.runningDeltaCity += delta       
+            if(self.runningDeltaCity >= 30):
+                self.City.animate(city)
+                self.runningDeltaCity = 0
 
         if(self.currentDistance >= self.raceDistance):
             global Game_music

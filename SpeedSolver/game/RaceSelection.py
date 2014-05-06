@@ -7,6 +7,8 @@ import Race
 import Garage
 import LeaderBoard
 import TextInterface
+import Model
+from Model import resources
 
 from spyral import Animation, easing
 
@@ -17,6 +19,13 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
+class RaceSelect(spyral.Sprite):
+    def __init__(self, Scene):
+        spyral.Sprite.__init__(self, Scene)
+        self.anchor = 'center'
+        self.RaceSelect = Model.RaceSelect
+        self.background  = Model.resources[self.RaceSelect]      
+        
 
 class RaceSelection(spyral.Scene):
     def __init__(self):
@@ -44,10 +53,16 @@ class RaceSelection(spyral.Scene):
 
 
         #Functions that will take you to garage/game/options depending on which button is clicked
-        spyral.event.register("form.RegisterForm.DayRaceButton.clicked", self.goToRace)
-        spyral.event.register("form.RegisterForm.NightRaceButton.clicked", self.goToRace)
+        spyral.event.register("form.RegisterForm.DayRaceButton.clicked", self.goToDayRace)
+        spyral.event.register("form.RegisterForm.NightRaceButton.clicked", self.goToNightRace)
         
         
-    def goToRace(self):
+    def goToNightRace(self):
+        Model.RaceSelect = "Night"
         spyral.director.pop
         spyral.director.push(Race.RaceScene())
+        
+    def goToDayRace(self):
+        Model.RaceSelect = "Day"
+        spyral.director.pop
+        spyral.director.push(Race.RaceScene())    
