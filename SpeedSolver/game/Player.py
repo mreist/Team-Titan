@@ -7,6 +7,7 @@ currentTime = 0
 bestTime = 100000
 tokens = 0
 firstPlay = True
+WithWheels = True
 
 class PlayerVehicle(spyral.Sprite):
     def __init__(self, Scene):
@@ -15,21 +16,26 @@ class PlayerVehicle(spyral.Sprite):
         self.Vtype = model.Vtype
         self.image  = model.resources[self.Vtype]
         
+if (WithWheels == True):        
+    class PlayerLWheels(spyral.Sprite):
+        def __init__(self, Scene):
+            spyral.Sprite.__init__(self, Scene)
+            try:
+                self.anchor = 'center'
+                self.LWtype = model.LWtype
         
-class PlayerLWheels(spyral.Sprite):
-    def __init__(self, Scene):
-        spyral.Sprite.__init__(self, Scene)
-        self.anchor = 'center'
-        self.LWtype = model.LWtype
-        self.image  = model.resources[self.LWtype]
-        #animation = Animation('x', easing.Linear(0, 600), duration = 3.0, loop = True)
-        #self.animate(animation)
-        
-class PlayerRWheels(spyral.Sprite):
-    def __init__(self, Scene):
-        spyral.Sprite.__init__(self, Scene)
-        self.anchor = 'center'
-        self.RWtype = model.RWtype 
-        self.image  = model.resources[self.RWtype]
-        #animation = Animation('x', easing.Linear(0, 600), duration = 3.0, loop = True)
-        #self.animate(animation)
+                self.image  = model.resources[self.LWtype]
+            except (KeyError, AttributeError):
+                print "Nothing1"
+            
+    class PlayerRWheels(spyral.Sprite):
+        def __init__(self, Scene):
+            spyral.Sprite.__init__(self, Scene)
+            try:
+                self.anchor = 'center'
+                self.RWtype = model.RWtype
+         
+                self.image  = model.resources[self.RWtype]
+            except (KeyError, AttributeError):
+                print "Nothing2"
+

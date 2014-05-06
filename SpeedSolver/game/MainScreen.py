@@ -15,10 +15,11 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
+
 class MainMenu(spyral.Scene):
     def __init__(self):
         super(MainMenu, self).__init__(SIZE)
-
+        
 #Loads custom start/option buttons
         #self.load_style("game/style.spys")
 
