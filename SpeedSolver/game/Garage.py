@@ -29,13 +29,13 @@ class drawRedImage(spyral.Sprite):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/RedCar.png")
-	    self.pos = (WIDTH/2, (HEIGHT/2)+200)
+	    self.pos = (WIDTH-200, (HEIGHT/2)+200)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
             model.Vtype = "red"
-            Player.WithWheels = False
+            Player.WithWheels = True
 
 class drawBlueImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -55,7 +55,7 @@ class drawLeftWheelImage(spyral.Sprite):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/Wheel.png")
-	    self.pos = (WIDTH/6, (HEIGHT/2)+235)
+	    self.pos = (WIDTH/6, (HEIGHT/2)+270)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
@@ -67,12 +67,36 @@ class drawRightWheelImage(spyral.Sprite):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/Wheel.png")
-	    self.pos = ((WIDTH/4) + 125, (HEIGHT/2)+235)
+	    self.pos = ((WIDTH/4) + 125, (HEIGHT/2)+270)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
             model.RWtype = "Rwheel"
+            
+class drawLeftFWheelImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/FancyWheel.png")
+	    self.pos = (WIDTH-300, (HEIGHT/2)+270)
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        if self.collide_point(pos):
+            model.LWtype = "LFwheel"
+
+class drawRightFWheelImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/FancyWheel.png")
+	    self.pos = ((WIDTH-80), (HEIGHT/2)+270)
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        if self.collide_point(pos):
+            model.RWtype = "RFwheel"            
 
 #Creates a Garage scene
 class GarageScene(spyral.Scene):
@@ -92,6 +116,9 @@ class GarageScene(spyral.Scene):
         self.BlueImage = drawBlueImage(self.scene)
         self.LeftWheelImage = drawLeftWheelImage(self.scene)
         self.RightWheelImage = drawRightWheelImage(self.scene)
+        self.LeftFWheelImage = drawLeftFWheelImage(self.scene)
+        self.RightFWheelImage = drawRightFWheelImage(self.scene)
+        
 	#Creates a back button to go back to the Main Menu
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")
