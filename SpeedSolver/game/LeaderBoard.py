@@ -23,6 +23,8 @@ class LeaderboardScene(spyral.Scene):
         for player in Player.top10:
             name = player[0]
             time = str(player[1])
+            if time == '1000000':
+                time = ''
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2 - 50, 200 + i), name)
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2 + 50, 200 + i), '|')
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2 + 150, 200 + i), time)
@@ -43,9 +45,4 @@ class LeaderboardScene(spyral.Scene):
 	
     def goToMenu(self):
         spyral.director.pop
-        spyral.director.push(MainScreen.MainMenu()) 
-
-
-
-
-
+        spyral.director.push(MainScreen.MainMenu())
