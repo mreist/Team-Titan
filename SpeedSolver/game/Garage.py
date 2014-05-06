@@ -1,11 +1,11 @@
 import spyral 
 import random
 import math
-import model
+import Model
 import MainScreen
 import Race
 import Player
-from model import resources
+from Model import resources
 
 WIDTH = 1200
 HEIGHT = 900
@@ -18,7 +18,7 @@ DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 class Garage(spyral.Sprite):
     def __init__(self, scene):
         super(Garage, self).__init__(scene)
-        model.loadResources()
+        Model.loadResources()
         
         self.image = spyral.Image(size =(5, 5))
         self.image = spyral.Image("images/Garage.png")
@@ -29,13 +29,13 @@ class drawRedImage(spyral.Sprite):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/RedCar.png")
-	    self.pos = (WIDTH/2, (HEIGHT/2)+200)
+	    self.pos = (WIDTH-200, (HEIGHT/2)+200)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
-            model.Vtype = "red"
-            Player.WithWheels = False
+            Model.Vtype = "red"
+            Player.WithWheels = True
 
 class drawBlueImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -47,7 +47,7 @@ class drawBlueImage(spyral.Sprite):
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
-            model.Vtype = "blue"
+            Model.Vtype = "blue"
             Player.WithWheels = True
 
 class drawLeftWheelImage(spyral.Sprite):
@@ -60,7 +60,7 @@ class drawLeftWheelImage(spyral.Sprite):
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
-            model.LWtype = "Lwheel"
+            Model.LWtype = "Lwheel"
 
 class drawRightWheelImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -72,7 +72,31 @@ class drawRightWheelImage(spyral.Sprite):
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
-            model.RWtype = "Rwheel"
+            Model.RWtype = "Rwheel"
+
+class drawLeftFWheelImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/FancyWheel.png")
+	    self.pos = (WIDTH-300, (HEIGHT/2)+270)
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        if self.collide_point(pos):
+            Model.LWtype = "LFwheel"
+
+class drawRightFWheelImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/FancyWheel.png")
+	    self.pos = (WIDTH-80, (HEIGHT/2)+270)
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        if self.collide_point(pos):
+            Model.RWtype = "RFwheel"
 
 #Creates a Garage scene
 class GarageScene(spyral.Scene):
@@ -92,6 +116,8 @@ class GarageScene(spyral.Scene):
         self.BlueImage = drawBlueImage(self.scene)
         self.LeftWheelImage = drawLeftWheelImage(self.scene)
         self.RightWheelImage = drawRightWheelImage(self.scene)
+        self.LeftFWheelImage = drawLeftFWheelImage(self.scene)
+        self.RightFWheelImage = drawRightFWheelImage(self.scene)
 	#Creates a back button to go back to the Main Menu
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")
