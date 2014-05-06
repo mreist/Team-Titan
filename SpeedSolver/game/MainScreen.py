@@ -20,8 +20,6 @@ class MainMenu(spyral.Scene):
     def __init__(self):
         super(MainMenu, self).__init__(SIZE)
         
-        seinfeld.play(0)
-        
 #Loads custom start/option buttons
         #self.load_style("game/style.spys")
 
