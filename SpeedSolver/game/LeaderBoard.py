@@ -2,6 +2,8 @@ import spyral
 import random
 import math
 import MainScreen
+import Player
+import TextInterface
 
 WIDTH = 1200
 HEIGHT = 900
@@ -17,8 +19,16 @@ class LeaderboardScene(spyral.Scene):
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
-
-        #self.background = spyral.Image("images/Leaderboard.png")
+        i = 0
+        for player in Player.top10:
+            name = player[0]
+            time = str(player[1])
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2 - 50, 200 + i), name)
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2 + 50, 200 + i), '|')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2 + 150, 200 + i), time)
+            i += 50
+            
+        self.background = spyral.Image("images/Background.png")
 
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")

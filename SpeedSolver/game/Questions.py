@@ -31,28 +31,18 @@ class Question(spyral.Sprite):
         if operator == 'addition':
             self.answer = self.num1 + self.num2
             self.image = self.font.render(str(self.num1) + "+" + str(self.num2) + "= ?")
+            self.output = (str(self.num1) + "+" + str(self.num2) + "=" + str(self.answer))
         elif operator == 'multiplication':
             self.answer = self.num1*self.num2
             self.image = self.font.render(str(self.num1) + "x" + str(self.num2) + "= ?")
+            self.output = (str(self.num1) + "*" + str(self.num2) + "=" + str(self.answer))
         elif operator == 'subtraction':
             self.answer = self.num1-self.num2
             self.image = self.font.render(str(self.num1) + "-" + str(self.num2) + "= ?")
+            self.output = (str(self.num1) + "-" + str(self.num2) + "=" + str(self.answer))
         elif operator == 'division':
-            checkdivision(self.num1, self.num2)
+            self.num3 = self.num1*self.num2
+            self.answer = self.num3/self.num1
+            self.image = self.font.render(str(self.num3) + "/" + str(self.num1) + "= ?")
+            self.output = (str(self.num3) + "/" + str(self.num2) + "=" + str(self.answer))
 
-        #spyral.event.register('director.update', self.update)
-      
-        
-    def checkdivision(self, num1, num2):
-        if self.num1 % self.num2 == 0:
-            self.answer = num1/num2
-            self.image = self.font.render(str(self.num1) + "/" + str(self.num2) + "= ?")
-        else:
-            self.num1 = random.randint(1, 10)
-            self.num2 = random.randint(1, 10)
-            checkdivision(num1, num2)
-
-    #def update(self):
-     #   r = self.rect
-      #  if r.left < 0:
-       #     self.kill()
