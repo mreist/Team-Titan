@@ -4,6 +4,7 @@ import Player
 import TextInterface
 import MainScreen
 import pygame
+import LeaderBoard
 
 WIDTH = 1200
 HEIGHT = 900
@@ -30,11 +31,15 @@ class ResultsScreen(spyral.Scene):
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
             RetryButton = spyral.widgets.Button("Race Again")
+            InitialsInput = spyral.widgets.TextInput(100, "Enter your initials")
         
         self.my_form = RegisterForm(self)
         self.my_form.focus()
         self.my_form.QuitButton.pos = ((WIDTH/2), (HEIGHT-50))
         self.my_form.RetryButton.pos = ((WIDTH/2 - 200), (HEIGHT-50))
+        self.my_form.InitialsInput.pos = ((WIDTH/2 - 200), (HEIGHT-100))
+
+        
 
 
         
@@ -62,6 +67,9 @@ class ResultsScreen(spyral.Scene):
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 300), 'You received a token for your speedy racing.')
             Player.tokens += 1
         TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 400), 'Total tokens: ' + str(Player.tokens))
+        
+        if time > Player.top10[0][1]:
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), ((WIDTH/2 - 400), (HEIGHT-200)), 'Wow! You got a high score! Enter your name.')
 
         
 
