@@ -28,7 +28,7 @@ class drawRedImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
-	    self.image = spyral.image.Image("images/redcar.jpg")
+	    self.image = spyral.image.Image("images/RedCar.png")
 	    self.pos = (WIDTH/2, (HEIGHT/2)+200)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
