@@ -18,7 +18,6 @@ from Player import PlayerLWheels
 from Player import PlayerRWheels
 import sets
 
-
 WIDTH = 1200
 HEIGHT = 900
 BG_COLOR = (0,0,0)
@@ -193,66 +192,39 @@ class RaceScene(spyral.Scene):
 
     #Checks if answer is correct,
     def checkAnswer(self):
-        
-        if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
-            if(self.currentTurn > 0):
-                self.feedback.kill()
-            self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,120,0)), (WIDTH/2, 50), ("Correct: " + self.currentQuestion.output))
-            self.feedback.anchor = 'bottomleft'
-            self.feedback.pos = (50, HEIGHT)            
-            self.level += 1
-            self.speed += 5
-        else:
-            if(self.currentTurn > 0):
-                self.feedback.kill()
-            self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (150,0,0)), (WIDTH/2, 50), ("Incorrect: " + self.currentQuestion.output))
-            self.feedback.anchor = 'bottomleft'            
-            self.feedback.pos = (50, HEIGHT)
-            if(self.speed > 2):
-                self.speed -= 2
-
-        operands = ['addition', 'multiplication', 'subtraction', 'division']
-        
-        self.currentTurn += 1
-        self.currentQuestion.kill()
-        self.currentQuestion = Questions.Question(self, random.choice(operands), 1)
-        self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
-        self.my_form.focus()
-
         if(self.my_form.AnswerInput.visible == True):
             try:
                 if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
-                    print "CORRECT"
                     if(self.currentTurn > 0):
                         self.feedback.kill()
-                    self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,120,0)), (WIDTH/2, 50), "Correct! %d + %d = %d" %(self.currentQuestion.num1, self.currentQuestion.num2, self.currentQuestion.answer))
+                    self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,120,0)), (WIDTH/2, 50), ("Correct: " + self.currentQuestion.output))
                     self.feedback.anchor = 'bottomleft'
                     self.feedback.pos = (50, HEIGHT)            
                     self.level += 1
                     self.speed += 5
                 else:
-                    print "INCORRECT"
                     if(self.currentTurn > 0):
                         self.feedback.kill()
-                    self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (150,0,0)), (WIDTH/2, 50), "Incorrect! %d + %d = %d" %(self.currentQuestion.num1, self.currentQuestion.num2, self.currentQuestion.answer))
+                    self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (150,0,0)), (WIDTH/2, 50), ("Incorrect: " + self.currentQuestion.output))
                     self.feedback.anchor = 'bottomleft'            
                     self.feedback.pos = (50, HEIGHT)
                     if(self.speed > 2):
                         self.speed -= 2
 
+                operands = ['addition', 'multiplication', 'subtraction', 'division']
                 self.currentTurn += 1
                 print ("previous answer: " + str(self.currentQuestion.answer))
                 self.currentQuestion.kill()
                 #self.currentQuestion = Questions.Question(self, 'addition', 1)
                 #self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
 
-                self.questionOne = Questions.Question(self, 'addition', 1)
+                self.questionOne = Questions.Question(self, random.choice(operands), 1)
                 self.questionOne.anchor ='midleft'        
                 self.questionOne.pos = (WIDTH + 200, 550)
-                self.questionTwo = Questions.Question(self, 'subtraction', 1)
+                self.questionTwo = Questions.Question(self, random.choice(operands), 1)
                 self.questionTwo.anchor ='midleft'
                 self.questionTwo.pos = (WIDTH + 200, 650)
-                self.questionThree = Questions.Question(self, 'multiplication', 1)
+                self.questionThree = Questions.Question(self, random.choice(operands), 1)
                 self.questionThree.anchor ='midleft'        
                 self.questionThree.pos = (WIDTH + 200, 750)
 
@@ -280,13 +252,12 @@ class RaceScene(spyral.Scene):
         tree = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
         large = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 10.0, loop = False)
 
-
-        if(self.currentTime%15 > 0 and self.currentTime%15 < .05):
+        if(self.currentTime%15 > 0 and self.currentTime%15 < .04):
             self.Tree.animate(tree)
 
-        if(self.currentTime%20 > 0 and self.currentTime%20 < .05):
+        if(self.currentTime%20 > 0 and self.currentTime%20 < .04):
             self.LrgCloud.animate(large)
-            
+
         if(self.currentDistance >= self.raceDistance):
             global Game_music
             Game_music.stop()
@@ -294,14 +265,9 @@ class RaceScene(spyral.Scene):
             finishTime = time.time() - timeStart                      
             print "Finish Time = %.2f" % finishTime 
             Player.currentTime = finishTime                                            
-
-            finishTime = time.time() - timeStart
-            Player.currentTime = finishTime                      
-            print "Finish Time = %.2f" % finishTime            
-
             self.goToResults()
 
-        if (self.collide_sprites(self.Chassis, self.questionOne)):
+        if (self.collide_sprites(self.PlayerVehicle, self.questionOne)):
             print "Collide with 1"
             self.my_form.AnswerInput.visible = True            
             self.questionOne.stop_all_animations()
@@ -310,7 +276,7 @@ class RaceScene(spyral.Scene):
             self.questionThree.kill()
             self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
             self.isMoving = 1
-        elif (self.collide_sprites(self.Chassis, self.questionTwo)):
+        elif (self.collide_sprites(self.PlayerVehicle, self.questionTwo)):
             print "Collide with 2"
             self.my_form.AnswerInput.visible = True           
             self.questionTwo.stop_all_animations()
@@ -319,7 +285,7 @@ class RaceScene(spyral.Scene):
             self.questionThree.kill()
             self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
             self.isMoving = 1
-        elif (self.collide_sprites(self.Chassis, self.questionThree)):
+        elif (self.collide_sprites(self.PlayerVehicle, self.questionThree)):
             print "Collide with 3"
             self.my_form.AnswerInput.visible = True
             self.questionThree.stop_all_animations()
