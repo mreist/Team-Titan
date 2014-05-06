@@ -11,7 +11,6 @@ BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
-Background_Music = True;
 pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.mixer.init()
 yay = pygame.mixer.Sound("yay.wav")
