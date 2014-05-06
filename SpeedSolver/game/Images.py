@@ -30,5 +30,12 @@ class SmallCloud(spyral.Sprite):
         self.anchor = 'center'
         self.pos = (WIDTH + 100, HEIGHT/7)
 
+class RoadLines(spyral.Sprite):
+    def __init__(self, scene):
+        super(RoadLines, self).__init__(scene)
+
+        self.image = spyral.Image("images/Line.png")
+        self.anchor = 'center'
+
 
 
