@@ -26,7 +26,7 @@ class Question(spyral.Sprite):
             self.num1 = random.randint(1, 10000000)
             self.num2 = random.randint(1, 10000000)
             
-        self.font = spyral.Font(DEF_FONT, 36, WHITE)
+        self.font = spyral.Font(DEF_FONT, 32, WHITE)
         
         if operator == 'addition':
             self.answer = self.num1 + self.num2
@@ -40,7 +40,7 @@ class Question(spyral.Sprite):
         elif operator == 'division':
             checkdivision(self.num1, self.num2)
 
-    
+        #spyral.event.register('director.update', self.update)
       
         
     def checkdivision(self, num1, num2):
@@ -51,4 +51,8 @@ class Question(spyral.Sprite):
             self.num1 = random.randint(1, 10)
             self.num2 = random.randint(1, 10)
             checkdivision(num1, num2)
-       
+
+    #def update(self):
+     #   r = self.rect
+      #  if r.left < 0:
+       #     self.kill()
