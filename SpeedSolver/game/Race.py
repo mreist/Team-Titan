@@ -35,24 +35,13 @@ class RaceScene(spyral.Scene):
         model.loadResources()
         
         global timeStart
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> 9ff6a662f89869201bcd9ad4bb6acb423e5f5286
         global manager
 
         timeStart = time.time() 
-<<<<<<< HEAD
-=======
+
         timeStart = time.time()
         self.layers = ["bottom", "top"]
-        
->>>>>>> origin/master
-=======
-        self.layers = ["bottom", "top"]
->>>>>>> 9ff6a662f89869201bcd9ad4bb6acb423e5f5286
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.layers = ["bottom", "top"]
@@ -113,29 +102,6 @@ class RaceScene(spyral.Scene):
         
         tree = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 4.5, loop = True)
         self.Tree.animate(tree)
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-        
-        
-=======
-        self.Chassis.pos = (WIDTH/4, (HEIGHT/2)+200)
-        self.LeftWheel.pos.x = self.Chassis.pos.x - 100
-        self.LeftWheel.pos.y = self.Chassis.pos.y + 30
-        self.RightWheel.pos.x = self.Chassis.pos.x + 120
-        self.RightWheel.pos.y = self.Chassis.pos.y + 30
-
-        animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
-        self.RightWheel.animate(animation)
-        self.LeftWheel.animate(animation)
->>>>>>> origin/master
-=======
->>>>>>> origin/master
-=======
-
->>>>>>> 9ff6a662f89869201bcd9ad4bb6acb423e5f5286
 
         #initialize Questions
         self.currentQuestion = Questions.Question(self, 'addition', 1)
