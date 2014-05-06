@@ -60,19 +60,53 @@ class RaceScene(spyral.Scene):
         self.RightWheel.layer = "top"
 
         #Creates background images
-        self.SmCloud = Images.SmallCloud(self)
+        #self.SmCloud = Images.SmallCloud(self)
         self.LrgCloud = Images.LargeCloud(self)
         self.Tree = Images.Tree(self)
 
-        small = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 3.0, loop = True)
-        self.SmCloud.animate(small)
+        #small = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 3.0, loop = True)
+        #self.SmCloud.animate(small)
 
 
-        large = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 5.5, loop = True)
-        self.LrgCloud.animate(large)
 
         tree = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 4.5, loop = True)
-        self.Tree.animate(tree)
+        #self.Tree.animate(tree)
+
+        #Creates Bottom Road Lines
+        self.BottomLine1 = Images.RoadLines(self)
+        self.BottomLine2 = Images.RoadLines(self)
+        self.BottomLine3 = Images.RoadLines(self)
+
+        self.BottomLine1.pos.y = HEIGHT - 180 
+        self.BottomLine2.pos.y = HEIGHT - 180
+        self.BottomLine3.pos.y = HEIGHT - 180
+
+        BottomOne = Animation('x', easing.Linear(WIDTH + 100, -2700), duration = 3.0, loop = True)
+        self.BottomLine1.animate(BottomOne)
+
+        BottomTwo = Animation('x', easing.Linear(WIDTH + 1400, -1400), duration = 3.0, loop = True)
+        self.BottomLine2.animate(BottomTwo)
+
+        BottomThree = Animation('x', easing.Linear(WIDTH + 2700, -100), duration = 3.0, loop = True)
+        self.BottomLine3.animate(BottomThree)
+
+        #Creates Top Road Lines
+        self.TopLine1 = Images.RoadLines(self)
+        self.TopLine2 = Images.RoadLines(self)
+        self.TopLine3 = Images.RoadLines(self)
+
+        self.TopLine1.pos.y = HEIGHT - 300 
+        self.TopLine2.pos.y = HEIGHT - 300
+        self.TopLine3.pos.y = HEIGHT - 300
+
+        TopOne = Animation('x', easing.Linear(WIDTH + 100, -2700), duration = 3.0, loop = True)
+        self.TopLine1.animate(TopOne)
+
+        TopTwo = Animation('x', easing.Linear(WIDTH + 1400, -1400), duration = 3.0, loop = True)
+        self.TopLine2.animate(TopTwo)
+
+        TopThree = Animation('x', easing.Linear(WIDTH + 2700, -100), duration = 3.0, loop = True)
+        self.TopLine3.animate(TopThree)
 
         self.Chassis.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.LeftWheel.pos.x = self.Chassis.pos.x - 100
@@ -135,32 +169,29 @@ class RaceScene(spyral.Scene):
     def checkAnswer(self):
         
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
-            print "CORRECT"
             if(self.currentTurn > 0):
                 self.feedback.kill()
-            self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,120,0)), (WIDTH/2, 50), "Correct! %d + %d = %d" %(self.currentQuestion.num1, self.currentQuestion.num2, self.currentQuestion.answer))
+            self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,120,0)), (WIDTH/2, 50), ("Correct: " + self.currentQuestion.output))
             self.feedback.anchor = 'bottomleft'
             self.feedback.pos = (50, HEIGHT)            
             self.level += 1
             self.speed += 5
         else:
-            print "INCORRECT"
             if(self.currentTurn > 0):
                 self.feedback.kill()
-            self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (150,0,0)), (WIDTH/2, 50), "Incorrect! %d + %d = %d" %(self.currentQuestion.num1, self.currentQuestion.num2, self.currentQuestion.answer))
+            self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (150,0,0)), (WIDTH/2, 50), ("Incorrect: " + self.currentQuestion.output))
             self.feedback.anchor = 'bottomleft'            
             self.feedback.pos = (50, HEIGHT)
             if(self.speed > 2):
                 self.speed -= 2
 
+        operands = ['addition', 'multiplication', 'subtraction', 'division']
+        
         self.currentTurn += 1
-        print ("previous answer: " + str(self.currentQuestion.answer))
         self.currentQuestion.kill()
-        self.currentQuestion = Questions.Question(self, 'addition', 1)
+        self.currentQuestion = Questions.Question(self, random.choice(operands), 1)
         self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
-        print ("new answer: " + str(self.currentQuestion.answer))
         self.my_form.focus()
-        print str(self.level)
 
     def update(self, delta): 
         self.currentTime = time.time() - timeStart 
@@ -169,19 +200,24 @@ class RaceScene(spyral.Scene):
         self.distanceText.update("Distance: %d" % self.currentDistance) 
         self.currentDistance += self.speed * delta
         self.miniMapBall.x = (100 + (self.currentDistance / self.raceDistance) * 600)
+        
+        tree = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
+        large = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 10.0, loop = False)
 
-        print self.miniMapBall.pos.x
+        if(self.currentTime%15 > 0 and self.currentTime%15 < .05):
+            self.Tree.animate(tree)
+
+        if(self.currentTime%20 > 0 and self.currentTime%20 < .05):
+            self.LrgCloud.animate(large)
+            
         if(self.currentDistance >= self.raceDistance):
             global Game_music
             Game_music.stop()
 
             finishTime = time.time() - timeStart                      
-            print "Finish Time = %.2f" % finishTime            
-            self.goToMenu()
+            print "Finish Time = %.2f" % finishTime 
+            Player.currentTime = finishTime                                            
 
-            finishTime = time.time() - timeStart
-            Player.currentTime = finishTime                      
-            print "Finish Time = %.2f" % finishTime            
             self.goToResults()
 
     #Quit button method that stops the music and goes back to Main Menu
