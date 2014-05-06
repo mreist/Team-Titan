@@ -39,7 +39,7 @@ class MainMenu(spyral.Scene):
 #Creates the Start and Option button
         class RegisterForm(spyral.Form):
             StartGame = spyral.widgets.Button("Start Game")
-            OptionButton = spyral.widgets.Button("Options")
+#            OptionButton = spyral.widgets.Button("Options")
             LeaderboardButton = spyral.widgets.Button("Leaderboard")
 
 
@@ -47,22 +47,22 @@ class MainMenu(spyral.Scene):
         my_form = RegisterForm(self)
         my_form.focus()
         my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
-        my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
+#        my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
         my_form.LeaderboardButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 400)
 
 
 
 
 #Functions that will take you to garage/game/options depending on which button is clicked
-        spyral.event.register("form.RegisterForm.OptionButton.clicked", self.goToOptions)
+#        spyral.event.register("form.RegisterForm.OptionButton.clicked", self.goToOptions)
         spyral.event.register("form.RegisterForm.StartGame.clicked", self.goToRace)
         spyral.event.register("form.RegisterForm.LeaderboardButton.clicked", self.goToLeaderboard)
         spyral.event.register("input.mouse.down", self.goToGarage)
         
         
-    def goToOptions(self):
-        spyral.director.pop
-        spyral.director.push(Options.OptionScene()) 
+#    def goToOptions(self):
+#        spyral.director.pop
+#        spyral.director.push(Options.OptionScene()) 
 		
     def goToRace(self):
         spyral.director.pop
