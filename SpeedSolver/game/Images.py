@@ -37,5 +37,11 @@ class RoadLines(spyral.Sprite):
         self.image = spyral.Image("images/Line.png")
         self.anchor = 'center'
 
+class City(spyral.Sprite):
+    def __init__(self, scene):
+        super(City, self).__init__(scene)
 
+        self.image = spyral.Image("images/City.png")
+        self.anchor = 'center'
+        self.pos = (WIDTH + 100, (HEIGHT/4)+50)
 

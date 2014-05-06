@@ -6,6 +6,7 @@ import Options
 import Race
 import Garage
 import LeaderBoard
+import RaceSelection
 
 from spyral import Animation, easing
 
@@ -65,7 +66,7 @@ class MainMenu(spyral.Scene):
 		
     def goToRace(self):
         spyral.director.pop
-        spyral.director.push(Race.RaceScene())
+        spyral.director.push(RaceSelection.RaceSelection())
         
     def goToLeaderboard(self):
         spyral.director.pop

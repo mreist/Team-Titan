@@ -2,8 +2,8 @@ import spyral
 import random
 import math
 import MainScreen
-import model
-from model import resources
+import Model
+from Model import resources
 import pygame
 import time
 
@@ -37,10 +37,10 @@ class Title(spyral.Scene):
     def __init__(self):
         super(Title, self).__init__(SIZE)
 
-        model.loadResources()
-        model.LWtype = "Lwheel"
-        model.RWtype = "Rwheel"
-        model.Vtype = "blue"
+        Model.loadResources()
+        Model.LWtype = "Lwheel"
+        Model.RWtype = "Rwheel"
+        Model.Vtype = "blue"
         
         self.slapbass()
         

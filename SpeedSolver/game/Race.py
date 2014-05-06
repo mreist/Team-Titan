@@ -10,13 +10,14 @@ import TextInterface
 import Questions
 from spyral import Animation, easing
 import ResultsScreen
-import model
+import Model
 import Player
-from model import resources
+from Model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
 from Player import PlayerRWheels
 import sets
+from RaceSelection import RaceSelect
 
 WIDTH = 1200
 HEIGHT = 900
@@ -33,7 +34,7 @@ class RaceScene(spyral.Scene):
     def __init__(self):
         super(RaceScene, self).__init__(SIZE)
         
-        model.loadResources()
+        Model.loadResources()
         
         global timeStart
 
@@ -49,10 +50,10 @@ class RaceScene(spyral.Scene):
         if (Player.WithWheels == True):
             self.PlayerLWheels = PlayerLWheels(self.scene)
             self.PlayerLWheels.pos.x = self.PlayerVehicle.pos.x - 100
-            self.PlayerLWheels.pos.y = self.PlayerVehicle.pos.y + 35
+            self.PlayerLWheels.pos.y = self.PlayerVehicle.pos.y + 30
             self.PlayerRWheels = PlayerRWheels(self.scene)
-            self.PlayerRWheels.pos.x = self.PlayerVehicle.pos.x + 125
-            self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 35
+            self.PlayerRWheels.pos.x = self.PlayerVehicle.pos.x + 120
+            self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 30
             self.PlayerLWheels.layer = "top"
             self.PlayerRWheels.layer = "top"
             animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
@@ -63,7 +64,7 @@ class RaceScene(spyral.Scene):
         self.currentTurn = 0
         self.currentDistance = 0
         self.level = 0
-
+        self.PlayerVehicle.layer = "bottom"
         
         
         
@@ -80,19 +81,19 @@ class RaceScene(spyral.Scene):
        
         if(Background_Music == True):
            Game_music.play(-1)
+           
+        if(Model.RaceSelect == "Night"):
+            self.background = spyral.Image("images/NightBackground.png")
+            self.City = Images.City(self)
+            self.runningDeltaCity = 0
+        elif(Model.RaceSelect == "Day"):
+            self.background = spyral.Image("images/Background.png")
+            self.LrgCloud = Images.LargeCloud(self)
+            self.Tree = Images.Tree(self)
+            self.runningDeltaTree = 0
+            self.runningDeltaLrgCloud = 0
+            
         
-        self.background = spyral.Image("images/Background.png")
-
-
-        self.PlayerVehicle.layer = "bottom"
-        
-        
-
-
-        #Creates background images
-
-        self.LrgCloud = Images.LargeCloud(self)
-        self.Tree = Images.Tree(self)
 
         #Creates Bottom Road Lines
         self.BottomLine1 = Images.RoadLines(self)
@@ -215,8 +216,6 @@ class RaceScene(spyral.Scene):
                 self.currentTurn += 1
                 print ("previous answer: " + str(self.currentQuestion.answer))
                 self.currentQuestion.kill()
-                #self.currentQuestion = Questions.Question(self, 'addition', 1)
-                #self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
 
                 self.questionOne = Questions.Question(self, random.choice(operands), 1)
                 self.questionOne.anchor ='midleft'        
@@ -241,7 +240,8 @@ class RaceScene(spyral.Scene):
             except ValueError:
                 print 'Nothing'
 
-    def update(self, delta): 
+    def update(self, delta):
+        print delta
         self.currentTime = time.time() - timeStart 
         self.timeText.update("Current Time: %.2f" % self.currentTime)
         self.speedText.update("Speed: %d mph" % self.speed)
@@ -251,12 +251,24 @@ class RaceScene(spyral.Scene):
         
         tree = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
         large = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 10.0, loop = False)
+        
+        city = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 20, loop = False)
 
-        if(self.currentTime%15 > 0 and self.currentTime%15 < .04):
-            self.Tree.animate(tree)
-
-        if(self.currentTime%20 > 0 and self.currentTime%20 < .04):
-            self.LrgCloud.animate(large)
+        if(Model.RaceSelect == "Day"):
+            self.runningDeltaTree += delta
+            self.runningDeltaLrgCloud += delta
+            if(self.runningDeltaTree >= 15):
+                self.Tree.animate(tree)
+                self.runningDeltaTree = 0
+            if(self.runningDeltaLrgCloud >= 20):
+                self.LrgCloud.animate(large)
+                self.runningDeltaLrgCloud = 0
+                
+        if(Model.RaceSelect == "Night"):
+            self.runningDeltaCity += delta       
+            if(self.runningDeltaCity >= 30):
+                self.City.animate(city)
+                self.runningDeltaCity = 0
 
         if(self.currentDistance >= self.raceDistance):
             global Game_music
