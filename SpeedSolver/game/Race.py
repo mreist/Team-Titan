@@ -16,11 +16,6 @@ from model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
 from Player import PlayerRWheels
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/master
 
 WIDTH = 1200
 HEIGHT = 900
@@ -40,12 +35,11 @@ class RaceScene(spyral.Scene):
         model.loadResources()
         
         global timeStart
-<<<<<<< HEAD
+
         global manager
 
-=======
->>>>>>> origin/master
         timeStart = time.time() 
+        self.layers = ["bottom", "top"]
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.layers = ["bottom", "top"]
@@ -62,16 +56,12 @@ class RaceScene(spyral.Scene):
             self.PlayerRWheels.animate(animation)
             self.PlayerLWheels.animate(animation)
             
-<<<<<<< HEAD
-        
-=======
->>>>>>> origin/master
         self.isMoving = 0
         self.currentTurn = 0
         self.currentDistance = 0
         self.level = 0
 
-        self.layers = ["bottom", "top"]
+        
         
         
         #Initializae race variables
@@ -90,24 +80,17 @@ class RaceScene(spyral.Scene):
         
         self.background = spyral.Image("images/Background.png")
 
-<<<<<<< HEAD
-        #self.LeftWheel.pos.x = self.Chassis.pos.x - 100
-        #self.LeftWheel.pos.y = self.Chassis.pos.y + 35
-        #self.RightWheel.pos.x = self.Chassis.pos.x + 125
-        #self.RightWheel.pos.y = self.Chassis.pos.y + 35
-        
+
         self.PlayerVehicle.layer = "bottom"
         
         
-        
-=======
 
 
 
 
 
         #Creates background images
->>>>>>> origin/master
+
         self.SmCloud = Images.SmallCloud(self)
         self.LrgCloud = Images.LargeCloud(self)
         self.Tree = Images.Tree(self)
@@ -121,21 +104,7 @@ class RaceScene(spyral.Scene):
         tree = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 4.5, loop = True)
         self.Tree.animate(tree)
 
-<<<<<<< HEAD
-        
-        
-        
-=======
-        self.Chassis.pos = (WIDTH/4, (HEIGHT/2)+200)
-        self.LeftWheel.pos.x = self.Chassis.pos.x - 100
-        self.LeftWheel.pos.y = self.Chassis.pos.y + 30
-        self.RightWheel.pos.x = self.Chassis.pos.x + 120
-        self.RightWheel.pos.y = self.Chassis.pos.y + 30
 
-        animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
-        self.RightWheel.animate(animation)
-        self.LeftWheel.animate(animation)
->>>>>>> origin/master
 
         #initialize Questions
         self.currentQuestion = Questions.Question(self, 'addition', 1)
@@ -266,10 +235,7 @@ class RaceScene(spyral.Scene):
             self.isMoving = 1
             chassisUp = Animation('y', easing.Linear(self.PlayerVehicle.y, self.PlayerVehicle.y-100), .5)
             self.PlayerVehicle.animate(chassisUp)
-<<<<<<< HEAD
-=======
-            
->>>>>>> origin/master
+
             if(Player.WithWheels == True):
                 leftWheelUp = Animation('y', easing.Linear(self.PlayerLWheels.y, self.PlayerLWheels.y-100), .5)
                 rightWheelUp = Animation('y', easing.Linear(self.PlayerRWheels.y, self.PlayerRWheels.y-100), .5)
@@ -289,10 +255,6 @@ class RaceScene(spyral.Scene):
             
                 self.PlayerLWheels.animate(leftWheelDown)
                 self.PlayerRWheels.animate(rightWheelDown)
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 
     def endMoving(self):
         self.isMoving = 0
