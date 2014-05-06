@@ -53,7 +53,6 @@ class Title(spyral.Scene):
 
 
     def slapbass(self):
-        time.sleep(1)
         seinfeld.play(0)
 
 #Clicking anywhere will pop the title sceen and push to the Main Menu
