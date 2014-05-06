@@ -10,9 +10,9 @@ import TextInterface
 import Questions
 from spyral import Animation, easing
 import ResultsScreen
-import model
+import Model
 import Player
-from model import resources
+from Model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
 from Player import PlayerRWheels
@@ -33,7 +33,7 @@ class RaceScene(spyral.Scene):
     def __init__(self):
         super(RaceScene, self).__init__(SIZE)
         
-        model.loadResources()
+        Model.loadResources()
         
         global timeStart
 
