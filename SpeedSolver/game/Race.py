@@ -86,7 +86,8 @@ class RaceScene(spyral.Scene):
 
         self.PlayerVehicle.layer = "bottom"
         
-        
+        self.runningDeltaTree = 0
+        self.runningDeltaLrgCloud = 0
 
 
         #Creates background images
@@ -215,8 +216,6 @@ class RaceScene(spyral.Scene):
                 self.currentTurn += 1
                 print ("previous answer: " + str(self.currentQuestion.answer))
                 self.currentQuestion.kill()
-                #self.currentQuestion = Questions.Question(self, 'addition', 1)
-                #self.currentQuestion.pos = (WIDTH/2, (HEIGHT))
 
                 self.questionOne = Questions.Question(self, random.choice(operands), 1)
                 self.questionOne.anchor ='midleft'        
@@ -241,7 +240,8 @@ class RaceScene(spyral.Scene):
             except ValueError:
                 print 'Nothing'
 
-    def update(self, delta): 
+    def update(self, delta):
+        print delta
         self.currentTime = time.time() - timeStart 
         self.timeText.update("Current Time: %.2f" % self.currentTime)
         self.speedText.update("Speed: %d mph" % self.speed)
@@ -252,11 +252,14 @@ class RaceScene(spyral.Scene):
         tree = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
         large = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 10.0, loop = False)
 
-        if(self.currentTime%15 > 0 and self.currentTime%15 < .04):
+        self.runningDeltaTree += delta
+        self.runningDeltaLrgCloud += delta
+        if(self.runningDeltaTree >= 15):
             self.Tree.animate(tree)
-
-        if(self.currentTime%20 > 0 and self.currentTime%20 < .04):
+            self.runningDeltaTree = 0
+        if(self.runningDeltaLrgCloud >= 20):
             self.LrgCloud.animate(large)
+            self.runningDeltaLrgCloud = 0
 
         if(self.currentDistance >= self.raceDistance):
             global Game_music
