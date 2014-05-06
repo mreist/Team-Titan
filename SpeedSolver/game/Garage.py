@@ -34,11 +34,7 @@ class drawRedImage(spyral.Sprite):
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
-<<<<<<< HEAD
-            model.Vtype = "red"
-=======
             Model.Vtype = "red"
->>>>>>> origin/Jay
             Player.WithWheels = True
 
 class drawBlueImage(spyral.Sprite):
@@ -76,13 +72,9 @@ class drawRightWheelImage(spyral.Sprite):
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
-<<<<<<< HEAD
-            model.RWtype = "Rwheel"
-            
-=======
             Model.RWtype = "Rwheel"
 
->>>>>>> origin/Jay
+
 class drawLeftFWheelImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -93,31 +85,20 @@ class drawLeftFWheelImage(spyral.Sprite):
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
-<<<<<<< HEAD
-            model.LWtype = "LFwheel"
-=======
             Model.LWtype = "LFwheel"
->>>>>>> origin/Jay
 
 class drawRightFWheelImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/FancyWheel.png")
-<<<<<<< HEAD
-	    self.pos = ((WIDTH-80), (HEIGHT/2)+270)
-=======
 	    self.pos = (WIDTH-80, (HEIGHT/2)+270)
->>>>>>> origin/Jay
+
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
-<<<<<<< HEAD
-            model.RWtype = "RFwheel"            
-=======
             Model.RWtype = "RFwheel"
->>>>>>> origin/Jay
 
 #Creates a Garage scene
 class GarageScene(spyral.Scene):
@@ -139,10 +120,7 @@ class GarageScene(spyral.Scene):
         self.RightWheelImage = drawRightWheelImage(self.scene)
         self.LeftFWheelImage = drawLeftFWheelImage(self.scene)
         self.RightFWheelImage = drawRightFWheelImage(self.scene)
-<<<<<<< HEAD
-        
-=======
->>>>>>> origin/Jay
+
 	#Creates a back button to go back to the Main Menu
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")
