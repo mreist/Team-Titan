@@ -39,6 +39,7 @@ class RaceScene(spyral.Scene):
         global timeStart
 
         global manager
+        operands = ['addition', 'multiplication', 'subtraction', 'division']
 
         timeStart = time.time() 
 
@@ -132,15 +133,15 @@ class RaceScene(spyral.Scene):
         self.TopLine3.animate(TopThree)
 
         #Initialize Questions and Question 
-        self.questionOne = Questions.Question(self, 'addition', 1)
+        self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
         self.questionOne.anchor ='midleft'        
         self.questionOne.pos = (WIDTH + 200, 550)
 
-        self.questionTwo = Questions.Question(self, 'subtraction', 1)
+        self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
         self.questionTwo.anchor ='midleft'                
         self.questionTwo.pos = (WIDTH + 200, 650)
         
-        self.questionThree = Questions.Question(self, 'multiplication', 1)
+        self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
         self.questionThree.anchor ='midleft'
         self.questionThree.pos = (WIDTH + 200, 750)
         
@@ -212,18 +213,20 @@ class RaceScene(spyral.Scene):
                     if(self.speed > 2):
                         self.speed -= 2
 
-                operands = ['addition', 'multiplication', 'subtraction', 'division']
+                
                 self.currentTurn += 1
                 print ("previous answer: " + str(self.currentQuestion.answer))
                 self.currentQuestion.kill()
 
-                self.questionOne = Questions.Question(self, random.choice(operands), 1)
+                operands = ['addition', 'multiplication', 'subtraction', 'division']
+
+                self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
                 self.questionOne.anchor ='midleft'        
                 self.questionOne.pos = (WIDTH + 200, 550)
-                self.questionTwo = Questions.Question(self, random.choice(operands), 1)
+                self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
                 self.questionTwo.anchor ='midleft'
                 self.questionTwo.pos = (WIDTH + 200, 650)
-                self.questionThree = Questions.Question(self, random.choice(operands), 1)
+                self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
                 self.questionThree.anchor ='midleft'        
                 self.questionThree.pos = (WIDTH + 200, 750)
 
