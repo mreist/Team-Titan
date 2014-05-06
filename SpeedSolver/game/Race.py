@@ -1,8 +1,8 @@
 import spyral 
 import random
-import Images
 import math
 import MainScreen
+import Images
 import Vehicle
 import pygame
 import time
@@ -32,10 +32,16 @@ class RaceScene(spyral.Scene):
     def __init__(self):
         super(RaceScene, self).__init__(SIZE)
         
+        model.loadResources()
+        
         global timeStart
+
+        global manager
+
+        timeStart = time.time() 
+
         timeStart = time.time()
         self.layers = ["bottom", "top"]
-        
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.layers = ["bottom", "top"]
@@ -59,6 +65,7 @@ class RaceScene(spyral.Scene):
 
         
         
+        
         #Initializae race variables
         #Start game with speed of 10        
         self.speed = 0
@@ -68,29 +75,33 @@ class RaceScene(spyral.Scene):
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
-
+        
+       
         if(Background_Music == True):
            Game_music.play(-1)
         
         self.background = spyral.Image("images/Background.png")
 
 
+        self.PlayerVehicle.layer = "bottom"
+        
+        
+
 
         #Creates background images
+
         self.SmCloud = Images.SmallCloud(self)
         self.LrgCloud = Images.LargeCloud(self)
         self.Tree = Images.Tree(self)
-
+        
         small = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 3.0, loop = True)
         self.SmCloud.animate(small)
-
-
+        
         large = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 5.5, loop = True)
         self.LrgCloud.animate(large)
-
+        
         tree = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 4.5, loop = True)
         self.Tree.animate(tree)
-
 
         #initialize Questions
         self.currentQuestion = Questions.Question(self, 'addition', 1)
@@ -138,8 +149,8 @@ class RaceScene(spyral.Scene):
         spyral.event.register("input.keyboard.down.down", self.moveDown)
         spyral.event.register("input.keyboard.down.up", self.moveUp)
         spyral.event.register("form.RegisterForm.Sound.clicked", self.SwitchSound)
-    
-    #checks if answer is correct
+
+    #Checks if answer is correct,
     def checkAnswer(self):
         
         if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
@@ -221,7 +232,7 @@ class RaceScene(spyral.Scene):
             self.isMoving = 1
             chassisUp = Animation('y', easing.Linear(self.PlayerVehicle.y, self.PlayerVehicle.y-100), .5)
             self.PlayerVehicle.animate(chassisUp)
-            
+
             if(Player.WithWheels == True):
                 leftWheelUp = Animation('y', easing.Linear(self.PlayerLWheels.y, self.PlayerLWheels.y-100), .5)
                 rightWheelUp = Animation('y', easing.Linear(self.PlayerRWheels.y, self.PlayerRWheels.y-100), .5)
