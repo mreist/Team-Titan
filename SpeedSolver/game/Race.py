@@ -41,11 +41,17 @@ class RaceScene(spyral.Scene):
         
         global timeStart
 <<<<<<< HEAD
+<<<<<<< HEAD
         global manager
 
 =======
 >>>>>>> origin/master
         timeStart = time.time() 
+=======
+        timeStart = time.time()
+        self.layers = ["bottom", "top"]
+        
+>>>>>>> origin/master
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.layers = ["bottom", "top"]
@@ -71,7 +77,7 @@ class RaceScene(spyral.Scene):
         self.currentDistance = 0
         self.level = 0
 
-        self.layers = ["bottom", "top"]
+        
         
         
         #Initializae race variables
@@ -103,9 +109,6 @@ class RaceScene(spyral.Scene):
 =======
 
 
-
-
-
         #Creates background images
 >>>>>>> origin/master
         self.SmCloud = Images.SmallCloud(self)
@@ -122,6 +125,7 @@ class RaceScene(spyral.Scene):
         self.Tree.animate(tree)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         
         
@@ -135,6 +139,8 @@ class RaceScene(spyral.Scene):
         animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
         self.RightWheel.animate(animation)
         self.LeftWheel.animate(animation)
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 
         #initialize Questions
