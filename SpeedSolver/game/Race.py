@@ -10,7 +10,12 @@ import TextInterface
 import Questions
 from spyral import Animation, easing
 import ResultsScreen
+import model
 import Player
+from model import resources
+from Player import PlayerVehicle
+from Player import PlayerLWheels
+from Player import PlayerRWheels
 
 WIDTH = 1200
 HEIGHT = 900
@@ -29,7 +34,22 @@ class RaceScene(spyral.Scene):
         
         global timeStart
         timeStart = time.time() 
-
+        self.PlayerVehicle = PlayerVehicle(self.scene)
+        self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
+        self.layers = ["bottom", "top"]
+        if (Player.WithWheels == True):
+            self.PlayerLWheels = PlayerLWheels(self.scene)
+            self.PlayerLWheels.pos.x = self.PlayerVehicle.pos.x - 100
+            self.PlayerLWheels.pos.y = self.PlayerVehicle.pos.y + 35
+            self.PlayerRWheels = PlayerRWheels(self.scene)
+            self.PlayerRWheels.pos.x = self.PlayerVehicle.pos.x + 125
+            self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 35
+            self.PlayerLWheels.layer = "top"
+            self.PlayerRWheels.layer = "top"
+            animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
+            self.PlayerRWheels.animate(animation)
+            self.PlayerLWheels.animate(animation)
+            
         self.isMoving = 0
         self.currentTurn = 0
         self.currentDistance = 0
@@ -52,12 +72,10 @@ class RaceScene(spyral.Scene):
         
         self.background = spyral.Image("images/Background.png")
 
-        self.Chassis = Vehicle.Car(self)
-        self.LeftWheel = Vehicle.Wheels(self)
-        self.RightWheel = Vehicle.Wheels(self)
-        self.Chassis.layer = "bottom"
-        self.LeftWheel.layer = "top"
-        self.RightWheel.layer = "top"
+
+
+
+
 
         #Creates background images
         self.SmCloud = Images.SmallCloud(self)
@@ -209,24 +227,30 @@ class RaceScene(spyral.Scene):
             Background_Music = True
         
     def moveUp(self):
-        if(self.Chassis.y >= (HEIGHT/2 + 200) and self.isMoving == 0):
+        if(self.PlayerVehicle.y >= (HEIGHT/2 + 200) and self.isMoving == 0):
             self.isMoving = 1
-            chassisUp = Animation('y', easing.Linear(self.Chassis.y, self.Chassis.y-100), .5)
-            leftWheelUp = Animation('y', easing.Linear(self.LeftWheel.y, self.LeftWheel.y-100), .5)
-            rightWheelUp = Animation('y', easing.Linear(self.RightWheel.y, self.RightWheel.y-100), .5)
-            self.Chassis.animate(chassisUp)
-            self.LeftWheel.animate(leftWheelUp)
-            self.RightWheel.animate(rightWheelUp)
+            chassisUp = Animation('y', easing.Linear(self.PlayerVehicle.y, self.PlayerVehicle.y-100), .5)
+            self.PlayerVehicle.animate(chassisUp)
+            
+            if(Player.WithWheels == True):
+                leftWheelUp = Animation('y', easing.Linear(self.PlayerLWheels.y, self.PlayerLWheels.y-100), .5)
+                rightWheelUp = Animation('y', easing.Linear(self.PlayerRWheels.y, self.PlayerRWheels.y-100), .5)
+            
+                self.PlayerLWheels.animate(leftWheelUp)
+                self.PlayerRWheels.animate(rightWheelUp)
 
     def moveDown(self):
-        if(self.Chassis.y <= (HEIGHT/2 + 200) and self.isMoving == 0):
+        if(self.PlayerVehicle.y <= (HEIGHT/2 + 200) and self.isMoving == 0):
             self.isMoving = 1
-            chassisDown = Animation('y', easing.Linear(self.Chassis.y, self.Chassis.y+100), .5)
-            leftWheelDown = Animation('y', easing.Linear(self.LeftWheel.y, self.LeftWheel.y+100), .5)
-            rightWheelDown = Animation('y', easing.Linear(self.RightWheel.y, self.RightWheel.y+100), .5)
-            self.Chassis.animate(chassisDown)
-            self.LeftWheel.animate(leftWheelDown)
-            self.RightWheel.animate(rightWheelDown)
+            chassisDown = Animation('y', easing.Linear(self.PlayerVehicle.y, self.PlayerVehicle.y+100), .5)
+            self.PlayerVehicle.animate(chassisDown)
+            
+            if(Player.WithWheels == True):
+                leftWheelDown = Animation('y', easing.Linear(self.PlayerLWheels.y, self.PlayerLWheels.y+100), .5)
+                rightWheelDown = Animation('y', easing.Linear(self.PlayerRWheels.y, self.PlayerRWheels.y+100), .5)
+            
+                self.PlayerLWheels.animate(leftWheelDown)
+                self.PlayerRWheels.animate(rightWheelDown)
 
     def endMoving(self):
         self.isMoving = 0
