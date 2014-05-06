@@ -7,7 +7,7 @@ currentTime = 0
 bestTime = 100000
 tokens = 0
 firstPlay = True
-top10 = [['JFR', 1], ['MTR', 30], ['JTW', 60], ['NNA', 75], ['FAP', 1000]]
+top10 = [['JFR', 1], ['MTR', 30], ['JTW', 60], ['NNA', 75], ['FAP', 1000], ['',1000000], ['',1000000], ['',1000000], ['',1000000], ['',1000000]]
 WithWheels = True
 
 class PlayerVehicle(spyral.Sprite):
