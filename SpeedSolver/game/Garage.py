@@ -4,6 +4,7 @@ import math
 import model
 import MainScreen
 import Race
+import Player
 from model import resources
 
 WIDTH = 1200
@@ -34,6 +35,7 @@ class drawRedImage(spyral.Sprite):
     def handle_clicked(self, pos):
         if self.collide_point(pos):
             model.Vtype = "red"
+            Player.WithWheels = False
 
 class drawBlueImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -46,6 +48,7 @@ class drawBlueImage(spyral.Sprite):
     def handle_clicked(self, pos):
         if self.collide_point(pos):
             model.Vtype = "blue"
+            Player.WithWheels = True
 
 class drawLeftWheelImage(spyral.Sprite):
     def __init__(self, Scene):

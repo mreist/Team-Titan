@@ -5,6 +5,7 @@ import Vehicle
 import Options
 import Race
 import Garage
+import LeaderBoard
 
 from spyral import Animation, easing
 
@@ -19,8 +20,6 @@ DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 class MainMenu(spyral.Scene):
     def __init__(self):
         super(MainMenu, self).__init__(SIZE)
-        
-        seinfeld.play(0)
         
 #Loads custom start/option buttons
         #self.load_style("game/style.spys")
@@ -40,19 +39,25 @@ class MainMenu(spyral.Scene):
         class RegisterForm(spyral.Form):
             StartGame = spyral.widgets.Button("Start Game")
             OptionButton = spyral.widgets.Button("Options")
+            LeaderboardButton = spyral.widgets.Button("Leaderboard")
+
 
         
         my_form = RegisterForm(self)
         my_form.focus()
         my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
         my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
+        my_form.LeaderboardButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 400)
+
 
 
 
 #Functions that will take you to garage/game/options depending on which button is clicked
         spyral.event.register("form.RegisterForm.OptionButton.clicked", self.goToOptions)
         spyral.event.register("form.RegisterForm.StartGame.clicked", self.goToRace)
+        spyral.event.register("form.RegisterForm.LeaderboardButton.clicked", self.goToLeaderboard)
         spyral.event.register("input.mouse.down", self.goToGarage)
+        
         
     def goToOptions(self):
         spyral.director.pop
@@ -61,6 +66,10 @@ class MainMenu(spyral.Scene):
     def goToRace(self):
         spyral.director.pop
         spyral.director.push(Race.RaceScene())
+        
+    def goToLeaderboard(self):
+        spyral.director.pop
+        spyral.director.push(LeaderBoard.LeaderboardScene())
         
     def goToGarage(self, pos):
         pos = spyral.Vec2D(pos)
