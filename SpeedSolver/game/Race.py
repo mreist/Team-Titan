@@ -49,10 +49,10 @@ class RaceScene(spyral.Scene):
         if (Player.WithWheels == True):
             self.PlayerLWheels = PlayerLWheels(self.scene)
             self.PlayerLWheels.pos.x = self.PlayerVehicle.pos.x - 100
-            self.PlayerLWheels.pos.y = self.PlayerVehicle.pos.y + 35
+            self.PlayerLWheels.pos.y = self.PlayerVehicle.pos.y + 30
             self.PlayerRWheels = PlayerRWheels(self.scene)
-            self.PlayerRWheels.pos.x = self.PlayerVehicle.pos.x + 125
-            self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 35
+            self.PlayerRWheels.pos.x = self.PlayerVehicle.pos.x + 120
+            self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 30
             self.PlayerLWheels.layer = "top"
             self.PlayerRWheels.layer = "top"
             animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)

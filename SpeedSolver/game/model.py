@@ -8,7 +8,7 @@ class Model:
 
 
 def loadResources():
-	    resources["red"] = spyral.image.Image("images/redcar.jpg")
+	    resources["red"] = spyral.image.Image("images/RedCar.png")
 	    resources["blue"] = spyral.image.Image("images/CarNoWheels.png")
 	    resources["Lwheel"] = spyral.image.Image("images/Wheel.png")
 	    resources["Rwheel"] = spyral.image.Image("images/Wheel.png")
