@@ -89,31 +89,9 @@ class RaceScene(spyral.Scene):
 
 
         #Creates background images
-<<<<<<< HEAD
-        #self.SmCloud = Images.SmallCloud(self)
+
         self.LrgCloud = Images.LargeCloud(self)
         self.Tree = Images.Tree(self)
-
-        #small = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 3.0, loop = True)
-        #self.SmCloud.animate(small)
-
-
-
-=======
-
-        self.SmCloud = Images.SmallCloud(self)
-        self.LrgCloud = Images.LargeCloud(self)
-        self.Tree = Images.Tree(self)
-        
-        small = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 3.0, loop = True)
-        self.SmCloud.animate(small)
-        
-        large = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 5.5, loop = True)
-        self.LrgCloud.animate(large)
-        
->>>>>>> origin/master
-        tree = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 4.5, loop = True)
-        #self.Tree.animate(tree)
 
         #Creates Bottom Road Lines
         self.BottomLine1 = Images.RoadLines(self)
