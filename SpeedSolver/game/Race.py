@@ -42,17 +42,26 @@ class RaceScene(spyral.Scene):
         timeStart = time.time() 
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
-        self.PlayerLWheels = PlayerLWheels(self.scene)
-        self.PlayerLWheels.pos.x = self.PlayerVehicle.pos.x - 100
-        self.PlayerLWheels.pos.y = self.PlayerVehicle.pos.y + 35
-        self.PlayerRWheels = PlayerRWheels(self.scene)
-        self.PlayerRWheels.pos.x = self.PlayerVehicle.pos.x + 125
-        self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 35
+        self.layers = ["bottom", "top"]
+        if (Player.WithWheels == True):
+            self.PlayerLWheels = PlayerLWheels(self.scene)
+            self.PlayerLWheels.pos.x = self.PlayerVehicle.pos.x - 100
+            self.PlayerLWheels.pos.y = self.PlayerVehicle.pos.y + 35
+            self.PlayerRWheels = PlayerRWheels(self.scene)
+            self.PlayerRWheels.pos.x = self.PlayerVehicle.pos.x + 125
+            self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 35
+            self.PlayerLWheels.layer = "top"
+            self.PlayerRWheels.layer = "top"
+            animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
+            self.PlayerRWheels.animate(animation)
+            self.PlayerLWheels.animate(animation)
+            
         
         self.isMoving = 0
         self.currentTurn = 0
         self.currentDistance = 0
         self.level = 0
+        
         
         #Initializae race variables
         #Start game with speed of 10        
@@ -76,8 +85,7 @@ class RaceScene(spyral.Scene):
         #self.RightWheel.pos.y = self.Chassis.pos.y + 35
         
         self.PlayerVehicle.layer = "bottom"
-        self.PlayerLWheels.layer = "top"
-        self.PlayerRWheels.layer = "top"
+        
         
         
         self.SmCloud = Images.SmallCloud(self)
@@ -93,10 +101,9 @@ class RaceScene(spyral.Scene):
         tree = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 4.5, loop = True)
         self.Tree.animate(tree)
 
-        animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
         
-        self.PlayerRWheels.animate(animation)
-        self.PlayerLWheels.animate(animation)
+        
+        
 
         #initialize Questions
         self.currentQuestion = Questions.Question(self, 'addition', 1)
@@ -226,21 +233,26 @@ class RaceScene(spyral.Scene):
         if(self.PlayerVehicle.y >= (HEIGHT/2 + 200) and self.isMoving == 0):
             self.isMoving = 1
             chassisUp = Animation('y', easing.Linear(self.PlayerVehicle.y, self.PlayerVehicle.y-100), .5)
-            leftWheelUp = Animation('y', easing.Linear(self.PlayerLWheels.y, self.PlayerLWheels.y-100), .5)
-            rightWheelUp = Animation('y', easing.Linear(self.PlayerRWheels.y, self.PlayerRWheels.y-100), .5)
             self.PlayerVehicle.animate(chassisUp)
-            self.PlayerLWheels.animate(leftWheelUp)
-            self.PlayerRWheels.animate(rightWheelUp)
+            if(Player.WithWheels == True):
+                leftWheelUp = Animation('y', easing.Linear(self.PlayerLWheels.y, self.PlayerLWheels.y-100), .5)
+                rightWheelUp = Animation('y', easing.Linear(self.PlayerRWheels.y, self.PlayerRWheels.y-100), .5)
+            
+                self.PlayerLWheels.animate(leftWheelUp)
+                self.PlayerRWheels.animate(rightWheelUp)
 
     def moveDown(self):
         if(self.PlayerVehicle.y <= (HEIGHT/2 + 200) and self.isMoving == 0):
             self.isMoving = 1
             chassisDown = Animation('y', easing.Linear(self.PlayerVehicle.y, self.PlayerVehicle.y+100), .5)
-            leftWheelDown = Animation('y', easing.Linear(self.PlayerLWheels.y, self.PlayerLWheels.y+100), .5)
-            rightWheelDown = Animation('y', easing.Linear(self.PlayerRWheels.y, self.PlayerRWheels.y+100), .5)
             self.PlayerVehicle.animate(chassisDown)
-            self.PlayerLWheels.animate(leftWheelDown)
-            self.PlayerRWheels.animate(rightWheelDown)
+            
+            if(Player.WithWheels == True):
+                leftWheelDown = Animation('y', easing.Linear(self.PlayerLWheels.y, self.PlayerLWheels.y+100), .5)
+                rightWheelDown = Animation('y', easing.Linear(self.PlayerRWheels.y, self.PlayerRWheels.y+100), .5)
+            
+                self.PlayerLWheels.animate(leftWheelDown)
+                self.PlayerRWheels.animate(rightWheelDown)
 
 
     def endMoving(self):
