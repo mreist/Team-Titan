@@ -76,9 +76,6 @@ class RaceScene(spyral.Scene):
 
 
 
-
-
-
         #Creates background images
         self.SmCloud = Images.SmallCloud(self)
         self.LrgCloud = Images.LargeCloud(self)
@@ -94,10 +91,6 @@ class RaceScene(spyral.Scene):
         tree = Animation('x', easing.Linear(WIDTH + 100, -500), duration = 4.5, loop = True)
         self.Tree.animate(tree)
 
-
-        animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
-        self.RightWheel.animate(animation)
-        self.LeftWheel.animate(animation)
 
         #initialize Questions
         self.currentQuestion = Questions.Question(self, 'addition', 1)
