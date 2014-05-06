@@ -39,8 +39,8 @@ class RaceScene(spyral.Scene):
         global timeStart
 
         global manager
-        operands = ['addition', 'multiplication', 'subtraction', 'division']
-
+        global speedIncrease
+        
         timeStart = time.time() 
 
         timeStart = time.time()
@@ -74,7 +74,6 @@ class RaceScene(spyral.Scene):
         self.speed = 5
         #Race distace is set to 1000      
         self.raceDistance = 1000
-        
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
@@ -84,15 +83,23 @@ class RaceScene(spyral.Scene):
            Game_music.play(-1)
            
         if(Model.RaceSelect == "Night"):
+            operands = ['multiplication', 'division']
             self.background = spyral.Image("images/NightBackground.png")
             self.City = Images.City(self)
             self.runningDeltaCity = 0
+            self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
+            self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
+            self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
         elif(Model.RaceSelect == "Day"):
+            operands = ['addition', 'subtraction']            
             self.background = spyral.Image("images/Background.png")
             self.LrgCloud = Images.LargeCloud(self)
             self.Tree = Images.Tree(self)
             self.runningDeltaTree = 0
             self.runningDeltaLrgCloud = 0
+            self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
+            self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
+            self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
             
         
 
@@ -133,15 +140,13 @@ class RaceScene(spyral.Scene):
         self.TopLine3.animate(TopThree)
 
         #Initialize Questions and Question 
-        self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
+        
         self.questionOne.anchor ='midleft'        
         self.questionOne.pos = (WIDTH + 200, 550)
 
-        self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
         self.questionTwo.anchor ='midleft'                
         self.questionTwo.pos = (WIDTH + 200, 650)
         
-        self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
         self.questionThree.anchor ='midleft'
         self.questionThree.pos = (WIDTH + 200, 750)
         
@@ -196,14 +201,19 @@ class RaceScene(spyral.Scene):
     def checkAnswer(self):
         if(self.my_form.AnswerInput.visible == True):
             try:
+                global speedIncrease                
                 if int(self.my_form.AnswerInput.value) == self.currentQuestion.answer:
                     if(self.currentTurn > 0):
                         self.feedback.kill()
-                    self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,120,0)), (WIDTH/2, 50), ("Correct: " + self.currentQuestion.output))
+                    
+                    if(Model.RaceSelect == "Night"):
+                        self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,255,0)), (WIDTH/2, 50), ("Correct: " + self.currentQuestion.output))
+                    elif(Model.RaceSelect == "Day"):
+                        self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,120,0)), (WIDTH/2, 50), ("Correct: " + self.currentQuestion.output))
                     self.feedback.anchor = 'bottomleft'
                     self.feedback.pos = (50, HEIGHT)            
                     self.level += 1
-                    self.speed += 5
+                    self.speed += speedIncrease
                 else:
                     if(self.currentTurn > 0):
                         self.feedback.kill()
@@ -218,15 +228,24 @@ class RaceScene(spyral.Scene):
                 print ("previous answer: " + str(self.currentQuestion.answer))
                 self.currentQuestion.kill()
 
-                operands = ['addition', 'multiplication', 'subtraction', 'division']
+                if(Model.RaceSelect == "Night"):
+                    operands = ['multiplication', 'division']
+                    self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
+                    self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
+                    self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
+                elif(Model.RaceSelect == "Day"):
+                    operands = ['addition', 'subtraction']            
+                    self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
+                    self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
+                    self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
 
-                self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
+
+
+
                 self.questionOne.anchor ='midleft'        
                 self.questionOne.pos = (WIDTH + 200, 550)
-                self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
                 self.questionTwo.anchor ='midleft'
                 self.questionTwo.pos = (WIDTH + 200, 650)
-                self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
                 self.questionThree.anchor ='midleft'        
                 self.questionThree.pos = (WIDTH + 200, 750)
 
@@ -245,6 +264,7 @@ class RaceScene(spyral.Scene):
 
     def update(self, delta):
         print delta
+        global speedIncrease
         self.currentTime = time.time() - timeStart 
         self.timeText.update("Current Time: %.2f" % self.currentTime)
         self.speedText.update("Speed: %d mph" % self.speed)
@@ -284,6 +304,7 @@ class RaceScene(spyral.Scene):
 
         if (self.collide_sprites(self.PlayerVehicle, self.questionOne)):
             print "Collide with 1"
+            speedIncrease = 5            
             self.my_form.AnswerInput.visible = True            
             self.questionOne.stop_all_animations()
             self.currentQuestion = self.questionOne
@@ -293,6 +314,7 @@ class RaceScene(spyral.Scene):
             self.isMoving = 1
         elif (self.collide_sprites(self.PlayerVehicle, self.questionTwo)):
             print "Collide with 2"
+            speedIncrease = 10
             self.my_form.AnswerInput.visible = True           
             self.questionTwo.stop_all_animations()
             self.currentQuestion = self.questionTwo
@@ -302,6 +324,7 @@ class RaceScene(spyral.Scene):
             self.isMoving = 1
         elif (self.collide_sprites(self.PlayerVehicle, self.questionThree)):
             print "Collide with 3"
+            speedIncrease = 15
             self.my_form.AnswerInput.visible = True
             self.questionThree.stop_all_animations()
             self.currentQuestion = self.questionThree
