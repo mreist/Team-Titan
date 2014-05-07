@@ -163,7 +163,7 @@ class RaceScene(spyral.Scene):
 
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
-            AnswerInput = spyral.widgets.TextInput(100, '', validator = inputValues)
+            AnswerInput = spyral.widgets.TextInput(100, '', validator = inputValues, text_length = 4)
             Sound = spyral.widgets.Button("Sound")
 
         
@@ -192,7 +192,7 @@ class RaceScene(spyral.Scene):
 
         spyral.event.register('PlayerVehicle.y.animation.end', self.endMoving)
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
-        spyral.event.register("input.keyboard.down.space", self.checkAnswer)
+        spyral.event.register("input.keyboard.down.return", self.checkAnswer)
         spyral.event.register("input.keyboard.down.down", self.moveDown)
         spyral.event.register("input.keyboard.down.up", self.moveUp)
         spyral.event.register("form.RegisterForm.Sound.clicked", self.SwitchSound)
