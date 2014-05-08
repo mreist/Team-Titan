@@ -69,11 +69,11 @@ class RaceScene(spyral.Scene):
         
         
         
-        #Initializae race variables
+        #Initialize race variables
         #Start game with speed of 10        
         self.speed = 5
         #Race distace is set to 1000      
-        self.raceDistance = 1000
+        self.raceDistance = 1
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
