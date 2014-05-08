@@ -74,6 +74,8 @@ class ResultsScreen(spyral.Scene):
             
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), ((WIDTH/2 - 400), (HEIGHT-200)), 'Wow! You got a high score! 2 extra tokens 4U! Enter your initials.')
             Player.tokens += 2
+        
+        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 400), 'Total tokens: ' + Player.tokens)
 
 
     def goToMenu(self):
