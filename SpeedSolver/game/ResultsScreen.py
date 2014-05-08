@@ -31,13 +31,16 @@ class ResultsScreen(spyral.Scene):
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
             RetryButton = spyral.widgets.Button("Race Again")
-            InitialsInput = spyral.widgets.TextInput(150, "Enter your initials")
+            InitialsInput = spyral.widgets.TextInput(150, "Enter your initials", text_length = 3)
             EnterButton = spyral.widgets.Button("Enter")
         
         self.my_form = RegisterForm(self)
         self.my_form.focus()
         self.my_form.QuitButton.pos = ((WIDTH/2), (HEIGHT-50))
         self.my_form.RetryButton.pos = ((WIDTH/2 - 200), (HEIGHT-50))
+
+        self.my_form.InitialsInput.pos = ((WIDTH/2 - 200), (HEIGHT-100))
+        self.my_form.EnterButton.pos = ((WIDTH/2 - 50), (HEIGHT-100))
 
 
 
@@ -68,8 +71,7 @@ class ResultsScreen(spyral.Scene):
             Player.tokens += 1
         
         if time < Player.top10[0][1]:
-            self.my_form.InitialsInput.pos = ((WIDTH/2 - 200), (HEIGHT-100))
-            self.my_form.EnterButton.pos = ((WIDTH/2 - 50), (HEIGHT-100))
+            
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), ((WIDTH/2 - 400), (HEIGHT-200)), 'Wow! You got a high score! 2 extra tokens 4U! Enter your initials.')
             Player.tokens += 2
 
