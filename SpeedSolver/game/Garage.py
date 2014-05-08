@@ -6,6 +6,10 @@ import MainScreen
 import Race
 import Player
 from Model import resources
+from Player import PlayerVehicle
+from Player import PlayerLWheels
+from Player import PlayerRWheels
+import TextInterface
 
 WIDTH = 1200
 HEIGHT = 900
@@ -13,6 +17,7 @@ BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
+tempCount = 0
 
 #Creates a Garage Sprite with its image
 class Garage(spyral.Sprite):
@@ -111,8 +116,22 @@ class GarageScene(spyral.Scene):
 
         self.background = spyral.Image("images/Background.png")
         
-        CarGarage = Garage(self)
-        CarGarage.pos = ((WIDTH/2), (HEIGHT/2)-100)
+        self.currentCarText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (WIDTH/2, 50), "Current Car:")
+        self.currentCarText.anchor = 'midbottom'
+
+        self.PlayerVehicle = PlayerVehicle(self.scene)
+        self.PlayerVehicle.pos = (WIDTH/2, 100)
+        self.layers = ["bottom", "top"]
+        if (Player.WithWheels == True):
+            self.PlayerLWheels = PlayerLWheels(self.scene)
+            self.PlayerLWheels.pos.x = self.PlayerVehicle.pos.x - 100
+            self.PlayerLWheels.pos.y = self.PlayerVehicle.pos.y + 30
+            self.PlayerRWheels = PlayerRWheels(self.scene)
+            self.PlayerRWheels.pos.x = self.PlayerVehicle.pos.x + 120
+            self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 30
+            self.PlayerLWheels.layer = "top"
+            self.PlayerRWheels.layer = "top"
+
 
         self.RedImage = drawRedImage(self.scene)
         self.BlueImage = drawBlueImage(self.scene)
@@ -131,6 +150,30 @@ class GarageScene(spyral.Scene):
         self.my_form.BackButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
 
         spyral.event.register("form.RegisterForm.BackButton.clicked", self.goToMenu)
+
+        spyral.event.register("input.mouse.down.left", self.update)	
+        #spyral.event.register('director.update', self.update)
+
+    def update(self):
+      #  global tempCount        
+  #      if (tempCount > 0):
+        self.PlayerVehicle.kill()
+        self.PlayerLWheels.kill()
+        self.PlayerRWheels.kill()
+        self.PlayerVehicle = PlayerVehicle(self.scene)
+        self.PlayerVehicle.pos = (WIDTH/2, 100)
+        self.layers = ["bottom", "top"]
+        if (Player.WithWheels == True):
+            self.PlayerLWheels = PlayerLWheels(self.scene)
+            self.PlayerLWheels.pos.x = self.PlayerVehicle.pos.x - 100
+            self.PlayerLWheels.pos.y = self.PlayerVehicle.pos.y + 30
+            self.PlayerRWheels = PlayerRWheels(self.scene)
+            self.PlayerRWheels.pos.x = self.PlayerVehicle.pos.x + 120
+            self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 30
+            self.PlayerLWheels.layer = "top"
+            self.PlayerRWheels.layer = "top"
+     #   tempCount =+ 1
+            
 
 #Pops the Garage Scene and pushes the Main Menu to the front	
     def goToMenu(self):
