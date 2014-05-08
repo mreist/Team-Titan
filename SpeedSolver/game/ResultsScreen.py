@@ -31,7 +31,7 @@ class ResultsScreen(spyral.Scene):
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
             RetryButton = spyral.widgets.Button("Race Again")
-            InitialsInput = spyral.widgets.TextInput(150, "Enter your initials")
+            InitialsInput = spyral.widgets.TextInput(150, "Enter your initials", text_length = 3)
             EnterButton = spyral.widgets.Button("Enter")
         
         self.my_form = RegisterForm(self)
