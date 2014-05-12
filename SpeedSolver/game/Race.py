@@ -43,8 +43,6 @@ class RaceScene(spyral.Scene):
         
         timeStart = time.time() 
 
-        timeStart = time.time()
-        self.layers = ["bottom", "top"]
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.layers = ["bottom", "top"]
@@ -66,13 +64,12 @@ class RaceScene(spyral.Scene):
         self.currentDistance = 0
         self.level = 0
         self.PlayerVehicle.layer = "bottom"
-        
-        
-        
+
+
         #Initializae race variables
-        #Start game with speed of 10        
+        #Start game with speed of 10
         self.speed = 5
-        #Race distace is set to 1000      
+        #Race distace is set to 1000
         self.raceDistance = 1000
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
@@ -163,7 +160,7 @@ class RaceScene(spyral.Scene):
 
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
-            AnswerInput = spyral.widgets.TextInput(100, '', validator = inputValues)
+            AnswerInput = spyral.widgets.TextInput(100, '', validator = inputValues, text_length = 4)
             Sound = spyral.widgets.Button("Sound")
 
         
@@ -192,7 +189,7 @@ class RaceScene(spyral.Scene):
 
         spyral.event.register('PlayerVehicle.y.animation.end', self.endMoving)
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
-        spyral.event.register("input.keyboard.down.space", self.checkAnswer)
+        spyral.event.register("input.keyboard.down.return", self.checkAnswer)
         spyral.event.register("input.keyboard.down.down", self.moveDown)
         spyral.event.register("input.keyboard.down.up", self.moveUp)
         spyral.event.register("form.RegisterForm.Sound.clicked", self.SwitchSound)
@@ -274,7 +271,6 @@ class RaceScene(spyral.Scene):
         
         tree = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
         large = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 10.0, loop = False)
-        
         city = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 20, loop = False)
 
         if(Model.RaceSelect == "Day"):

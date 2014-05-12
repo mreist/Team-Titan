@@ -1,0 +1,6 @@
+[Activity]
+name = SpeedSolver
+activity_version = 1
+bundle_id = org.teamtitan.speedsolver
+icon = activity
+exec = sugar-activity activity.Activity
