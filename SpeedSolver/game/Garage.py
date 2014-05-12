@@ -39,7 +39,10 @@ class drawRedImage(spyral.Sprite):
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
-            Model.Vtype = "red"
+            if (Player.tokens > 0):
+                Model.Vtype = "red"
+                Player.tokens = Player.tokens - 1
+                print Player.tokens
             Player.WithWheels = True
 
 class drawBlueImage(spyral.Sprite):
@@ -90,7 +93,11 @@ class drawLeftFWheelImage(spyral.Sprite):
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
-            Model.LWtype = "LFwheel"
+            if (Player.tokens > 0):
+                Model.LWtype = "LFwheel"
+                Player.tokens = Player.tokens - 1
+                print Player.tokens
+                
 
 class drawRightFWheelImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -103,7 +110,10 @@ class drawRightFWheelImage(spyral.Sprite):
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
-            Model.RWtype = "RFwheel"
+            if (Player.tokens > 0):
+                Model.RWtype = "RFwheel"
+                Player.tokens = Player.tokens - 1
+                print Player.tokens
 
 #Creates a Garage scene
 class GarageScene(spyral.Scene):
