@@ -13,42 +13,47 @@ class Question(spyral.Sprite):
     def __init__(self, scene, operator, digits):
         spyral.Sprite.__init__(self, scene)
         self.anchor = 'midbottom'
-        if digits == 1:
+        if digits == 'AS_Easy':
             self.num1 = random.randint(1, 10)
             self.num2 = random.randint(1, 10)
-        elif digits == 2:
-            self.num1 = random.randint(10, 100)
-            self.num2 = random.randint(10, 100)
-        elif digits == 3:
-            self.num1 = random.randint(100, 1000)
-            self.num2 = random.randint(100, 1000)
+        elif digits == 'AS_Med':
+            self.num1 = random.randint(10, 99)
+            self.num2 = random.randint(10, 99)
+        elif digits == 'AS_Hard':
+            self.num1 = random.randint(100, 500)
+            self.num2 = random.randint(100, 500)
+        elif digits == 'MD_Easy':
+            self.num1 = random.randint(1, 10)
+            self.num2 = random.randint(1, 10) 
+        elif digits == 'MD_Med':
+            self.num1 = random.randint(10, 25)
+            self.num2 = random.randint(1, 10)
+        elif digits == 'MD_Hard':
+            self.num1 = random.randint(25, 50)
+            self.num2 = random.randint(1, 10)         
+
+
         else:
-            self.num1 = random.randint(1, 10000000)
-            self.num2 = random.randint(1, 10000000)
+            self.num1 = random.randint(1, 10)
+            self.num2 = random.randint(1, 10)
             
-        self.font = spyral.Font(DEF_FONT, 36, WHITE)
+        self.font = spyral.Font(DEF_FONT, 32, WHITE)
         
         if operator == 'addition':
             self.answer = self.num1 + self.num2
             self.image = self.font.render(str(self.num1) + "+" + str(self.num2) + "= ?")
+            self.output = (str(self.num1) + "+" + str(self.num2) + "=" + str(self.answer))
         elif operator == 'multiplication':
             self.answer = self.num1*self.num2
             self.image = self.font.render(str(self.num1) + "x" + str(self.num2) + "= ?")
+            self.output = (str(self.num1) + "*" + str(self.num2) + "=" + str(self.answer))
         elif operator == 'subtraction':
             self.answer = self.num1-self.num2
             self.image = self.font.render(str(self.num1) + "-" + str(self.num2) + "= ?")
+            self.output = (str(self.num1) + "-" + str(self.num2) + "=" + str(self.answer))
         elif operator == 'division':
-            checkdivision(self.num1, self.num2)
+            self.num3 = self.num1*self.num2
+            self.answer = self.num3/self.num1
+            self.image = self.font.render(str(self.num3) + "/" + str(self.num1) + "= ?")
+            self.output = (str(self.num3) + "/" + str(self.num1) + "=" + str(self.answer))
 
-    
-      
-        
-    def checkdivision(self, num1, num2):
-        if self.num1 % self.num2 == 0:
-            self.answer = num1/num2
-            self.image = self.font.render(str(self.num1) + "/" + str(self.num2) + "= ?")
-        else:
-            self.num1 = random.randint(1, 10)
-            self.num2 = random.randint(1, 10)
-            checkdivision(num1, num2)
-       
