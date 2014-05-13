@@ -42,14 +42,6 @@ class drawRedImage(spyral.Sprite):
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
-<<<<<<< HEAD
-        if self.collide_point(pos):
-            if (Player.tokens > 0):
-                Model.Vtype = "red"
-                Player.tokens = Player.tokens - 1
-                print Player.tokens
-            Player.WithWheels = True
-=======
         global RedCarUnlocked
         if (RedCarUnlocked == False):
             if self.collide_point(pos):
@@ -62,7 +54,7 @@ class drawRedImage(spyral.Sprite):
             if self.collide_point(pos):
                 Model.Vtype = "red"
         Player.WithWheels = True
->>>>>>> origin/master
+
 
 class drawBlueImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -111,14 +103,6 @@ class drawLeftFWheelImage(spyral.Sprite):
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
-<<<<<<< HEAD
-        if self.collide_point(pos):
-            if (Player.tokens > 0):
-                Model.LWtype = "LFwheel"
-                Player.tokens = Player.tokens - 1
-                print Player.tokens
-                
-=======
         global LeftFWUnlocked
         
         if (LeftFWUnlocked == False):
@@ -133,7 +117,6 @@ class drawLeftFWheelImage(spyral.Sprite):
             if self.collide_point(pos):
                 Model.LWtype = "LFwheel"
                 
->>>>>>> origin/master
 
 class drawRightFWheelImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -145,13 +128,6 @@ class drawRightFWheelImage(spyral.Sprite):
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
-<<<<<<< HEAD
-        if self.collide_point(pos):
-            if (Player.tokens > 0):
-                Model.RWtype = "RFwheel"
-                Player.tokens = Player.tokens - 1
-                print Player.tokens
-=======
         global RightFWUnlocked
         if (RightFWUnlocked == False):
             if self.collide_point(pos):
@@ -163,7 +139,6 @@ class drawRightFWheelImage(spyral.Sprite):
         if (RightFWUnlocked == True):
             if self.collide_point(pos):
                 Model.RWtype = "RFwheel"
->>>>>>> origin/master
 
 #Creates a Garage scene
 class GarageScene(spyral.Scene):
