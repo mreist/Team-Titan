@@ -50,4 +50,21 @@ class Snowman(spyral.Sprite):
         super(Snowman, self).__init__(scene)
 
         self.image = spyral.Image("images/Snowman.png")
-        self.anchor = (WIDTH + 100, HEIGHT/4 +100)
+        self.anchor = 'center'
+        self.pos = (WIDTH + 100, HEIGHT/4 +150)
+
+class Crab(spyral.Sprite):
+    def __init__(self, scene):
+        super(Crab, self).__init__(scene)
+
+        self.image = spyral.Image("images/Crab.png")
+        self.anchor = 'center'
+        self.pos = (WIDTH + 100, HEIGHT/4 +200)
+
+class Bob(spyral.Sprite):
+    def __init__(self, scene):
+        super(Bob, self).__init__(scene)
+
+        self.image = spyral.Image("images/Bob.png")
+        self.anchor = 'center'
+        self.pos = (WIDTH + 150, HEIGHT/4 +125)
