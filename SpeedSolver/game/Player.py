@@ -44,6 +44,5 @@ def saveState():
     f = open('saveUnlocks.txt', 'w')
     for i in top10:
         f.write(str(i) + '\n')
-    f.write('poop.exe\n')
     f.close()
 
