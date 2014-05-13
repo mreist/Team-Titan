@@ -43,7 +43,6 @@ class RaceScene(spyral.Scene):
         global questionBlock
         questionBlock = 0
         
-        timeStart = time.time() 
 
         timeStart = time.time()
         self.layers = ["bottom", "top"]
@@ -75,7 +74,7 @@ class RaceScene(spyral.Scene):
         #Start game with speed of 10        
         self.speed = 5
         #Race distace is set to 1000      
-        self.raceDistance = 1
+        self.raceDistance = 1000
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
