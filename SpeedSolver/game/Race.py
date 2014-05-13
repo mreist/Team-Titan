@@ -40,6 +40,8 @@ class RaceScene(spyral.Scene):
 
         global manager
         global speedIncrease
+        global questionBlock
+        questionBlock = 0
         
         timeStart = time.time() 
 
@@ -263,11 +265,13 @@ class RaceScene(spyral.Scene):
                 print 'Nothing'
 
     def update(self, delta):
-        print delta
         global speedIncrease
         self.currentTime = time.time() - timeStart 
         self.timeText.update("Current Time: %.2f" % self.currentTime)
+        
+        #might be able to move speed text out of update and into check answer
         self.speedText.update("Speed: %d mph" % self.speed)
+
         self.distanceText.update("Distance: %d" % self.currentDistance) 
         self.currentDistance += self.speed * delta
         self.miniMapBall.x = (100 + (self.currentDistance / self.raceDistance) * 600)
@@ -302,37 +306,35 @@ class RaceScene(spyral.Scene):
             Player.currentTime = finishTime                                            
             self.goToResults()
 
-        if (self.collide_sprites(self.PlayerVehicle, self.questionOne)):
-            print "Collide with 1"
-            speedIncrease = 5            
-            self.my_form.AnswerInput.visible = True            
-            self.questionOne.stop_all_animations()
-            self.currentQuestion = self.questionOne
-            self.questionTwo.kill()
-            self.questionThree.kill()
-            self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
-            self.isMoving = 1
-        elif (self.collide_sprites(self.PlayerVehicle, self.questionTwo)):
-            print "Collide with 2"
-            speedIncrease = 10
-            self.my_form.AnswerInput.visible = True           
-            self.questionTwo.stop_all_animations()
-            self.currentQuestion = self.questionTwo
-            self.questionOne.kill()
-            self.questionThree.kill()
-            self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
-            self.isMoving = 1
-        elif (self.collide_sprites(self.PlayerVehicle, self.questionThree)):
-            print "Collide with 3"
-            speedIncrease = 15
-            self.my_form.AnswerInput.visible = True
-            self.questionThree.stop_all_animations()
-            self.currentQuestion = self.questionThree
-            self.questionOne.kill()
-            self.questionTwo.kill()
-            self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
-            self.isMoving = 1
-
+        if(self.PlayerVehicle.collide_sprite(self.questionOne) or self.PlayerVehicle.collide_sprite(self.questionTwo) or self.PlayerVehicle.collide_sprite(self.questionThree)):
+            if(self.PlayerVehicle.y <= (HEIGHT/2)+150):
+                self.questionTwo.kill()
+                self.questionThree.kill()
+                print "Collided in top lane, Q1"
+                speedIncrease = 5            
+                self.my_form.AnswerInput.visible = True            
+                self.questionOne.stop_all_animations()
+                self.currentQuestion = self.questionOne
+                self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
+            if(self.PlayerVehicle.y > (HEIGHT/2)+150 and self.PlayerVehicle.y < (HEIGHT/2)+250):
+                self.questionOne.kill()
+                self.questionThree.kill()
+                print "Collided in center lane, Q2"
+                speedIncrease = 10
+                self.my_form.AnswerInput.visible = True            
+                self.questionTwo.stop_all_animations()
+                self.currentQuestion = self.questionTwo
+                self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
+            if(self.PlayerVehicle.y >= (HEIGHT/2)+250):
+                self.questionOne.kill()
+                self.questionTwo.kill()
+                print "Collided in bottom lane, Q3"
+                speedIncrease = 20
+                self.my_form.AnswerInput.visible = True            
+                self.questionThree.stop_all_animations()
+                self.currentQuestion = self.questionThree
+                self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
+ 
     #Quit button method that stops the music and goes back to Main Menu
     def goToMenu(self):
         global Game_music

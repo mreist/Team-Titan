@@ -17,20 +17,20 @@ class Question(spyral.Sprite):
             self.num1 = random.randint(1, 10)
             self.num2 = random.randint(1, 10)
         elif digits == 'AS_Med':
-            self.num1 = random.randint(10, 99)
-            self.num2 = random.randint(10, 99)
+            self.num1 = random.randint(10, 50)
+            self.num2 = random.randint(10, 50)
         elif digits == 'AS_Hard':
-            self.num1 = random.randint(100, 500)
-            self.num2 = random.randint(100, 500)
+            self.num1 = random.randint(50, 150)
+            self.num2 = random.randint(50, 150)
         elif digits == 'MD_Easy':
-            self.num1 = random.randint(1, 10)
-            self.num2 = random.randint(1, 10) 
+            self.num1 = random.randint(1, 6)
+            self.num2 = random.randint(1, 6) 
         elif digits == 'MD_Med':
-            self.num1 = random.randint(10, 25)
-            self.num2 = random.randint(1, 10)
+            self.num1 = random.randint(6, 12)
+            self.num2 = random.randint(1, 12)
         elif digits == 'MD_Hard':
-            self.num1 = random.randint(25, 50)
-            self.num2 = random.randint(1, 10)         
+            self.num1 = random.randint(10, 20)
+            self.num2 = random.randint(1, 12)         
 
 
         else:
