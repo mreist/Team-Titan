@@ -61,7 +61,7 @@ class Title(spyral.Scene):
         i = 0
         initials = True
         for line in f:
-            line = line.rstrip('\n')
+            line = line.rstrip('\n')         
             if initials:
                 Player.top10[i][0] = line
                 print('read initials: ' + line)
