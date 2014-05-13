@@ -302,38 +302,70 @@ class RaceScene(spyral.Scene):
             Player.currentTime = finishTime                                            
             self.goToResults()
 
-        
+        if(self.PlayerVehicle.collide_sprite(self.questionOne) or self.PlayerVehicle.collide_sprite(self.questionTwo) or self.PlayerVehicle.collide_sprite(self.questionThree)):
+            if(self.PlayerVehicle.y <= (HEIGHT/2)+150):
+                self.questionTwo.kill()
+                self.questionThree.kill()
+                print "Collided in top lane, Q1"
+                speedIncrease = 5            
+                self.my_form.AnswerInput.visible = True            
+                self.questionOne.stop_all_animations()
+                self.currentQuestion = self.questionOne
+                self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
+                #self.isMoving = 1  
+            if(self.PlayerVehicle.y > (HEIGHT/2)+150 and self.PlayerVehicle.y < (HEIGHT/2)+250):
+                self.questionOne.kill()
+                self.questionThree.kill()
+                print "Collided in center lane, Q2"
+                speedIncrease = 10
+                self.my_form.AnswerInput.visible = True            
+                self.questionTwo.stop_all_animations()
+                self.currentQuestion = self.questionTwo
+                self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
+                #self.isMoving = 1  
+            if(self.PlayerVehicle.y >= (HEIGHT/2)+250):
+                self.questionOne.kill()
+                self.questionTwo.kill()
+                print "Collided in bottom lane, Q3"
+                speedIncrease = 20
+                self.my_form.AnswerInput.visible = True            
+                self.questionThree.stop_all_animations()
+                self.currentQuestion = self.questionThree
+                self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
+                #self.isMoving = 1
+ 
 
-        if(self.questionOne.collide_point((self.PlayerVehicle.x +190, self.PlayerVehicle.y))):
-            self.questionTwo.kill()
-            self.questionThree.kill()
-            print "Collided in top lane, Q1"
-            speedIncrease = 5            
-            self.my_form.AnswerInput.visible = True            
-            self.questionOne.stop_all_animations()
-            self.currentQuestion = self.questionOne
-            self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
-            self.isMoving = 1
-        elif(self.questionTwo.collide_point((self.PlayerVehicle.x +190, self.PlayerVehicle.y))):
-            self.questionOne.kill()
-            self.questionThree.kill()
-            print "Collided in center lane, Q2"
-            speedIncrease = 10
-            self.my_form.AnswerInput.visible = True            
-            self.questionTwo.stop_all_animations()
-            self.currentQuestion = self.questionTwo
-            self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
-            self.isMoving = 1
-        elif(self.questionThree.collide_point((self.PlayerVehicle.x +190, self.PlayerVehicle.y))):
-            self.questionOne.kill()
-            self.questionTwo.kill()
-            print "Collided in bottom lane, Q3"
-            speedIncrease = 20
-            self.my_form.AnswerInput.visible = True            
-            self.questionThree.stop_all_animations()
-            self.currentQuestion = self.questionThree
-            self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
-            self.isMoving = 1
+
+#       if(self.questionOne.collide_point((self.PlayerVehicle.x +190, self.PlayerVehicle.y))):
+  #          self.questionTwo.kill()
+   #         self.questionThree.kill()
+    #        print "Collided in top lane, Q1"
+     #       speedIncrease = 5            
+      #      self.my_form.AnswerInput.visible = True            
+       #     self.questionOne.stop_all_animations()
+        #    self.currentQuestion = self.questionOne
+         #   self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
+          #  self.isMoving = 1
+#        elif(self.questionTwo.collide_point((self.PlayerVehicle.x +190, self.PlayerVehicle.y))):
+ #           self.questionOne.kill()
+  #          self.questionThree.kill()
+   #         print "Collided in center lane, Q2"
+    #        speedIncrease = 10
+     #       self.my_form.AnswerInput.visible = True            
+      #      self.questionTwo.stop_all_animations()
+       #     self.currentQuestion = self.questionTwo
+        #    self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
+         #   self.isMoving = 1
+#        elif(self.questionThree.collide_point((self.PlayerVehicle.x +190, self.PlayerVehicle.y))):
+ #           self.questionOne.kill()
+  #          self.questionTwo.kill()
+   #         print "Collided in bottom lane, Q3"
+    #        speedIncrease = 20
+     #       self.my_form.AnswerInput.visible = True            
+      #      self.questionThree.stop_all_animations()
+       #     self.currentQuestion = self.questionThree
+        #    self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
+         #   self.isMoving = 1
 
     #Quit button method that stops the music and goes back to Main Menu
     def goToMenu(self):
