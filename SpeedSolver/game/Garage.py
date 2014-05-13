@@ -18,10 +18,6 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 tempCount = 0
-RedCarUnlocked = False
-LeftFWUnlocked =  False
-RightFWUnlocked = False
-
 
 #Creates a Garage Sprite with its image
 class Garage(spyral.Sprite):
@@ -42,18 +38,9 @@ class drawRedImage(spyral.Sprite):
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
-        global RedCarUnlocked
-        if (RedCarUnlocked == False):
-            if self.collide_point(pos):
-                if (Player.tokens > 0):
-                    Model.Vtype = "red"
-                    Player.tokens = Player.tokens - 1
-                    print Player.tokens
-                    RedCarUnlocked = True
-        if (RedCarUnlocked == True):
-            if self.collide_point(pos):
-                Model.Vtype = "red"
-        Player.WithWheels = True
+        if self.collide_point(pos):
+            Model.Vtype = "red"
+            Player.WithWheels = True
 
 
 class drawBlueImage(spyral.Sprite):
@@ -103,20 +90,8 @@ class drawLeftFWheelImage(spyral.Sprite):
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
-        global LeftFWUnlocked
-        
-        if (LeftFWUnlocked == False):
-            if self.collide_point(pos):
-                if (Player.tokens > 0):
-                    Model.LWtype = "LFwheel"
-                    Player.tokens = Player.tokens - 1
-                    LeftFWUnlocked = True
-                print Player.tokens
-                
-        if (LeftFWUnlocked == True):
-            if self.collide_point(pos):
-                Model.LWtype = "LFwheel"
-                
+        if self.collide_point(pos):
+            Model.LWtype = "LFwheel"
 
 class drawRightFWheelImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -128,17 +103,8 @@ class drawRightFWheelImage(spyral.Sprite):
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
-        global RightFWUnlocked
-        if (RightFWUnlocked == False):
-            if self.collide_point(pos):
-                if (Player.tokens > 0):
-                    Model.RWtype = "RFwheel"
-                    Player.tokens = Player.tokens - 1
-                    RightFWUnlocked = True
-                print Player.tokens
-        if (RightFWUnlocked == True):
-            if self.collide_point(pos):
-                Model.RWtype = "RFwheel"
+        if self.collide_point(pos):
+            Model.RWtype = "RFwheel"
 
 #Creates a Garage scene
 class GarageScene(spyral.Scene):
@@ -153,10 +119,6 @@ class GarageScene(spyral.Scene):
         
         self.currentCarText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (WIDTH/2, 50), "Current Car:")
         self.currentCarText.anchor = 'midbottom'
-        
-        self.tokenText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (300, 100), "Number of Tokens: "+ str(Player.tokens))
-        
-        self.tokenText.anchor = 'bottomright'
 
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/2, 100)
@@ -196,7 +158,6 @@ class GarageScene(spyral.Scene):
     def update(self):
       #  global tempCount        
   #      if (tempCount > 0):
-        self.tokenText.update("Number of Tokens: " + str(Player.tokens))
         self.PlayerVehicle.kill()
         self.PlayerLWheels.kill()
         self.PlayerRWheels.kill()
