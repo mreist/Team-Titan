@@ -45,6 +45,8 @@ class RaceScene(spyral.Scene):
         
         timeStart = time.time() 
 
+        timeStart = time.time()
+        self.layers = ["bottom", "top"]
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.layers = ["bottom", "top"]
@@ -66,13 +68,14 @@ class RaceScene(spyral.Scene):
         self.currentDistance = 0
         self.level = 0
         self.PlayerVehicle.layer = "bottom"
-
-
-        #Initializae race variables
-        #Start game with speed of 10
+        
+        
+        
+        #Initialize race variables
+        #Start game with speed of 10        
         self.speed = 5
-        #Race distace is set to 1000
-        self.raceDistance = 1000
+        #Race distace is set to 1000      
+        self.raceDistance = 1
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
@@ -275,6 +278,7 @@ class RaceScene(spyral.Scene):
         
         tree = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
         large = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 10.0, loop = False)
+        
         city = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 20, loop = False)
 
         if(Model.RaceSelect == "Day"):

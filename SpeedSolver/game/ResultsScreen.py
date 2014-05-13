@@ -74,6 +74,8 @@ class ResultsScreen(spyral.Scene):
             
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), ((WIDTH/2 - 400), (HEIGHT-200)), 'Wow! You got a high score! 2 extra tokens 4U! Enter your initials.')
             Player.tokens += 2
+        
+        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 400), 'Total tokens: ' + str(Player.tokens))
 
 
     def goToMenu(self):
@@ -89,10 +91,20 @@ class ResultsScreen(spyral.Scene):
         playerAdded = False
         newplayer = [self.my_form.InitialsInput.value, Player.currentTime]
         for player in Player.top10:
-            if (player[1] == 1000000) and (playerAdded == False):
+            if (player[1] == 1000000) and not playerAdded:
                 Player.top10[i] = newplayer
                 playerAdded = True
-            i += 1   
+            i += 1 
+        if not playerAdded:
+            Player.top10[len(Player.top10)-1] = newplayer
         Player.top10.sort(key=lambda player: player[1])
+        self.writeLeaderboardToFile()
         spyral.director.pop
         spyral.director.push(LeaderBoard.LeaderboardScene())
+        
+    def writeLeaderboardToFile(self):
+        f = open('LeaderBoard.txt', 'w')
+        for player in Player.top10:
+            f.write(player[0] + '\n' + str(player[1]) + '\n')
+        print('wrote!')
+        f.close()
