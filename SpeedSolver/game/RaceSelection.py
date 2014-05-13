@@ -122,20 +122,8 @@ class RaceSelection(spyral.Scene):
         self.PrehistImage = drawPrehistImage(self.scene)
         
         #Creates the Start and Option button
-<<<<<<< HEAD
-        class RegisterForm(spyral.Form):
-            DayRaceButton = spyral.widgets.Button("Day Race")
-            NightRaceButton = spyral.widgets.Button("Night Race")
 
-        my_form = RegisterForm(self)
-        my_form.focus()
-        my_form.DayRaceButton.pos = (WIDTH/2 - 100, HEIGHT/2)
-        my_form.NightRaceButton.pos = (WIDTH/2 + 100, HEIGHT/2)
-        
-=======
        
-
->>>>>>> origin/Nick's-Branch
         self.titleText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, WHITE), (WIDTH/2, 50), "Click The Race You Would Like To Play")
         self.titleText.anchor = 'center'
         #self.dayText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 18, WHITE), (200, HEIGHT/2 - 100), "The day race uses addition and subtraction")
