@@ -98,5 +98,13 @@ class ResultsScreen(spyral.Scene):
         if not playerAdded:
             Player.top10[len(Player.top10)-1] = newplayer
         Player.top10.sort(key=lambda player: player[1])
+        self.writeLeaderboardToFile()
         spyral.director.pop
         spyral.director.push(LeaderBoard.LeaderboardScene())
+        
+    def writeLeaderboardToFile(self):
+        f = open('LeaderBoard.txt', 'w')
+        for player in Player.top10:
+            f.write(player[0] + '\n' + str(player[1]) + '\n')
+        print('wrote!')
+        f.close()
