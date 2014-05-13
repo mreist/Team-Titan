@@ -26,7 +26,7 @@ class RaceSelect(spyral.Sprite):
 
         self.anchor = 'center'
         self.RaceSelect = Model.RaceSelect
-        self.background  = Model.resources[self.RaceSelect]      
+        self.background  = spyral.Image(size=SIZE).fill(WHITE)      
         
 class drawNightImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -114,7 +114,7 @@ class RaceSelection(spyral.Scene):
         spyral.event.register("system.quit", spyral.director.quit)
 
         #Sets Main MenuBackground and places Garage image
-        self.background = spyral.Image("images/RaceSelect.png")
+        self.background = spyral.Image(size=SIZE).fill(WHITE)
         self.NightImage = drawNightImage(self.scene)
         self.DayImage = drawDayImage(self.scene)
         self.SnowImage = drawSnowImage(self.scene)
