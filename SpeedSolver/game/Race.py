@@ -40,8 +40,6 @@ class RaceScene(spyral.Scene):
 
         global manager
         global speedIncrease
-        global questionBlock
-        questionBlock = 0
         
 
         timeStart = time.time()
@@ -101,7 +99,14 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
-            
+        elif(Model.RaceSelect == "Snow"):
+            operands = ['addition']            
+            self.background = spyral.Image("images/SnowBackground.png")
+            self.Snowman = Images.Snowman(self)
+            self.runningDeltaSnowman = 0
+            self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
+            self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
+            self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
         
 
         #Creates Bottom Road Lines
@@ -209,7 +214,7 @@ class RaceScene(spyral.Scene):
                     
                     if(Model.RaceSelect == "Night"):
                         self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,255,0)), (WIDTH/2, 50), ("Correct: " + self.currentQuestion.output))
-                    elif(Model.RaceSelect == "Day"):
+                    elif(Model.RaceSelect == "Day" or Model.RaceSelect == "Snow"):
                         self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,120,0)), (WIDTH/2, 50), ("Correct: " + self.currentQuestion.output))
                     self.feedback.anchor = 'bottomleft'
                     self.feedback.pos = (50, HEIGHT)            
@@ -239,7 +244,11 @@ class RaceScene(spyral.Scene):
                     self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
                     self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
                     self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
-
+                elif(Model.RaceSelect == "Snow"):
+                    operands = ['addition']            
+                    self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
+                    self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
+                    self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
 
 
 
@@ -280,6 +289,8 @@ class RaceScene(spyral.Scene):
         
         city = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 20, loop = False)
 
+        snowman = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
+
         if(Model.RaceSelect == "Day"):
             self.runningDeltaTree += delta
             self.runningDeltaLrgCloud += delta
@@ -295,6 +306,12 @@ class RaceScene(spyral.Scene):
             if(self.runningDeltaCity >= 30):
                 self.City.animate(city)
                 self.runningDeltaCity = 0
+
+        if(Model.RaceSelect == "Snow"):
+            self.runningDeltaSnowman += delta
+            if(self.runningDeltaSnowman >= 20):
+                self.Snowman.animate(snowman)
+                self.runningDeltaSnowman = 0
 
         if(self.currentDistance >= self.raceDistance):
             global Game_music
