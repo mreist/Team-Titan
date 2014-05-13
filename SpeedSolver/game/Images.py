@@ -45,3 +45,9 @@ class City(spyral.Sprite):
         self.anchor = 'center'
         self.pos = (WIDTH + 100, (HEIGHT/4)+50)
 
+class Snowman(spyral.Sprite):
+    def __init__(self, scene):
+        super(Snowman, self).__init__(scene)
+
+        self.image = spyral.Image("images/Snowman.png")
+        self.anchor = (WIDTH + 100, HEIGHT/4 +100)
