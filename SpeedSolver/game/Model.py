@@ -17,3 +17,11 @@ def loadResources():
 	    resources["RFwheel"] = spyral.image.Image("images/FancyWheel.png")
 	    resources["Night"] = spyral.image.Image("images/NightBackground.png")
 	    resources["Day"] = spyral.image.Image("images/Background.png")
+	    resources["Snow"] = spyral.image.Image("images/SnowBackground.png")
+	    resources["Beach"] = spyral.image.Image("images/BeachBackground.png")
+	    resources["PreHist"] = spyral.image.Image("images/PrehistoricBackground.png")
+	    resources["RR"] = spyral.image.Image("images/RainbowRoad.png")
+	    
+	    
+	    
+	    

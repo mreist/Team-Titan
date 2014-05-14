@@ -101,7 +101,19 @@ class drawPrehistImage(spyral.Sprite):
             spyral.director.pop
             spyral.director.push(Race.RaceScene())
          
-            
+class drawRRImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'topleft'
+	    self.image = spyral.image.Image("images/RR.png")
+	    self.pos = (WIDTH*2/3, HEIGHT/2)
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        if self.collide_point(pos):
+            Model.RaceSelect = "RR"
+            spyral.director.pop
+            spyral.director.push(Race.RaceScene())            
                      
 
 class RaceSelection(spyral.Scene):
@@ -122,6 +134,7 @@ class RaceSelection(spyral.Scene):
         self.SnowImage = drawSnowImage(self.scene)
         self.BeachImage = drawBeachImage(self.scene)
         self.PrehistImage = drawPrehistImage(self.scene)
+        self.RRImage = drawRRImage(self.scene)
         
         #Creates the Start and Option button
 
