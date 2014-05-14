@@ -109,6 +109,7 @@ class drawRRImage(spyral.Sprite):
 	    self.pos = (WIDTH*2/3, HEIGHT/2)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
+
     def handle_clicked(self, pos):
         if self.collide_point(pos):
             Model.RaceSelect = "RR"
@@ -144,10 +145,8 @@ class RaceSelection(spyral.Scene):
         self.titleText.layer = 'top'
         #self.dayText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 18, WHITE), (200, HEIGHT/2 - 100), "The day race uses addition and subtraction")
         #self.dayText.anchor = 'midleft'
-
         #self.nightText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 18, WHITE), (WIDTH - 100, HEIGHT/2 - 100), "The night race uses multiplication and division")
         #self.nightText.anchor = 'midright'
-
         #self.instructions1 = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, HEIGHT/2 + 100), 'Steer your vehicle into the questions you would like to answer.')
         #self.instructions2 = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, HEIGHT/2 + 130), 'Input your answers into the box that appears when you touch your question.')
         #self.instructions3 = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, HEIGHT/2 + 160), 'Answer questions as fast as you can to complete the race. ')
