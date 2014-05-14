@@ -5,11 +5,11 @@ import Model
 import MainScreen
 import Race
 import Player
+import TextInterface
 from Model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
 from Player import PlayerRWheels
-import TextInterface
 
 WIDTH = 1200
 HEIGHT = 900
@@ -21,7 +21,6 @@ tempCount = 0
 RedCarUnlocked = False
 LeftFWUnlocked =  False
 RightFWUnlocked = False
-
 
 #Creates a Garage Sprite with its image
 class Garage(spyral.Sprite):
@@ -115,7 +114,6 @@ class drawLeftFWheelImage(spyral.Sprite):
         if (LeftFWUnlocked == True):
             if self.collide_point(pos):
                 Model.LWtype = "LFwheel"
-                
 
 class drawRightFWheelImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -143,9 +141,7 @@ class drawRightFWheelImage(spyral.Sprite):
 	    
         
         
-             
-                
-       
+        
 
 #Creates a Garage scene
 class GarageScene(spyral.Scene):
@@ -158,6 +154,7 @@ class GarageScene(spyral.Scene):
 
         self.background = spyral.Image("images/Background.png")
         
+
         self.currentCarText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (WIDTH/2, 50), "Current Car:")
         self.currentCarText.anchor = 'midbottom'
         
@@ -227,8 +224,3 @@ class GarageScene(spyral.Scene):
     def goToMenu(self):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu()) 
-
-
-
-
-
