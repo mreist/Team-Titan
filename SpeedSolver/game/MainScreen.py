@@ -45,6 +45,7 @@ class MainMenu(spyral.Scene):
 
         
         my_form = RegisterForm(self)
+        
         my_form.focus()
         my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
 #        my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)

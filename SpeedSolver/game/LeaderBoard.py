@@ -20,7 +20,6 @@ class LeaderboardScene(spyral.Scene):
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
         i = 0
-        Player.saveState()
         for player in Player.top10:
             name = player[0]
             time = str(player[1])

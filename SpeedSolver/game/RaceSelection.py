@@ -26,14 +26,14 @@ class RaceSelect(spyral.Sprite):
 
         self.anchor = 'center'
         self.RaceSelect = Model.RaceSelect
-        self.background  = Model.resources[self.RaceSelect]      
+        self.background  = spyral.Image(size=SIZE).fill(WHITE)      
         
 class drawNightImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
-	    self.anchor = 'bottomright'
+	    self.anchor = 'topleft'
 	    self.image = spyral.image.Image("images/Night.png")
-	    self.pos = (WIDTH/3, HEIGHT/2)
+	    self.pos = (WIDTH/3, 0)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
@@ -45,9 +45,9 @@ class drawNightImage(spyral.Sprite):
 class drawDayImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
-	    self.anchor = 'bottomright'
+	    self.anchor = 'topleft'
 	    self.image = spyral.image.Image("images/Day.png")
-	    self.pos = (WIDTH-400, HEIGHT/2)
+	    self.pos = (0, 0)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
@@ -55,6 +55,54 @@ class drawDayImage(spyral.Sprite):
             Model.RaceSelect = "Day"
             spyral.director.pop
             spyral.director.push(Race.RaceScene())
+            
+            
+class drawSnowImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'topleft'
+	    self.image = spyral.image.Image("images/Snow.png")
+	    self.pos = (WIDTH*2/3, 0)
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        if self.collide_point(pos):
+            Model.RaceSelect = "Snow"
+            spyral.director.pop
+            spyral.director.push(Race.RaceScene())
+
+class drawBeachImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'topleft'
+	    self.image = spyral.image.Image("images/Beach.png")
+	    self.pos = (0, HEIGHT/2)
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        if self.collide_point(pos):
+            Model.RaceSelect = "Beach"
+            spyral.director.pop
+            spyral.director.push(Race.RaceScene())         
+            
+            
+            
+class drawPrehistImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'topleft'
+	    self.image = spyral.image.Image("images/Prehistoric.png")
+	    self.pos = (WIDTH/3, HEIGHT/2)
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        if self.collide_point(pos):
+            Model.RaceSelect = "PreHist"
+            spyral.director.pop
+            spyral.director.push(Race.RaceScene())
+         
+            
+                     
 
 class RaceSelection(spyral.Scene):
     def __init__(self):
@@ -65,15 +113,22 @@ class RaceSelection(spyral.Scene):
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
 
+        self.layers = ["bottom", "top"]
+
         #Sets Main MenuBackground and places Garage image
-        self.background = spyral.Image("images/RaceSelect.png")
+        self.background = spyral.Image(size=SIZE).fill(WHITE)
         self.NightImage = drawNightImage(self.scene)
         self.DayImage = drawDayImage(self.scene)
+        self.SnowImage = drawSnowImage(self.scene)
+        self.BeachImage = drawBeachImage(self.scene)
+        self.PrehistImage = drawPrehistImage(self.scene)
+        
         #Creates the Start and Option button
-       
 
+       
         self.titleText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, WHITE), (WIDTH/2, 50), "Click The Race You Would Like To Play")
         self.titleText.anchor = 'center'
+        self.titleText.layer = 'top'
         #self.dayText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 18, WHITE), (200, HEIGHT/2 - 100), "The day race uses addition and subtraction")
         #self.dayText.anchor = 'midleft'
 
