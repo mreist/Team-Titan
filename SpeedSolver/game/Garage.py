@@ -5,7 +5,11 @@ import Model
 import MainScreen
 import Race
 import Player
+import TextInterface
 from Model import resources
+from Player import PlayerVehicle
+from Player import PlayerLWheels
+from Player import PlayerRWheels
 
 WIDTH = 1200
 HEIGHT = 900
