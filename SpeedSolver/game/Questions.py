@@ -1,6 +1,7 @@
 import spyral 
 import random
 import math
+import Model
 
 WIDTH = 1200
 HEIGHT = 900
@@ -37,7 +38,11 @@ class Question(spyral.Sprite):
             self.num1 = random.randint(1, 10)
             self.num2 = random.randint(1, 10)
             
-        self.font = spyral.Font(DEF_FONT, 32, WHITE)
+        if(Model.RaceSelect == 'Snow'):
+            self.font = spyral.Font(DEF_FONT, 32, (70,175,175))
+        else:
+            self.font = spyral.Font(DEF_FONT, 32, WHITE)
+        
         
         if operator == 'addition':
             self.answer = self.num1 + self.num2
