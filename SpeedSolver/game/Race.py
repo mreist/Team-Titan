@@ -76,12 +76,6 @@ class RaceScene(spyral.Scene):
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
 
-<<<<<<< HEAD
-        if(Background_Music == True):
-           Game_music.play(-1)
-=======
->>>>>>> origin/master
-           
         if(Model.RaceSelect == "Night"):
             operands = ['multiplication', 'division']
             self.background = spyral.Image("images/NightBackground.png")
