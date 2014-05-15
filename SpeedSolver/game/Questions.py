@@ -1,5 +1,6 @@
 import spyral 
 import random
+import operator
 import math
 import Model
 
@@ -9,6 +10,11 @@ BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
+
+opsKeys = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.div}
+Operands = ["+", "-", "*", "/"]
+
+
 
 class Question(spyral.Sprite):
     def __init__(self, scene, operator, digits):
@@ -31,8 +37,13 @@ class Question(spyral.Sprite):
             self.num2 = random.randint(1, 12)
         elif digits == 'MD_Hard':
             self.num1 = random.randint(10, 20)
-            self.num2 = random.randint(1, 12)         
-
+            self.num2 = random.randint(1, 12) 
+        elif digits == 'OrderOps':
+            self.num1 = random.randint(1, 10)
+            self.num2 = random.randint(1, 10) 
+            self.num3 = random.randint(1, 10) 
+            self.op1 = random.choice(Operands)  
+            self.op2 = random.choice(Operands)            
 
         else:
             self.num1 = random.randint(1, 10)
@@ -61,4 +72,7 @@ class Question(spyral.Sprite):
             self.answer = self.num3/self.num1
             self.image = self.font.render(str(self.num3) + "/" + str(self.num1) + "= ?")
             self.output = (str(self.num3) + "/" + str(self.num1) + "=" + str(self.answer))
+#        elif operator == 'OrOfOp':
+
+            
 
