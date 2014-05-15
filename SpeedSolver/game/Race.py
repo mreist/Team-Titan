@@ -25,7 +25,7 @@ BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
-Background_Music = True;
+Background_Music = False;
 pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.mixer.init()
 Game_music = pygame.mixer.Sound("SandStorm.wav")
@@ -75,9 +75,14 @@ class RaceScene(spyral.Scene):
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
+<<<<<<< HEAD
 
         if(Background_Music == True):
            Game_music.play(-1)
+=======
+        
+
+>>>>>>> origin/Nick's-Branch
            
         if(Model.RaceSelect == "Night"):
             operands = ['multiplication', 'division']
@@ -87,6 +92,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
+            self.Music()
         elif(Model.RaceSelect == "Day"):
             operands = ['addition', 'subtraction']            
             self.background = spyral.Image("images/Background.png")
@@ -97,6 +103,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
+            self.Music()
         elif(Model.RaceSelect == "Snow"):
             operands = ['addition']            
             self.background = spyral.Image("images/SnowBackground.png")
@@ -105,6 +112,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
+            self.Music()
         elif(Model.RaceSelect == "Beach"):
             operands = ['subtraction']
             self.background = spyral.Image("images/BeachBackground.png")
@@ -113,6 +121,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
+            self.Music()
         elif(Model.RaceSelect == "PreHist"):
             operands = ['division']
             self.background = spyral.Image("images/PrehistoricBackground.png")
@@ -121,6 +130,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
+<<<<<<< HEAD
         elif(Model.RaceSelect == "RR"):
             operands = ['addition', 'subtraction', 'multiplication', 'division'] 
             self.background = spyral.Image("images/RainbowRoad.png")
@@ -132,6 +142,9 @@ class RaceScene(spyral.Scene):
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
         
+=======
+            self.Music()
+>>>>>>> origin/Nick's-Branch
 
         #Creates Bottom Road Lines
         self.BottomLine1 = Images.RoadLines(self)
@@ -425,6 +438,7 @@ class RaceScene(spyral.Scene):
         global Game_music
         global Background_Music
         
+        
         if(Background_Music == True):
             Game_music.stop()
             Background_Music = False
@@ -461,7 +475,16 @@ class RaceScene(spyral.Scene):
     def endMoving(self):
         self.isMoving = 0
 
+<<<<<<< HEAD
 class miniMapBall(spyral.Sprite):
+=======
+    def Music(self):
+        if(Background_Music == True):
+           Game_music.play(-1)
+        
+        
+class miniMap(spyral.Sprite):
+>>>>>>> origin/Nick's-Branch
     def __init__(self, scene):
         super(miniMapBall, self).__init__(scene)
 
