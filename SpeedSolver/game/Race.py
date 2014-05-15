@@ -78,10 +78,11 @@ class RaceScene(spyral.Scene):
 
         if(Model.RaceSelect == "Night"):
             operands = ['multiplication', 'division']
+            operands2 = ['OrOfOp']
             self.background = spyral.Image("images/NightBackground.png")
             self.City = Images.City(self)
             self.runningDeltaCity = 15
-            self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
+            self.questionOne = Questions.Question(self, random.choice(operands2), 'OrderOps')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
             self.Music()
@@ -263,7 +264,8 @@ class RaceScene(spyral.Scene):
 
                 if(Model.RaceSelect == "Night"):
                     operands = ['multiplication', 'division']
-                    self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
+                    operands2 = ['OrOfOp']
+                    self.questionOne = Questions.Question(self, random.choice(operands2), 'OrderOps')
                     self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
                     self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
                 elif(Model.RaceSelect == "Day"):
