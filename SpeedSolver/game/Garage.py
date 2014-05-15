@@ -5,7 +5,11 @@ import Model
 import MainScreen
 import Race
 import Player
+import TextInterface
 from Model import resources
+from Player import PlayerVehicle
+from Player import PlayerLWheels
+from Player import PlayerRWheels
 
 WIDTH = 1200
 HEIGHT = 900
@@ -54,7 +58,7 @@ class drawBlueImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
-	    self.image = spyral.image.Image("images/CarNoWheels.png")
+	    self.image = spyral.image.Image("images/BlueCar.png")
 	    self.pos = (WIDTH/4, (HEIGHT/2)+200)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 

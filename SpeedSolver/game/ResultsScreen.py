@@ -89,7 +89,7 @@ class ResultsScreen(spyral.Scene):
     def enterInitials(self):
         i = 0
         playerAdded = False
-        newplayer = [self.my_form.InitialsInput.value, Player.currentTime]
+        newplayer = [(self.my_form.InitialsInput.value).upper(), Player.currentTime]
         for player in Player.top10:
             if (player[1] == 1000000) and not playerAdded:
                 Player.top10[i] = newplayer
