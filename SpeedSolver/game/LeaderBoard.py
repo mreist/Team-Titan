@@ -20,17 +20,20 @@ class LeaderboardScene(spyral.Scene):
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
         i = 0
+        n = 1
+        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (0, 0, 0)), (WIDTH/2 - 225, 40), "Initials")
+        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (0, 0, 0)), (WIDTH/2 + 100, 40), "Time (seconds)")
+        
         for player in Player.top10:
             name = player[0]
             time = str(player[1])
             if time == '1000000':
                 time = ''
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2 - 50, 200 + i), name)
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2 + 50, 200 + i), '|')
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2 + 150, 200 + i), time)
-            i += 50
-            
-        self.background = spyral.Image("images/Background.png")
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (0, 0, 0)), (WIDTH/2 - 225, 110 + i), str(n) + ". " + name)
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (0, 0, 0)), (WIDTH/2 + 100, 110 + i), time)
+            i += 70
+            n += 1
+        self.background = spyral.Image("images/LeaderboardBackground.png")
 
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")
@@ -38,7 +41,7 @@ class LeaderboardScene(spyral.Scene):
         self.my_form = RegisterForm(self)
 
         self.my_form.focus()
-        self.my_form.BackButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
+        self.my_form.BackButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 350)
 
         spyral.event.register("form.RegisterForm.BackButton.clicked", self.goToMenu)
 
