@@ -75,14 +75,7 @@ class RaceScene(spyral.Scene):
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
-<<<<<<< HEAD
 
-        if(Background_Music == True):
-           Game_music.play(-1)
-=======
-        
-
->>>>>>> origin/Nick's-Branch
            
         if(Model.RaceSelect == "Night"):
             operands = ['multiplication', 'division']
@@ -130,7 +123,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
-<<<<<<< HEAD
+            self.Music()
         elif(Model.RaceSelect == "RR"):
             operands = ['addition', 'subtraction', 'multiplication', 'division'] 
             self.background = spyral.Image("images/RainbowRoad.png")
@@ -141,10 +134,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
-        
-=======
             self.Music()
->>>>>>> origin/Nick's-Branch
 
         #Creates Bottom Road Lines
         self.BottomLine1 = Images.RoadLines(self)
@@ -385,7 +375,9 @@ class RaceScene(spyral.Scene):
 
         if(self.currentDistance >= self.raceDistance):
             global Game_music
+            global Background_Music
             Game_music.stop()
+            Background_Music = False
 
             finishTime = time.time() - timeStart                      
             print "Finish Time = %.2f" % finishTime 
@@ -424,6 +416,10 @@ class RaceScene(spyral.Scene):
     #Quit button method that stops the music and goes back to Main Menu
     def goToMenu(self):
         global Game_music
+        global Background_Music
+        
+        Background_Music = False
+        
         Game_music.stop()
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
@@ -474,17 +470,17 @@ class RaceScene(spyral.Scene):
 
     def endMoving(self):
         self.isMoving = 0
-
-<<<<<<< HEAD
-class miniMapBall(spyral.Sprite):
-=======
+        
     def Music(self):
         if(Background_Music == True):
            Game_music.play(-1)
+
+class miniMapBall(spyral.Sprite):
+
         
         
 class miniMap(spyral.Sprite):
->>>>>>> origin/Nick's-Branch
+
     def __init__(self, scene):
         super(miniMapBall, self).__init__(scene)
 
