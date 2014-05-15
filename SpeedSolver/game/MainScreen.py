@@ -41,6 +41,7 @@ class MainMenu(spyral.Scene):
             StartGame = spyral.widgets.Button("Start Game")
 #            OptionButton = spyral.widgets.Button("Options")
             LeaderboardButton = spyral.widgets.Button("Leaderboard")
+            SoundButton = spyral.widgets.Button("Sound")
 
 
         
@@ -49,7 +50,7 @@ class MainMenu(spyral.Scene):
         my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
 #        my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
         my_form.LeaderboardButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 400)
-
+        my_form.SoundButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 250)
 
 
 
@@ -57,6 +58,7 @@ class MainMenu(spyral.Scene):
 #        spyral.event.register("form.RegisterForm.OptionButton.clicked", self.goToOptions)
         spyral.event.register("form.RegisterForm.StartGame.clicked", self.goToRace)
         spyral.event.register("form.RegisterForm.LeaderboardButton.clicked", self.goToLeaderboard)
+        spyral.event.register("form.RegisterForm.SoundButton.clicked", self.SwitchSound)
         spyral.event.register("input.mouse.down", self.goToGarage)
         
         
@@ -72,6 +74,14 @@ class MainMenu(spyral.Scene):
         spyral.director.pop
         spyral.director.push(LeaderBoard.LeaderboardScene())
         
+    def SwitchSound(self):
+        Race.Background_Music
+        
+        if(Race.Background_Music == True):
+            Race.Background_Music = False
+        elif(Race.Background_Music == False):
+            Race.Background_Music = True
+            
     def goToGarage(self, pos):
         pos = spyral.Vec2D(pos)
         if pos.x > 390 and pos.x < 870 and pos.y >50 and pos.y < 475:
