@@ -11,7 +11,6 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
-opsKeys = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.div}
 Operands = ["+", "-", "*", "/"]
 
 
@@ -39,11 +38,20 @@ class Question(spyral.Sprite):
             self.num1 = random.randint(10, 20)
             self.num2 = random.randint(1, 12) 
         elif digits == 'OrderOps':
-            self.num1 = random.randint(1, 10)
-            self.num2 = random.randint(1, 10) 
-            self.num3 = random.randint(1, 10) 
+            self.num1 = random.randint(1, 5)
+            self.num2 = random.randint(1, 5)            
+            self.num3 = random.randint(1, 5)
+            self.num4 = random.randint(1, 5)
+            self.num5 = random.randint(1, 5)
             self.op1 = random.choice(Operands)  
-            self.op2 = random.choice(Operands)            
+            self.op2 = random.choice(Operands)  
+            if (self.op1 == '/'):
+                self.num1 = self.num2 * self.num4
+            if(self.op2 == '/'):
+                self.num2 = self.num3 * self.num4
+            if(self.op1 == '/' and self.op2 == '/'):
+                self.num2 = self.num3 * self.num4
+                self.num1 = self.num2 * self.num4
 
         else:
             self.num1 = random.randint(1, 10)
@@ -72,7 +80,10 @@ class Question(spyral.Sprite):
             self.answer = self.num3/self.num1
             self.image = self.font.render(str(self.num3) + "/" + str(self.num1) + "= ?")
             self.output = (str(self.num3) + "/" + str(self.num1) + "=" + str(self.answer))
-#        elif operator == 'OrOfOp':
-
+        elif operator == 'OrOfOp':
+            self.answer = eval(str(self.num1) + str(self.op1) + str(self.num2) + str(self.op2) + str(self.num3))
+            self.image = self.font.render(str(self.num1) + str(self.op1) + str(self.num2) + str(self.op2) + str(self.num3) + "= ?")
+            self.output = (str(self.num1) + str(self.op1) + str(self.num2) + str(self.op2) + str(self.num3) + "=" + str(self.answer))
+            
             
 
