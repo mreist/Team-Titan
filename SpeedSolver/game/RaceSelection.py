@@ -105,7 +105,7 @@ class drawRRImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'topleft'
-	    self.image = spyral.image.Image("images/RR.png")
+	    self.image = spyral.image.Image("images/Rainbow.png")
 	    self.pos = (WIDTH*2/3, HEIGHT/2)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
