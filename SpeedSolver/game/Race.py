@@ -25,7 +25,7 @@ BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
-Background_Music = True;
+Background_Music = False;
 pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.mixer.init()
 Game_music = pygame.mixer.Sound("SandStorm.wav")
@@ -75,18 +75,16 @@ class RaceScene(spyral.Scene):
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
-       
-        if(Background_Music == True):
-           Game_music.play(-1)
-           
+
         if(Model.RaceSelect == "Night"):
             operands = ['multiplication', 'division']
             self.background = spyral.Image("images/NightBackground.png")
             self.City = Images.City(self)
-            self.runningDeltaCity = 0
+            self.runningDeltaCity = 15
             self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
+            self.Music()
         elif(Model.RaceSelect == "Day"):
             operands = ['addition', 'subtraction']            
             self.background = spyral.Image("images/Background.png")
@@ -97,6 +95,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
+            self.Music()
         elif(Model.RaceSelect == "Snow"):
             operands = ['addition']            
             self.background = spyral.Image("images/SnowBackground.png")
@@ -105,6 +104,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
+            self.Music()
         elif(Model.RaceSelect == "Beach"):
             operands = ['subtraction']
             self.background = spyral.Image("images/BeachBackground.png")
@@ -113,6 +113,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
+            self.Music()
         elif(Model.RaceSelect == "PreHist"):
             operands = ['division']
             self.background = spyral.Image("images/PrehistoricBackground.png")
@@ -121,6 +122,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
+            self.Music()
         elif(Model.RaceSelect == "RR"):
             operands = ['addition', 'subtraction', 'multiplication', 'division'] 
             self.background = spyral.Image("images/RainbowRoad.png")
@@ -131,7 +133,7 @@ class RaceScene(spyral.Scene):
             self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
-        
+            self.Music()
 
         #Creates Bottom Road Lines
         self.BottomLine1 = Images.RoadLines(self)
@@ -207,18 +209,20 @@ class RaceScene(spyral.Scene):
         spyral.event.register('director.update', self.update)
         
         #Initialize on screen text
-        self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (WIDTH - 300, 100), str(time.time() - timeStart))
-        self.speedText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, 100), str(self.speed))
-        self.distanceText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (350, 100), str(self.currentDistance))
+        self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (WIDTH - 400, 35), str(time.time() - timeStart))
+        self.speedText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, 35), str(self.speed))
+        self.distanceText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (350, 35), str(self.currentDistance))
 
         #Minimap stuff        
         self.mapStart = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, 300), "Start")
         self.mapStart.anchor = 'midright'
         self.mapFinish = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (700, 300), "Finish")
         self.mapFinish.anchor = 'midleft'
-        self.miniMapBall = miniMap(self)
+        self.miniMapBall = miniMapBall(self)
         self.miniMapBall.x = 100
         self.miniMapBall.y = 300
+        self.miniMapRect = miniMapRect(self)
+        self.miniMapRect.pos = (100, 300)
 
         spyral.event.register('PlayerVehicle.y.animation.end', self.endMoving)
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
@@ -323,7 +327,7 @@ class RaceScene(spyral.Scene):
         tree = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
         large = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 10.0, loop = False)
         
-        city = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 20, loop = False)
+        city = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 30, loop = False)
 
         snowman = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
 
@@ -370,7 +374,9 @@ class RaceScene(spyral.Scene):
 
         if(self.currentDistance >= self.raceDistance):
             global Game_music
+            global Background_Music
             Game_music.stop()
+            Background_Music = False
 
             finishTime = time.time() - timeStart                      
             print "Finish Time = %.2f" % finishTime 
@@ -409,6 +415,10 @@ class RaceScene(spyral.Scene):
     #Quit button method that stops the music and goes back to Main Menu
     def goToMenu(self):
         global Game_music
+        global Background_Music
+        
+        Background_Music = False
+        
         Game_music.stop()
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
@@ -422,6 +432,7 @@ class RaceScene(spyral.Scene):
     def SwitchSound(self):
         global Game_music
         global Background_Music
+        
         
         if(Background_Music == True):
             Game_music.stop()
@@ -458,11 +469,22 @@ class RaceScene(spyral.Scene):
 
     def endMoving(self):
         self.isMoving = 0
+        
+    def Music(self):
+        if(Background_Music == True):
+           Game_music.play(-1)
 
-class miniMap(spyral.Sprite):
+class miniMapBall(spyral.Sprite):
     def __init__(self, scene):
-        super(miniMap, self).__init__(scene)
+        super(miniMapBall, self).__init__(scene)
 
         self.image = spyral.Image(size=(20, 20))
         self.image.draw_circle(WHITE, (10, 10), 10)
         self.anchor = 'center'
+
+class miniMapRect(spyral.Sprite):
+    def __init__(self, scene):
+        super(miniMapRect, self).__init__(scene)
+
+        self.image = spyral.Image(size=(600, 5)).fill(WHITE)
+        self.anchor = 'midleft'
