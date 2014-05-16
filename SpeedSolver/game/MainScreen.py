@@ -18,6 +18,20 @@ SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
 
+
+class drawGarageImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/Garage.png")
+	    self.pos = ((WIDTH/2), (HEIGHT/2)-200)
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        if self.collide_point(pos):
+            spyral.director.pop
+            spyral.director.push(Garage.GarageScene())
+
 class MainMenu(spyral.Scene):
     def __init__(self):
         super(MainMenu, self).__init__(SIZE)
@@ -31,10 +45,7 @@ class MainMenu(spyral.Scene):
 
 #Sets Main MenuBackground and places Garage image
         self.background = spyral.Image("images/Background.png")
-
-        self.image = spyral.Image("images/Garage.png")
-        CarGarage = Garage.Garage(self)
-        CarGarage.pos = ((WIDTH/2), (HEIGHT/2)-200)
+        self.GarageImage = drawGarageImage(self.scene)
 
 #Creates the Start and Option button
         class RegisterForm(spyral.Form):
@@ -59,7 +70,7 @@ class MainMenu(spyral.Scene):
         spyral.event.register("form.RegisterForm.StartGame.clicked", self.goToRace)
         spyral.event.register("form.RegisterForm.LeaderboardButton.clicked", self.goToLeaderboard)
         spyral.event.register("form.RegisterForm.SoundButton.clicked", self.SwitchSound)
-        spyral.event.register("input.mouse.down", self.goToGarage)
+        #spyral.event.register("input.mouse.down", self.goToGarage)
         
         
 #    def goToOptions(self):
@@ -82,8 +93,8 @@ class MainMenu(spyral.Scene):
         elif(Race.Background_Music == False):
             Race.Background_Music = True
             
-    def goToGarage(self, pos):
-        pos = spyral.Vec2D(pos)
-        if pos.x > 390 and pos.x < 870 and pos.y >50 and pos.y < 475:
-            spyral.director.pop
-            spyral.director.push(Garage.GarageScene())
+    #def goToGarage(self, pos):
+        #pos = spyral.Vec2D(pos)
+        #if pos.x > 390 and pos.x < 870 and pos.y >50 and pos.y < 475:
+          #  spyral.director.pop
+           # spyral.director.push(Garage.GarageScene())
