@@ -37,12 +37,12 @@ class Question(spyral.Sprite):
         elif digits == 'MD_Hard':
             self.num1 = random.randint(10, 20)
             self.num2 = random.randint(1, 12) 
-        elif digits == 'OrderOps':
-            self.num1 = random.randint(1, 5)
-            self.num2 = random.randint(1, 5)            
-            self.num3 = random.randint(1, 5)
-            self.num4 = random.randint(1, 5)
-            self.num5 = random.randint(1, 5)
+        elif digits == 'OO_Easy':
+            self.num1 = random.randint(1, 4)
+            self.num2 = random.randint(1, 4)            
+            self.num3 = random.randint(1, 4)
+            self.num4 = random.randint(1, 4)
+            self.num5 = random.randint(1, 4)
             self.op1 = random.choice(Operands)  
             self.op2 = random.choice(Operands)  
             if (self.op1 == '/'):
@@ -50,12 +50,39 @@ class Question(spyral.Sprite):
             if(self.op2 == '/'):
                 self.num2 = self.num3 * self.num4
             if(self.op1 == '/' and self.op2 == '/'):
-                self.num2 = self.num3 * self.num4
+                self.op1 = random.choice(['+', '-', '*'])
+        elif digits == 'OO_Med':
+            self.num1 = random.randint(2, 8)
+            self.num2 = random.randint(2, 8)            
+            self.num3 = random.randint(2, 8)
+            self.num4 = random.randint(2, 8)
+            self.num5 = random.randint(2, 8)
+            self.op1 = random.choice(Operands)  
+            self.op2 = random.choice(Operands)  
+            if (self.op1 == '/'):
                 self.num1 = self.num2 * self.num4
+            if(self.op2 == '/'):
+                self.num2 = self.num3 * self.num4
+            if(self.op1 == '/' and self.op2 == '/'):
+                self.op1 = random.choice(['+', '-', '*'])
+        elif digits == 'OO_Hard':
+            self.num1 = random.randint(3, 12)
+            self.num2 = random.randint(3, 12)            
+            self.num3 = random.randint(3, 12)
+            self.num4 = random.randint(1, 5)
+            self.op1 = random.choice(Operands)  
+            self.op2 = random.choice(Operands)  
+            if (self.op1 == '/'):
+                self.num1 = self.num2 * self.num4
+            if(self.op2 == '/'):
+                self.num2 = self.num3 * self.num4
+            if(self.op1 == '/' and self.op2 == '/'):
+                self.op1 = random.choice(['+', '-', '*'])
 
         else:
             self.num1 = random.randint(1, 10)
             self.num2 = random.randint(1, 10)
+
             
         if(Model.RaceSelect == 'Snow'):
             self.font = spyral.Font(DEF_FONT, 32, (70,175,175))
