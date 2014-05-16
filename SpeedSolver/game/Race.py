@@ -28,7 +28,7 @@ DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 Background_Music = False;
 pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.mixer.init()
-Game_music = pygame.mixer.Sound("SandStorm.wav")
+Game_music = pygame.mixer.Sound("GameMusic.wav")
 
 class RaceScene(spyral.Scene):
     def __init__(self):
@@ -81,7 +81,7 @@ class RaceScene(spyral.Scene):
             self.background = spyral.Image("images/NightBackground.png")
             self.City = Images.City(self)
             self.runningDeltaCity = 15
-            self.questionOne = Questions.Question(self, random.choice(operands2), 'MD_Easy')
+            self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
             self.Music()
@@ -265,7 +265,7 @@ class RaceScene(spyral.Scene):
 
                 if(Model.RaceSelect == "Night"):
                     operands = ['multiplication', 'division']
-                    self.questionOne = Questions.Question(self, random.choice(operands2), 'OrderOps')
+                    self.questionOne = Questions.Question(self, random.choice(operands), 'OrderOps')
                     self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
                     self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
                 elif(Model.RaceSelect == "Day"):
