@@ -81,7 +81,7 @@ class RaceScene(spyral.Scene):
             self.background = spyral.Image("images/NightBackground.png")
             self.City = Images.City(self)
             self.runningDeltaCity = 15
-            self.questionOne = Questions.Question(self, random.choice(operands2), 'MD_Easy')
+            self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
             self.Music()
