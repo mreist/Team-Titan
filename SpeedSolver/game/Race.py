@@ -265,7 +265,7 @@ class RaceScene(spyral.Scene):
 
                 if(Model.RaceSelect == "Night"):
                     operands = ['multiplication', 'division']
-                    self.questionOne = Questions.Question(self, random.choice(operands2), 'OrderOps')
+                    self.questionOne = Questions.Question(self, random.choice(operands), 'OrderOps')
                     self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
                     self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
                 elif(Model.RaceSelect == "Day"):
