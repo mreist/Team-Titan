@@ -76,3 +76,11 @@ class RRFace(spyral.Sprite):
         self.image = spyral.Image("images/RRFace.png")
         self.anchor = 'center'
         self.pos = (WIDTH + 150, HEIGHT/4+25)
+
+class RRStar(spyral.Sprite):
+    def __init__(self, scene):
+        super(RRStar, self).__init__(scene)
+
+        self.image = spyral.Image("images/RRStars.png")
+        self.anchor = 'midleft'
+        self.pos = (0, HEIGHT/2 - 90)

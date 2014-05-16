@@ -127,7 +127,9 @@ class RaceScene(spyral.Scene):
             operands = ['OrOfOp'] 
             self.background = spyral.Image("images/RainbowRoad.png")
             self.RRFace = Images.RRFace(self)
+            self.RRStar = Images.RRStar(self)
             self.runningDeltaRRFace = 0
+            self.runningDeltaRRStar = 0
             #This should be order of operation questions?
             #Anthony?
             self.questionOne = Questions.Question(self, random.choice(operands), 'OO_Easy')
@@ -335,7 +337,9 @@ class RaceScene(spyral.Scene):
 
         bob = Animation('x', easing.Linear(WIDTH + 150, -150), duration = 4.5, loop = False)
 
-        face = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
+        face = Animation('x', easing.Linear(WIDTH + 100, -150), duration = 4.5, loop = False)
+
+        star = Animation('x', easing.Linear(0, -225), duration = 1, loop = False)
     
         if(Model.RaceSelect == "Day"):
             self.runningDeltaTree += delta
@@ -368,9 +372,13 @@ class RaceScene(spyral.Scene):
                 self.runningDeltaBob = 0
         elif(Model.RaceSelect == "RR"):
             self.runningDeltaRRFace += delta
+            self.runningDeltaRRStar += delta
             if(self.runningDeltaRRFace >= 10):
                 self.RRFace.animate(face)
                 self.runningDeltaRRFace = 0
+            if(self.runningDeltaRRStar >= 1.1):
+                self.RRStar.animate(star)
+                self.runningDeltaRRStar = 0
 
         if(self.currentDistance >= self.raceDistance):
             global Game_music
