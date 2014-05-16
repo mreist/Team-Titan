@@ -152,7 +152,7 @@ class GarageScene(spyral.Scene):
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
 
-        self.background = spyral.Image("images/Background.png")
+        self.background = spyral.Image("images/GarageScene.png")
         
 
         self.currentCarText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (WIDTH/2, 50), "Current Car:")
