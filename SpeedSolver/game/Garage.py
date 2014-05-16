@@ -246,7 +246,7 @@ class drawLeftWheelImage(spyral.Sprite):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/Wheel.png")
-	    self.pos = (WIDTH/6, (HEIGHT/2)+270)
+	    self.pos = (WIDTH - 1025, (HEIGHT/2)-330)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
@@ -258,7 +258,7 @@ class drawRightWheelImage(spyral.Sprite):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/Wheel.png")
-	    self.pos = ((WIDTH/4) + 125, (HEIGHT/2)+270)
+	    self.pos = (WIDTH - 175, (HEIGHT/2)-315)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
@@ -271,7 +271,7 @@ class drawLeftFWheelImage(spyral.Sprite):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/FancyWheel.png")
-	    self.pos = (WIDTH-300, (HEIGHT/2)+270)
+	    self.pos = (WIDTH - 1125 , (HEIGHT/2)-290)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
     def handle_clicked(self, pos):
@@ -294,7 +294,7 @@ class drawRightFWheelImage(spyral.Sprite):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/FancyWheel.png")
-	    self.pos = (WIDTH-80, (HEIGHT/2)+270)
+	    self.pos = (WIDTH - 75, (HEIGHT/2)-270)
 
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
@@ -313,12 +313,12 @@ class drawRightFWheelImage(spyral.Sprite):
                 
    
 	    
-#class drawBobImage(spyral.Sprite):
-    #def __init__(self, Scene):
-	   # spyral.Sprite.__init__(self, Scene)
-	   # self.anchor = 'center'
-	   # self.image = spyral.image.Image("images/Bob.png")
-	   # self.pos = (WIDTH-80, (HEIGHT/2)+270)
+class drawFBobImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/FancyBob.png")
+	    self.pos = (WIDTH - 300, (HEIGHT/2) + 150)
 	    #self.PlayerLWheels = PlayerLWheels(self.scene)
 	  #  self.PlayerRWheels = PlayerRWheels(self.scene)
 	   # spyral.event.register("input.mouse.down.left", self.handle_clicked)	
@@ -350,12 +350,12 @@ class GarageScene(spyral.Scene):
         self.background = spyral.Image("images/GarageScene.png")
         
 
-        self.currentCarText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (WIDTH/2, 50), "Current Car:")
+        self.currentCarText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), ((WIDTH/2, HEIGHT/2 + 135)), "Current Car:")
         self.currentCarText.anchor = 'midbottom'
         
-        self.tokenText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (300, 100), "Number of Tokens: "+ str(Player.tokens))
+        self.tokenText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), ((WIDTH - 200), (HEIGHT/2) + 400), "Number of Tokens: "+ str(Player.tokens))
         
-        self.tokenText.anchor = 'bottomright'
+        self.tokenText.anchor = 'center'
 
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = ((WIDTH/2), (HEIGHT/2) + 200)
@@ -385,7 +385,7 @@ class GarageScene(spyral.Scene):
         self.RightWheelImage = drawRightWheelImage(self.scene)
         self.LeftFWheelImage = drawLeftFWheelImage(self.scene)
         self.RightFWheelImage = drawRightFWheelImage(self.scene)
-        #self.BobImage = drawBobImage(self.scene)
+        self.FBobImage = drawFBobImage(self.scene)
 
 	#Creates a back button to go back to the Main Menu
         class RegisterForm(spyral.Form):
