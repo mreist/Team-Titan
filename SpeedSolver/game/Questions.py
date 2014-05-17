@@ -1,5 +1,6 @@
 import spyral 
 import random
+import operator
 import math
 import Model
 
@@ -9,6 +10,10 @@ BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
+
+Operands = ["+", "-", "*", "/"]
+
+
 
 class Question(spyral.Sprite):
     def __init__(self, scene, operator, digits):
@@ -31,12 +36,53 @@ class Question(spyral.Sprite):
             self.num2 = random.randint(1, 12)
         elif digits == 'MD_Hard':
             self.num1 = random.randint(10, 20)
-            self.num2 = random.randint(1, 12)         
-
+            self.num2 = random.randint(1, 12) 
+        elif digits == 'OO_Easy':
+            self.num1 = random.randint(1, 4)
+            self.num2 = random.randint(1, 4)            
+            self.num3 = random.randint(1, 4)
+            self.num4 = random.randint(1, 4)
+            self.num5 = random.randint(1, 4)
+            self.op1 = random.choice(Operands)  
+            self.op2 = random.choice(Operands)  
+            if (self.op1 == '/'):
+                self.num1 = self.num2 * self.num4
+            if(self.op2 == '/'):
+                self.num2 = self.num3 * self.num4
+            if(self.op1 == '/' and self.op2 == '/'):
+                self.op1 = random.choice(['+', '-', '*'])
+        elif digits == 'OO_Med':
+            self.num1 = random.randint(2, 8)
+            self.num2 = random.randint(2, 8)            
+            self.num3 = random.randint(2, 8)
+            self.num4 = random.randint(2, 8)
+            self.num5 = random.randint(2, 8)
+            self.op1 = random.choice(Operands)  
+            self.op2 = random.choice(Operands)  
+            if (self.op1 == '/'):
+                self.num1 = self.num2 * self.num4
+            if(self.op2 == '/'):
+                self.num2 = self.num3 * self.num4
+            if(self.op1 == '/' and self.op2 == '/'):
+                self.op1 = random.choice(['+', '-', '*'])
+        elif digits == 'OO_Hard':
+            self.num1 = random.randint(3, 12)
+            self.num2 = random.randint(3, 12)            
+            self.num3 = random.randint(3, 12)
+            self.num4 = random.randint(1, 5)
+            self.op1 = random.choice(Operands)  
+            self.op2 = random.choice(Operands)  
+            if (self.op1 == '/'):
+                self.num1 = self.num2 * self.num4
+            if(self.op2 == '/'):
+                self.num2 = self.num3 * self.num4
+            if(self.op1 == '/' and self.op2 == '/'):
+                self.op1 = random.choice(['+', '-', '*'])
 
         else:
             self.num1 = random.randint(1, 10)
             self.num2 = random.randint(1, 10)
+
             
         if(Model.RaceSelect == 'Snow'):
             self.font = spyral.Font(DEF_FONT, 32, (70,175,175))
@@ -61,4 +107,10 @@ class Question(spyral.Sprite):
             self.answer = self.num3/self.num1
             self.image = self.font.render(str(self.num3) + "/" + str(self.num1) + "= ?")
             self.output = (str(self.num3) + "/" + str(self.num1) + "=" + str(self.answer))
+        elif operator == 'OrOfOp':
+            self.answer = eval(str(self.num1) + str(self.op1) + str(self.num2) + str(self.op2) + str(self.num3))
+            self.image = self.font.render(str(self.num1) + str(self.op1) + str(self.num2) + str(self.op2) + str(self.num3) + "= ?")
+            self.output = (str(self.num1) + str(self.op1) + str(self.num2) + str(self.op2) + str(self.num3) + "=" + str(self.answer))
+            
+            
 

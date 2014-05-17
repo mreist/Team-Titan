@@ -5,7 +5,7 @@ from spyral import Animation, easing
 
 currentTime = 0
 bestTime = 100000
-tokens = 0
+tokens = 10
 firstPlay = True
 top10 = [['JFR', 1], ['MTR', 30], ['JTW', 60], ['NNA', 75], ['FAP', 1000], ['',1000000], ['',1000000], ['',1000000], ['',1000000], ['',1000000]]
 WithWheels = True

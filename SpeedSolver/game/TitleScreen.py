@@ -1,6 +1,7 @@
 import spyral 
 import random
 import math
+import operator
 import MainScreen
 import Model
 from Model import resources
@@ -24,11 +25,9 @@ class GameName(spyral.Sprite):
     def __init__(self, scene):
         super(GameName, self).__init__(scene)
         
-        
-        
         self.image = spyral.Image("images/Title.png")
         self.pos = (250, -1000)
-
+        
         animation = Animation('y', easing.Linear(-1000, 200), duration = 4.0, loop = False)
         self.animate(animation)
 
