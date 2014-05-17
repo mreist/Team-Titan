@@ -71,7 +71,7 @@ class RaceScene(spyral.Scene):
         #Start game with speed of 10        
         self.speed = 5
         #Race distace is set to 1000      
-        self.raceDistance = 1
+        self.raceDistance = 1000
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
@@ -124,7 +124,7 @@ class RaceScene(spyral.Scene):
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
             self.Music()
         elif(Model.RaceSelect == "RR"):
-            operands = ['addition', 'subtraction', 'multiplication', 'division'] 
+            operands = ['addition', 'subtraction', 'multiplication', 'division']
             self.background = spyral.Image("images/RainbowRoad.png")
             self.RRFace = Images.RRFace(self)
             self.runningDeltaRRFace = 0
