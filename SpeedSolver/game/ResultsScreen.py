@@ -32,7 +32,6 @@ class ResultsScreen(spyral.Scene):
             QuitButton = spyral.widgets.Button("Quit")
             RetryButton = spyral.widgets.Button("Race Again")
             InitialsInput = spyral.widgets.TextInput(150, "Enter your initials", text_length = 3)
-            EnterButton = spyral.widgets.Button("Enter")
         
         self.my_form = RegisterForm(self)
         self.my_form.focus()
@@ -40,42 +39,42 @@ class ResultsScreen(spyral.Scene):
         self.my_form.RetryButton.pos = ((WIDTH/2 - 200), (HEIGHT-50))
 
         self.my_form.InitialsInput.pos = ((WIDTH/2 - 200), (HEIGHT-100))
-        self.my_form.EnterButton.pos = ((WIDTH/2 - 50), (HEIGHT-100))
 
 
 
         
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
         spyral.event.register("form.RegisterForm.RetryButton.clicked", self.retry)
-        spyral.event.register("form.RegisterForm.EnterButton.clicked", self.enterInitials)
+        spyral.event.register("input.keyboard.down.return", self.enterInitials)
         self.background = spyral.Image("images/Background.png")
         time = Player.currentTime
-        
-        self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 100), 'You did it!! Your time was %.2f.' %time)
+        locx = WIDTH/2 - 250
+        fontsize = 30
+        self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 100), 'You did it!! Your time was %.2f.' %time)
         if Player.firstPlay == True:
             Player.bestTime = Player.currentTime
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 200), 'Try to beat it next time!')
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 300), 'You received a token for your speedy racing.')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Try to beat it next time!')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You received a token for your speedy racing.')
             Player.tokens += 1
             Player.firstPlay = False
         elif (time < Player.bestTime):
             lasttime = Player.bestTime
             yay.play(0)
             Player.bestTime = time
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 200), 'Wow! You beat your previous best time of ' + str(lasttime) + '.')
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 300), 'You got 2 tokens. Nice!')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Wow! You beat your previous best time of ' + str(lasttime) + '.')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You got 2 tokens. Nice!')
             Player.tokens += 2
         else:
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 200), 'Your best time is ' + str(Player.bestTime) + '.')
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 300), 'You received a token for your speedy racing.')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Your best time is ' + str(Player.bestTime) + '.')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You received a token for your speedy racing.')
             Player.tokens += 1
         
         if time < Player.top10[0][1]:
             
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), ((WIDTH/2 - 400), (HEIGHT-200)), 'Wow! You got a high score! 2 extra tokens 4U! Enter your initials.')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), ((WIDTH/2 - 400), (HEIGHT-200)), 'Wow! You got a high score! 2 extra tokens 4U! Enter your initials.')
             Player.tokens += 2
         
-        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (255, 255, 255)), (WIDTH/2, 400), 'Total tokens: ' + str(Player.tokens))
+        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 400), 'Total tokens: ' + str(Player.tokens))
 
 
     def goToMenu(self):
