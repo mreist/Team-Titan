@@ -1,6 +1,4 @@
 import spyral
-import speedSolver
-import Options
 import MainScreen
 import TitleScreen
 import Race

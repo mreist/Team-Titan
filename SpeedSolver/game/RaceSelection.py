@@ -1,10 +1,6 @@
 import spyral 
-import random
-import math
 import Vehicle
-import Options
 import Race
-import Garage
 import LeaderBoard
 import TextInterface
 import Model
@@ -14,10 +10,8 @@ from spyral import Animation, easing
 
 WIDTH = 1200
 HEIGHT = 900
-BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
-DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 
 class RaceSelect(spyral.Sprite):
     def __init__(self, Scene):
@@ -27,7 +21,8 @@ class RaceSelect(spyral.Sprite):
         self.anchor = 'center'
         self.RaceSelect = Model.RaceSelect
         self.background  = spyral.Image(size=SIZE).fill(WHITE)      
-        
+
+#Draws Night Icon        
 class drawNightImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -42,6 +37,7 @@ class drawNightImage(spyral.Sprite):
             spyral.director.pop
             spyral.director.push(Race.RaceScene())
 
+#Draws Day Icon
 class drawDayImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -56,7 +52,7 @@ class drawDayImage(spyral.Sprite):
             spyral.director.pop
             spyral.director.push(Race.RaceScene())
             
-            
+#Draws Snow Icon            
 class drawSnowImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -71,6 +67,7 @@ class drawSnowImage(spyral.Sprite):
             spyral.director.pop
             spyral.director.push(Race.RaceScene())
 
+#Draws Beach Icon
 class drawBeachImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -86,7 +83,7 @@ class drawBeachImage(spyral.Sprite):
             spyral.director.push(Race.RaceScene())         
             
             
-            
+#Draws Prehistoric Icon            
 class drawPrehistImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -100,7 +97,8 @@ class drawPrehistImage(spyral.Sprite):
             Model.RaceSelect = "PreHist"
             spyral.director.pop
             spyral.director.push(Race.RaceScene())
-         
+
+#Draws Rainbow Road Icon       
 class drawRRImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -128,7 +126,6 @@ class RaceSelection(spyral.Scene):
 
         self.layers = ["bottom", "top"]
 
-        #Sets Main MenuBackground and places Garage image
         self.background = spyral.Image(size=SIZE).fill(WHITE)
         self.NightImage = drawNightImage(self.scene)
         self.DayImage = drawDayImage(self.scene)
@@ -136,18 +133,6 @@ class RaceSelection(spyral.Scene):
         self.BeachImage = drawBeachImage(self.scene)
         self.PrehistImage = drawPrehistImage(self.scene)
         self.RRImage = drawRRImage(self.scene)
-        
-        #Creates the Start and Option button
-
-       
-        #self.dayText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 18, WHITE), (200, HEIGHT/2 - 100), "The day race uses addition and subtraction")
-        #self.dayText.anchor = 'midleft'
-        #self.nightText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 18, WHITE), (WIDTH - 100, HEIGHT/2 - 100), "The night race uses multiplication and division")
-        #self.nightText.anchor = 'midright'
-        #self.instructions1 = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, HEIGHT/2 + 100), 'Steer your vehicle into the questions you would like to answer.')
-        #self.instructions2 = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, HEIGHT/2 + 130), 'Input your answers into the box that appears when you touch your question.')
-        #self.instructions3 = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, HEIGHT/2 + 160), 'Answer questions as fast as you can to complete the race. ')
-        #self.instructions4 = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), (100, HEIGHT/2 + 190), 'The harder the questions are, the faster you will go! Do your best!')
 
 
        
