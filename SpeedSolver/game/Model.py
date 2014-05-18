@@ -6,6 +6,9 @@ class Model:
     LWtype = ""
     RWtype = ""
     RaceSelect = ""
+    
+    #Either Race or LeaderBoard
+    SelectMode = ""
 
 
 def loadResources():
