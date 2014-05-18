@@ -10,6 +10,7 @@ from Model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
 from Player import PlayerRWheels
+from Player import PlayerDecal
 
 WIDTH = 1200
 HEIGHT = 900
@@ -29,17 +30,16 @@ OrangeCarUnlocked = False
 
 LeftFWUnlocked =  False
 RightFWUnlocked = False
+
+FireDecalUnlocked = False
 BobUnlocked = True
 
+paintCost = 2
+wheelCost = 4
+decalCost = 6
+
+
 #Creates a Garage Sprite with its image
-class Garage(spyral.Sprite):
-    def __init__(self, scene):
-        super(Garage, self).__init__(scene)
-        Model.loadResources()
-        
-        self.image = spyral.Image(size =(5, 5))
-        self.image = spyral.Image("images/Garage.png")
-        self.anchor = 'center'
 
 class drawBlueImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -68,9 +68,9 @@ class drawRedImage(spyral.Sprite):
         global RedCarUnlocked
         if (RedCarUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > 0):
+                if (Player.tokens > paintCost):
                     Model.Vtype = "red"
-                    Player.tokens = Player.tokens - 1
+                    Player.tokens = Player.tokens - paintCost
                     print Player.tokens
                     RedCarUnlocked = True
         if (RedCarUnlocked == True):
@@ -311,8 +311,28 @@ class drawRightFWheelImage(spyral.Sprite):
             if self.collide_point(pos):
                 Model.RWtype = "RFwheel"
                 
-   
-	    
+
+class drawFireDecal(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/Fire.png")
+	    self.pos = ((WIDTH -120, HEIGHT - 300))
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        global FireDecalUnlocked
+        if (FireDecalUnlocked == False):
+            if self.collide_point(pos):
+                if (Player.tokens > decalCost):
+                    Model.Decal = "fire"
+                    Player.tokens = Player.tokens - decalCost
+                    print Player.tokens
+                    FireDecalUnlocked = True
+        if (FireDecalUnlocked == True):
+            if self.collide_point(pos):
+                Model.Decal = "fire"
+
 class drawFBobImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -385,6 +405,9 @@ class GarageScene(spyral.Scene):
         self.RightWheelImage = drawRightWheelImage(self.scene)
         self.LeftFWheelImage = drawLeftFWheelImage(self.scene)
         self.RightFWheelImage = drawRightFWheelImage(self.scene)
+
+        self.FireDecalImage = drawFireDecal(self.scene)
+
         self.FBobImage = drawFBobImage(self.scene)
 
 	#Creates a back button to go back to the Main Menu
@@ -408,8 +431,11 @@ class GarageScene(spyral.Scene):
         self.PlayerVehicle.kill()
         self.PlayerLWheels.kill()
         self.PlayerRWheels.kill()
+        #self.PlayerDecal.kill()
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = ((WIDTH/2), (HEIGHT/2) + 200)
+        self.PlayerDecal = PlayerDecal(self.scene)
+        self.PlayerDecal.pos = ((WIDTH/2), (HEIGHT/2) + 200)
         self.layers = ["bottom", "top"]
         if (Player.WithWheels == True):
             self.PlayerLWheels = PlayerLWheels(self.scene)

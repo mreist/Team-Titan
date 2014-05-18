@@ -17,6 +17,14 @@ class PlayerVehicle(spyral.Sprite):
         self.Vtype = Model.Vtype
         self.image  = Model.resources[self.Vtype]
         
+
+class PlayerDecal(spyral.Sprite):
+    def __init__(self, Scene):
+        spyral.Sprite.__init__(self, Scene)
+        self.anchor = 'center'
+        self.Decal = Model.Decal
+        self.image = Model.resources[self.Decal]
+
 if (WithWheels == True):        
     class PlayerLWheels(spyral.Sprite):
         def __init__(self, Scene):
