@@ -32,6 +32,7 @@ LeftFWUnlocked =  False
 RightFWUnlocked = False
 
 FireDecalUnlocked = False
+FlowerDecalUnlocked = False
 BobUnlocked = True
 
 paintCost = 2
@@ -279,7 +280,7 @@ class drawLeftFWheelImage(spyral.Sprite):
         
         if (LeftFWUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > wheelCost):
+                if (Player.tokens >= wheelCost):
                     Model.LWtype = "LFwheel"
                     Player.tokens = Player.tokens - wheelCost
                     LeftFWUnlocked = True
@@ -302,7 +303,7 @@ class drawRightFWheelImage(spyral.Sprite):
         global RightFWUnlocked
         if (RightFWUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > wheelCost):
+                if (Player.tokens >= wheelCost):
                     Model.RWtype = "RFwheel"
                     Player.tokens = Player.tokens - wheelCost
                     RightFWUnlocked = True
@@ -324,7 +325,7 @@ class drawFireDecal(spyral.Sprite):
         global FireDecalUnlocked
         if (FireDecalUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > decalCost):
+                if (Player.tokens >= decalCost):
                     Model.Decal = "fire"
                     Player.tokens = Player.tokens - decalCost
                     print Player.tokens
@@ -332,6 +333,30 @@ class drawFireDecal(spyral.Sprite):
         if (FireDecalUnlocked == True):
             if self.collide_point(pos):
                 Model.Decal = "fire"
+
+
+class drawFlowerDecal(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/Flower.png")
+	    self.pos = ((WIDTH - 150, HEIGHT - 375))
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        global FlowerDecalUnlocked
+        if (FlowerDecalUnlocked == False):
+            if self.collide_point(pos):
+                if (Player.tokens >= decalCost):
+                    Model.Decal = "flower"
+                    Player.tokens = Player.tokens - decalCost
+                    print Player.tokens
+                    FlowerDecalUnlocked = True
+        if (FlowerDecalUnlocked == True):
+            if self.collide_point(pos):
+                Model.Decal = "flower"
+
+
 
 class drawFBobImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -379,6 +404,7 @@ class GarageScene(spyral.Scene):
 
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = ((WIDTH/2), (HEIGHT/2) + 200)
+        self.PlayerVehicle.layer = "bottom"
         self.PlayerDecal = PlayerDecal(self.scene)
         self.PlayerDecal.pos = ((WIDTH/2) -25, (HEIGHT/2) + 215)
         self.PlayerDecal.layer = "middle"
@@ -410,7 +436,10 @@ class GarageScene(spyral.Scene):
         self.RightFWheelImage = drawRightFWheelImage(self.scene)
 
         self.FireDecalImage = drawFireDecal(self.scene)
-
+        self.FireDecalImage.scale = .75     
+        self.FlowerDecalImage = drawFlowerDecal(self.scene)
+        self.FlowerDecalImage.scale = .75
+        
         self.FBobImage = drawFBobImage(self.scene)
 
 	#Creates a back button to go back to the Main Menu
@@ -418,18 +447,13 @@ class GarageScene(spyral.Scene):
             BackButton = spyral.widgets.Button("Go Back")
 		
         self.my_form = RegisterForm(self)
-
         self.my_form.focus()
         self.my_form.BackButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 400)
 
         spyral.event.register("form.RegisterForm.BackButton.clicked", self.goToMenu)
-
         spyral.event.register("input.mouse.down.left", self.update)	
-        #spyral.event.register('director.update', self.update)
 
     def update(self):
-      #  global tempCount        
-  #      if (tempCount > 0):
         self.tokenText.update("Number of Tokens: " + str(Player.tokens))
         self.PlayerVehicle.kill()
         self.PlayerLWheels.kill()
@@ -437,6 +461,7 @@ class GarageScene(spyral.Scene):
         self.PlayerDecal.kill()
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = ((WIDTH/2), (HEIGHT/2) + 200)
+        self.PlayerVehicle.layer = "bottom"
         self.PlayerDecal = PlayerDecal(self.scene)
         self.PlayerDecal.pos = ((WIDTH/2) -25, (HEIGHT/2) + 215)
         self.PlayerDecal.layer = "middle"
@@ -450,10 +475,9 @@ class GarageScene(spyral.Scene):
             self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 30
             self.PlayerLWheels.layer = "top"
             self.PlayerRWheels.layer = "top"
-     #   tempCount =+ 1
             
 
-#Pops the Garage Scene and pushes the Main Menu to the front	
+    #Pops the Garage Scene and pushes the Main Menu to the front	
     def goToMenu(self):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu()) 
