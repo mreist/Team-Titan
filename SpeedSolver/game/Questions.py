@@ -21,13 +21,13 @@ class Question(spyral.Sprite):
         self.anchor = 'midbottom'
         if digits == 'AS_Easy':
             self.num1 = random.randint(1, 10)
-            self.num2 = random.randint(1, 10)
+            self.num2 = random.randint(1, self.num1)
         elif digits == 'AS_Med':
-            self.num1 = random.randint(10, 50)
-            self.num2 = random.randint(10, 50)
+            self.num1 = random.randint(10, 30)
+            self.num2 = random.randint(10, self.num1)
         elif digits == 'AS_Hard':
-            self.num1 = random.randint(50, 150)
-            self.num2 = random.randint(50, 150)
+            self.num1 = random.randint(30, 99)
+            self.num2 = random.randint(30, self.num1)
         elif digits == 'MD_Easy':
             self.num1 = random.randint(1, 6)
             self.num2 = random.randint(1, 6) 
@@ -37,6 +37,27 @@ class Question(spyral.Sprite):
         elif digits == 'MD_Hard':
             self.num1 = random.randint(10, 20)
             self.num2 = random.randint(1, 12) 
+        elif digits == 'NEG_Easy':
+            self.num1 = random.randint(1, 4)
+            self.num2 = random.randint(-4, -1)
+            self.num3 = random.randint(1, 4)
+            self.op1 = random.choice(Operands)
+            if(self.op1 == '/'):
+                self.num1 = self.num3*self.num2  
+        elif digits == 'NEG_Med':
+            self.num1 = random.randint(2, 8)
+            self.num2 = random.randint(-8, -2)
+            self.num3 = random.randint(2, 8)
+            self.op1 = random.choice(Operands)
+            if(self.op1 == '/'):
+                self.num1 = self.num3*self.num2
+        elif digits == 'NEG_Hard':
+            self.num1 = random.randint(3, 12)
+            self.num2 = random.randint(-12, -3)
+            self.num3 = random.randint(3, 12)
+            self.op1 = random.choice(Operands)
+            if(self.op1 == '/'):
+                self.num1 = self.num3*self.num2 
         elif digits == 'OO_Easy':
             self.num1 = random.randint(1, 4)
             self.num2 = random.randint(1, 4)            
@@ -111,6 +132,10 @@ class Question(spyral.Sprite):
             self.answer = eval(str(self.num1) + str(self.op1) + str(self.num2) + str(self.op2) + str(self.num3))
             self.image = self.font.render(str(self.num1) + str(self.op1) + str(self.num2) + str(self.op2) + str(self.num3) + "= ?")
             self.output = (str(self.num1) + str(self.op1) + str(self.num2) + str(self.op2) + str(self.num3) + "=" + str(self.answer))
+        elif operator == 'negative':
+            self.answer = eval(str(self.num1) + str(self.op1) + str(self.num2))
+            self.image = self.font.render("(" + str(self.num1) + ")" + str(self.op1) + "(" + str(self.num2) + ")= ?")
+            self.output = "(" + (str(self.num1) + ")" + str(self.op1) + "(" + str(self.num2) + ")=" + str(self.answer))
             
             
 
