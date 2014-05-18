@@ -114,6 +114,7 @@ class RaceScene(spyral.Scene):
             self.background = spyral.Image("images/SnowBackground.png")
             self.raceDistance = 1500
             self.Snowman = Images.Snowman(self)
+            self.Snowman.scale = .8
             self.runningDeltaSnowman = 0
             self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
@@ -134,16 +135,17 @@ class RaceScene(spyral.Scene):
             self.background = spyral.Image("images/PrehistoricBackground.png")
             self.raceDistance = 2000            
             self.Bob = Images.Bob(self)
+            self.Bob.scale = .8
             self.runningDeltaBob = 0
             self.questionOne = Questions.Question(self, random.choice(operands), 'NEG_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'NEG_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'NEG_Hard')
-            self.Music()
         elif(Model.RaceSelect == "RR"):
             operands = ['OrOfOp'] 
             self.background = spyral.Image("images/RainbowRoad.png")
             self.raceDistance = 2000            
             self.RRFace = Images.RRFace(self)
+            self.RRFace.scale = .6
             self.RRStar = Images.RRStar(self)
             self.runningDeltaRRFace = 0
             self.runningDeltaRRStar = 0

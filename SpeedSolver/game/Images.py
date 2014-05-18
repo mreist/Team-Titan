@@ -53,7 +53,7 @@ class Snowman(spyral.Sprite):
 
         self.image = spyral.Image("images/Snowman.png")
         self.anchor = 'center'
-        self.pos = (WIDTH + 100, HEIGHT/4 +150)
+        self.pos = (WIDTH + 100, HEIGHT/4 +125)
 
 #Creates Crab Image
 class Crab(spyral.Sprite):
@@ -71,7 +71,7 @@ class Bob(spyral.Sprite):
 
         self.image = spyral.Image("images/Bob.png")
         self.anchor = 'center'
-        self.pos = (WIDTH + 150, HEIGHT/4 +125)
+        self.pos = (WIDTH + 150, HEIGHT/4 +100)
 
 #Creates Face Image
 class RRFace(spyral.Sprite):
@@ -80,7 +80,7 @@ class RRFace(spyral.Sprite):
 
         self.image = spyral.Image("images/RRFace.png")
         self.anchor = 'center'
-        self.pos = (WIDTH + 150, HEIGHT/4+25)
+        self.pos = (WIDTH + 150, HEIGHT/4 - 25)
 
 #Creates Star Image
 class RRStar(spyral.Sprite):
