@@ -16,6 +16,7 @@ from Model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
 from Player import PlayerRWheels
+from Player import PlayerDecal
 import sets
 from RaceSelection import RaceSelect
 
@@ -43,9 +44,12 @@ class RaceScene(spyral.Scene):
         
 
         timeStart = time.time()
+        self.layers = ["bottom", "middle", "top"]
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
-        self.layers = ["bottom", "top"]
+        self.PlayerDecal = PlayerDecal(self.scene)
+        self.PlayerDecal.pos = (WIDTH/4 - 25, HEIGHT/2 + 215)
+        self.PlayerDecal.layer = "middle"
         if (Player.WithWheels == True):
             self.PlayerLWheels = PlayerLWheels(self.scene)
             self.PlayerLWheels.pos.x = self.PlayerVehicle.pos.x - 100
@@ -135,6 +139,8 @@ class RaceScene(spyral.Scene):
             self.RRStar = Images.RRStar(self)
             self.runningDeltaRRFace = 0
             self.runningDeltaRRStar = 0
+            star = Animation('x', easing.Linear(0, -225), duration = 1, loop = True)
+            self.RRStar.animate(star)
             self.questionOne = Questions.Question(self, random.choice(operands), 'OO_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'OO_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'OO_Hard')
@@ -342,7 +348,7 @@ class RaceScene(spyral.Scene):
 
         face = Animation('x', easing.Linear(WIDTH + 100, -150), duration = 4.5, loop = False)
 
-        star = Animation('x', easing.Linear(0, -225), duration = 1, loop = False)
+        star = Animation('x', easing.Linear(0, -225), duration = 1, loop = True)
     
         if(Model.RaceSelect == "Day"):
             self.runningDeltaTree += delta
@@ -379,9 +385,9 @@ class RaceScene(spyral.Scene):
             if(self.runningDeltaRRFace >= 10):
                 self.RRFace.animate(face)
                 self.runningDeltaRRFace = 0
-            if(self.runningDeltaRRStar >= 1.1):
-                self.RRStar.animate(star)
-                self.runningDeltaRRStar = 0
+ #           if(self.runningDeltaRRStar >= 1.1):
+  #              self.RRStar.animate(star)
+   #             self.runningDeltaRRStar = 0
 
         if(self.currentDistance >= self.raceDistance):
             global Game_music
@@ -455,6 +461,8 @@ class RaceScene(spyral.Scene):
             self.isMoving = 1
             chassisUp = Animation('y', easing.Linear(self.PlayerVehicle.y, self.PlayerVehicle.y-100), .5)
             self.PlayerVehicle.animate(chassisUp)
+            decalUp = Animation('y', easing.Linear(self.PlayerDecal.y, self.PlayerDecal.y-100), .5)
+            self.PlayerDecal.animate(decalUp)
 
             if(Player.WithWheels == True):
                 leftWheelUp = Animation('y', easing.Linear(self.PlayerLWheels.y, self.PlayerLWheels.y-100), .5)
@@ -468,6 +476,8 @@ class RaceScene(spyral.Scene):
             self.isMoving = 1
             chassisDown = Animation('y', easing.Linear(self.PlayerVehicle.y, self.PlayerVehicle.y+100), .5)
             self.PlayerVehicle.animate(chassisDown)
+            decalDown = Animation('y', easing.Linear(self.PlayerDecal.y, self.PlayerDecal.y+100), .5)
+            self.PlayerDecal.animate(decalDown)
             
             if(Player.WithWheels == True):
                 leftWheelDown = Animation('y', easing.Linear(self.PlayerLWheels.y, self.PlayerLWheels.y+100), .5)

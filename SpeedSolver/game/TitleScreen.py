@@ -40,7 +40,7 @@ class Title(spyral.Scene):
         Model.LWtype = "Lwheel"
         Model.RWtype = "Rwheel"
         Model.Vtype = "blue"
-        Model.Decal = 
+        Model.Decal = "blank"
 
         self.slapbass()
         self.loadLeaderBoard()

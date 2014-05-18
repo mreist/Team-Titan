@@ -28,6 +28,7 @@ def loadResources():
     resources["RFwheel"] = spyral.image.Image("images/FancyWheel.png")
 
     #Decals
+    resources["blank"] = spyral.image.Image("images/Blank.png")
     resources["fire"] = spyral.image.Image("images/Fire.png")
 
     #Race Backgrounds
