@@ -21,13 +21,13 @@ class Question(spyral.Sprite):
         self.anchor = 'midbottom'
         if digits == 'AS_Easy':
             self.num1 = random.randint(1, 10)
-            self.num2 = random.randint(1, 10)
+            self.num2 = random.randint(1, self.num1)
         elif digits == 'AS_Med':
-            self.num1 = random.randint(10, 50)
-            self.num2 = random.randint(10, 50)
+            self.num1 = random.randint(10, 30)
+            self.num2 = random.randint(10, self.num1)
         elif digits == 'AS_Hard':
-            self.num1 = random.randint(50, 150)
-            self.num2 = random.randint(50, 150)
+            self.num1 = random.randint(30, 99)
+            self.num2 = random.randint(30, self.num1)
         elif digits == 'MD_Easy':
             self.num1 = random.randint(1, 6)
             self.num2 = random.randint(1, 6) 
