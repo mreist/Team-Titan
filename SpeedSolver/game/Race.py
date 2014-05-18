@@ -385,9 +385,6 @@ class RaceScene(spyral.Scene):
             if(self.runningDeltaRRFace >= 10):
                 self.RRFace.animate(face)
                 self.runningDeltaRRFace = 0
- #           if(self.runningDeltaRRStar >= 1.1):
-  #              self.RRStar.animate(star)
-   #             self.runningDeltaRRStar = 0
 
         if(self.currentDistance >= self.raceDistance):
             global Game_music

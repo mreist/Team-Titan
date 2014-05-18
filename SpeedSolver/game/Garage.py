@@ -380,6 +380,7 @@ class GarageScene(spyral.Scene):
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = ((WIDTH/2), (HEIGHT/2) + 200)
         self.PlayerDecal = PlayerDecal(self.scene)
+        self.PlayerDecal.pos = ((WIDTH/2) -25, (HEIGHT/2) + 215)
         self.PlayerDecal.layer = "middle"
         self.layers = ["bottom", "middle", "top"]
         if (Player.WithWheels == True):
