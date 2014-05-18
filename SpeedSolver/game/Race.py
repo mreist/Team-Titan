@@ -70,24 +70,15 @@ class RaceScene(spyral.Scene):
         #Initialize race variables
         #Start game with speed of 10        
         self.speed = 5
-        #Race distace is set to 1000      
-        self.raceDistance = 1000
+        
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
 
-        if(Model.RaceSelect == "Night"):
-            operands = ['multiplication', 'division']
-            self.background = spyral.Image("images/NightBackground.png")
-            self.City = Images.City(self)
-            self.runningDeltaCity = 15
-            self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
-            self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
-            self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
-            self.Music()
-        elif(Model.RaceSelect == "Day"):
-            operands = ['addition', 'subtraction']            
+        if(Model.RaceSelect == "Day"):
+            operands = ['addition']            
             self.background = spyral.Image("images/Background.png")
+            self.raceDistance = 1000            
             self.LrgCloud = Images.LargeCloud(self)
             self.Tree = Images.Tree(self)
             self.runningDeltaTree = 0
@@ -96,42 +87,54 @@ class RaceScene(spyral.Scene):
             self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
             self.Music()
+        elif(Model.RaceSelect == "Night"):
+            operands = ['subtraction']
+            self.background = spyral.Image("images/NightBackground.png")
+            self.raceDistance = 1000            
+            self.City = Images.City(self)
+            self.runningDeltaCity = 15
+            self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
+            self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
+            self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
+            self.Music()
         elif(Model.RaceSelect == "Snow"):
-            operands = ['addition']            
+            operands = ['multiplication']
             self.background = spyral.Image("images/SnowBackground.png")
+            self.raceDistance = 1500
             self.Snowman = Images.Snowman(self)
             self.runningDeltaSnowman = 0
-            self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
-            self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
-            self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
-            self.Music()
-        elif(Model.RaceSelect == "Beach"):
-            operands = ['subtraction']
-            self.background = spyral.Image("images/BeachBackground.png")
-            self.Crab = Images.Crab(self)
-            self.runningDeltaCrab = 0
-            self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
-            self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
-            self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
-            self.Music()
-        elif(Model.RaceSelect == "PreHist"):
-            operands = ['division']
-            self.background = spyral.Image("images/PrehistoricBackground.png")
-            self.Bob = Images.Bob(self)
-            self.runningDeltaBob = 0
             self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
             self.Music()
+        elif(Model.RaceSelect == "Beach"):
+            operands = ['division']
+            self.background = spyral.Image("images/BeachBackground.png")
+            self.raceDistance = 1500            
+            self.Crab = Images.Crab(self)
+            self.runningDeltaCrab = 0
+            self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
+            self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
+            self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
+            self.Music()
+        elif(Model.RaceSelect == "PreHist"):
+            operands = ['negative']
+            self.background = spyral.Image("images/PrehistoricBackground.png")
+            self.raceDistance = 2000            
+            self.Bob = Images.Bob(self)
+            self.runningDeltaBob = 0
+            self.questionOne = Questions.Question(self, random.choice(operands), 'NEG_Easy')
+            self.questionTwo = Questions.Question(self, random.choice(operands), 'NEG_Med')
+            self.questionThree = Questions.Question(self, random.choice(operands), 'NEG_Hard')
+            self.Music()
         elif(Model.RaceSelect == "RR"):
             operands = ['OrOfOp'] 
             self.background = spyral.Image("images/RainbowRoad.png")
+            self.raceDistance = 2000            
             self.RRFace = Images.RRFace(self)
             self.RRStar = Images.RRStar(self)
             self.runningDeltaRRFace = 0
             self.runningDeltaRRStar = 0
-            #This should be order of operation questions?
-            #Anthony?
             self.questionOne = Questions.Question(self, random.choice(operands), 'OO_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'OO_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'OO_Hard')
@@ -262,32 +265,32 @@ class RaceScene(spyral.Scene):
                 self.currentTurn += 1
                 print ("previous answer: " + str(self.currentQuestion.answer))
                 self.currentQuestion.kill()
-
-                if(Model.RaceSelect == "Night"):
-                    operands = ['multiplication', 'division']
-                    self.questionOne = Questions.Question(self, random.choice(operands), 'OrderOps')
-                    self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
-                    self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
-                elif(Model.RaceSelect == "Day"):
-                    operands = ['addition', 'subtraction']            
-                    self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
-                    self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
-                    self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
-                elif(Model.RaceSelect == "Snow"):
+                
+                if(Model.RaceSelect == "Day"):
                     operands = ['addition']            
                     self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
                     self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
                     self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
-                elif(Model.RaceSelect == "Beach"):
-                    operands = ['subtraction']            
+                elif(Model.RaceSelect == "Night"):
+                    operands = ['subtraction']
                     self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
                     self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
                     self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
-                elif(Model.RaceSelect == "PreHist"):
+                elif(Model.RaceSelect == "Snow"):
+                    operands = ['multiplication']            
+                    self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
+                    self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
+                    self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
+                elif(Model.RaceSelect == "Beach"):
                     operands = ['division']            
                     self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
                     self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
                     self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
+                elif(Model.RaceSelect == "PreHist"):
+                    operands = ['negative']            
+                    self.questionOne = Questions.Question(self, random.choice(operands), 'NEG_Easy')
+                    self.questionTwo = Questions.Question(self, random.choice(operands), 'NEG_Med')
+                    self.questionThree = Questions.Question(self, random.choice(operands), 'NEG_Hard')
                 elif(Model.RaceSelect == "RR"):
                     operands = ['OrOfOp']            
                     self.questionOne = Questions.Question(self, random.choice(operands), 'OO_Easy')
@@ -434,13 +437,11 @@ class RaceScene(spyral.Scene):
     def goToResults(self):
         spyral.director.pop
         spyral.director.push(ResultsScreen.ResultsScreen())
-
         
     #Button that allows the player to turn on/off the sound    
     def SwitchSound(self):
         global Game_music
         global Background_Music
-        
         
         if(Background_Music == True):
             Game_music.stop()
