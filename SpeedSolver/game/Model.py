@@ -1,6 +1,7 @@
 import spyral
 resources  = {}
-
+# Model class stores image files so they can be loaded when a certain type is selected.
+#For example we use Vtype for our Vehicle selection, so if Vtype is set to red then the RedCar.png will display 
 class Model:        
     Vtype = ""
     LWtype = ""
@@ -39,6 +40,8 @@ def loadResources():
     resources["PreHist"] = spyral.image.Image("images/PrehistoricBackground.png")
     resources["RR"] = spyral.image.Image("images/RainbowRoad.png")
     resources["Garage"] = spyral.image.Image("images/Garage.png")
+    
+    #Main Character Bob
     resources["Bob"] = spyral.image.Image("images/Bob.png")
 	    
 	    
