@@ -10,6 +10,7 @@ from Model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
 from Player import PlayerRWheels
+from Player import PlayerDecal
 
 WIDTH = 1200
 HEIGHT = 900
@@ -29,17 +30,16 @@ OrangeCarUnlocked = False
 
 LeftFWUnlocked =  False
 RightFWUnlocked = False
+
+FireDecalUnlocked = False
 BobUnlocked = True
 
+paintCost = 2
+wheelCost = 4
+decalCost = 6
+
+
 #Creates a Garage Sprite with its image
-class Garage(spyral.Sprite):
-    def __init__(self, scene):
-        super(Garage, self).__init__(scene)
-        Model.loadResources()
-        
-        self.image = spyral.Image(size =(5, 5))
-        self.image = spyral.Image("images/Garage.png")
-        self.anchor = 'center'
 
 class drawBlueImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -68,9 +68,9 @@ class drawRedImage(spyral.Sprite):
         global RedCarUnlocked
         if (RedCarUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > 0):
+                if (Player.tokens >= paintCost):
                     Model.Vtype = "red"
-                    Player.tokens = Player.tokens - 1
+                    Player.tokens = Player.tokens - paintCost
                     print Player.tokens
                     RedCarUnlocked = True
         if (RedCarUnlocked == True):
@@ -91,9 +91,9 @@ class drawBlackImage(spyral.Sprite):
         global BlackCarUnlocked
         if (BlackCarUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > 0):
+                if (Player.tokens >= paintCost):
                     Model.Vtype = "black"
-                    Player.tokens = Player.tokens - 1
+                    Player.tokens = Player.tokens - paintCost
                     print Player.tokens
                     BlackCarUnlocked = True
         if (BlackCarUnlocked == True):
@@ -114,9 +114,9 @@ class drawWhiteImage(spyral.Sprite):
         global WhiteCarUnlocked
         if (WhiteCarUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > 0):
+                if (Player.tokens >= paintCost):
                     Model.Vtype = "white"
-                    Player.tokens = Player.tokens - 1
+                    Player.tokens = Player.tokens - paintCost
                     print Player.tokens
                     WhiteCarUnlocked = True
         if (WhiteCarUnlocked == True):
@@ -138,9 +138,9 @@ class drawGreenImage(spyral.Sprite):
         global GreenCarUnlocked
         if (GreenCarUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > 0):
+                if (Player.tokens >= paintCost):
                     Model.Vtype = "green"
-                    Player.tokens = Player.tokens - 1
+                    Player.tokens = Player.tokens - paintCost
                     print Player.tokens
                     GreenCarUnlocked = True
         if (GreenCarUnlocked == True):
@@ -161,9 +161,9 @@ class drawPurpleImage(spyral.Sprite):
         global PurpleCarUnlocked
         if (PurpleCarUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > 0):
+                if (Player.tokens >= paintCost):
                     Model.Vtype = "purple"
-                    Player.tokens = Player.tokens - 1
+                    Player.tokens = Player.tokens - paintCost
                     print Player.tokens
                     PurpleCarUnlocked = True
         if (PurpleCarUnlocked == True):
@@ -183,9 +183,9 @@ class drawPinkImage(spyral.Sprite):
         global PinkCarUnlocked
         if (PinkCarUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > 0):
+                if (Player.tokens >= paintCost):
                     Model.Vtype = "pink"
-                    Player.tokens = Player.tokens - 1
+                    Player.tokens = Player.tokens - paintCost
                     print Player.tokens
                     PinkCarUnlocked = True
         if (PinkCarUnlocked == True):
@@ -207,9 +207,9 @@ class drawYellowImage(spyral.Sprite):
         global YellowCarUnlocked
         if (YellowCarUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > 0):
+                if (Player.tokens >= paintCost):
                     Model.Vtype = "yellow"
-                    Player.tokens = Player.tokens - 1
+                    Player.tokens = Player.tokens - paintCost
                     print Player.tokens
                     YellowCarUnlocked = True
         if (YellowCarUnlocked == True):
@@ -230,9 +230,9 @@ class drawOrangeImage(spyral.Sprite):
         global OrangeCarUnlocked
         if (OrangeCarUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > 0):
+                if (Player.tokens >= paintCost):
                     Model.Vtype = "orange"
-                    Player.tokens = Player.tokens - 1
+                    Player.tokens = Player.tokens - paintCost
                     print Player.tokens
                     OrangeCarUnlocked = True
         if (OrangeCarUnlocked == True):
@@ -279,9 +279,9 @@ class drawLeftFWheelImage(spyral.Sprite):
         
         if (LeftFWUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > 0):
+                if (Player.tokens > wheelCost):
                     Model.LWtype = "LFwheel"
-                    Player.tokens = Player.tokens - 1
+                    Player.tokens = Player.tokens - wheelCost
                     LeftFWUnlocked = True
                 print Player.tokens
                 
@@ -302,17 +302,37 @@ class drawRightFWheelImage(spyral.Sprite):
         global RightFWUnlocked
         if (RightFWUnlocked == False):
             if self.collide_point(pos):
-                if (Player.tokens > 0):
+                if (Player.tokens > wheelCost):
                     Model.RWtype = "RFwheel"
-                    Player.tokens = Player.tokens - 1
+                    Player.tokens = Player.tokens - wheelCost
                     RightFWUnlocked = True
                 print Player.tokens
         if (RightFWUnlocked == True):
             if self.collide_point(pos):
                 Model.RWtype = "RFwheel"
                 
-   
-	    
+
+class drawFireDecal(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/Fire.png")
+	    self.pos = ((WIDTH -120, HEIGHT - 300))
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        global FireDecalUnlocked
+        if (FireDecalUnlocked == False):
+            if self.collide_point(pos):
+                if (Player.tokens > decalCost):
+                    Model.Decal = "fire"
+                    Player.tokens = Player.tokens - decalCost
+                    print Player.tokens
+                    FireDecalUnlocked = True
+        if (FireDecalUnlocked == True):
+            if self.collide_point(pos):
+                Model.Decal = "fire"
+
 class drawFBobImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -359,7 +379,9 @@ class GarageScene(spyral.Scene):
 
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = ((WIDTH/2), (HEIGHT/2) + 200)
-        self.layers = ["bottom", "top"]
+        self.PlayerDecal = PlayerDecal(self.scene)
+        self.PlayerDecal.layer = "middle"
+        self.layers = ["bottom", "middle", "top"]
         if (Player.WithWheels == True):
             self.PlayerLWheels = PlayerLWheels(self.scene)
             self.PlayerLWheels.pos.x = self.PlayerVehicle.pos.x - 100
@@ -385,6 +407,9 @@ class GarageScene(spyral.Scene):
         self.RightWheelImage = drawRightWheelImage(self.scene)
         self.LeftFWheelImage = drawLeftFWheelImage(self.scene)
         self.RightFWheelImage = drawRightFWheelImage(self.scene)
+
+        self.FireDecalImage = drawFireDecal(self.scene)
+
         self.FBobImage = drawFBobImage(self.scene)
 
 	#Creates a back button to go back to the Main Menu
@@ -408,9 +433,13 @@ class GarageScene(spyral.Scene):
         self.PlayerVehicle.kill()
         self.PlayerLWheels.kill()
         self.PlayerRWheels.kill()
+        self.PlayerDecal.kill()
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = ((WIDTH/2), (HEIGHT/2) + 200)
-        self.layers = ["bottom", "top"]
+        self.PlayerDecal = PlayerDecal(self.scene)
+        self.PlayerDecal.pos = ((WIDTH/2) -25, (HEIGHT/2) + 215)
+        self.PlayerDecal.layer = "middle"
+        self.layers = ["bottom", "middle", "top"]
         if (Player.WithWheels == True):
             self.PlayerLWheels = PlayerLWheels(self.scene)
             self.PlayerLWheels.pos.x = self.PlayerVehicle.pos.x - 100

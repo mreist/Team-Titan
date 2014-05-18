@@ -2,7 +2,6 @@ import spyral
 import random
 import math
 import Vehicle
-import Options
 import Race
 import Garage
 import LeaderBoard
@@ -140,9 +139,6 @@ class RaceSelection(spyral.Scene):
         #Creates the Start and Option button
 
        
-        self.titleText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, WHITE), (WIDTH/2, 50), "Click The Race You Would Like To Play")
-        self.titleText.anchor = 'center'
-        self.titleText.layer = 'top'
         #self.dayText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 18, WHITE), (200, HEIGHT/2 - 100), "The day race uses addition and subtraction")
         #self.dayText.anchor = 'midleft'
         #self.nightText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 18, WHITE), (WIDTH - 100, HEIGHT/2 - 100), "The night race uses multiplication and division")
