@@ -48,10 +48,13 @@ class RaceScene(spyral.Scene):
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
         self.layers = ["bottom", "middle", "top"]
+
+        #Draws Decal
         self.PlayerDecal = PlayerDecal(self.scene)
         self.PlayerDecal.pos = (WIDTH/4 - 25, HEIGHT/2 + 215)
         self.PlayerDecal.layer = "middle"
 
+        #Draws wheels
         if (Player.WithWheels == True):
             self.PlayerLWheels = PlayerLWheels(self.scene)
             self.PlayerRWheels = PlayerRWheels(self.scene)
@@ -71,16 +74,15 @@ class RaceScene(spyral.Scene):
         self.level = 0
         self.PlayerVehicle.layer = "bottom"
         
-        
-        
         #Initialize race variables
-        #Start game with speed of 10        
+        #Start game with speed of 5
         self.speed = 5
         
-
+        #Allows user to quit with escape key or windows X button
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
 
+        #Initializes all data, images, questions, and music for each race
         if(Model.RaceSelect == "Day"):
             operands = ['addition']            
             self.background = spyral.Image("images/Background.png")
@@ -157,6 +159,7 @@ class RaceScene(spyral.Scene):
         self.BottomLine2.pos.y = HEIGHT - 180
         self.BottomLine3.pos.y = HEIGHT - 180
 
+        #Animates Bottom Road Lines
         BottomOne = Animation('x', easing.Linear(WIDTH + 100, -2700), duration = 3.0, loop = True)
         self.BottomLine1.animate(BottomOne)
 
@@ -175,6 +178,7 @@ class RaceScene(spyral.Scene):
         self.TopLine2.pos.y = HEIGHT - 300
         self.TopLine3.pos.y = HEIGHT - 300
 
+        #Animates Top Road Lines
         TopOne = Animation('x', easing.Linear(WIDTH + 100, -2700), duration = 3.0, loop = True)
         self.TopLine1.animate(TopOne)
 
@@ -184,8 +188,7 @@ class RaceScene(spyral.Scene):
         TopThree = Animation('x', easing.Linear(WIDTH + 2700, -100), duration = 3.0, loop = True)
         self.TopLine3.animate(TopThree)
 
-        #Initialize Questions and Question 
-        
+        #Initialize Questions and Question   
         self.questionOne.anchor ='midleft'        
         self.questionOne.pos = (WIDTH + 200, 550)
 
@@ -195,6 +198,8 @@ class RaceScene(spyral.Scene):
         self.questionThree.anchor ='midleft'
         self.questionThree.pos = (WIDTH + 200, 750)
         
+
+        #Animates questions across screen towards car
         self.questionOneAnimation = Animation('x', easing.Linear(self.questionOne.x, self.questionOne.x - (WIDTH + 300)), 8)
         self.questionOne.animate(self.questionOneAnimation)
 
@@ -204,8 +209,10 @@ class RaceScene(spyral.Scene):
         self.questionThreeAnimation = Animation('x', easing.Linear(self.questionThree.x, self.questionThree.x - (WIDTH + 300)), 8)
         self.questionThree.animate(self.questionThreeAnimation)
 
+        #Allows users to only input values in the array for their answer
         inputValues = sets.Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'])
 
+        #Creates Quit and sound button
         class RegisterForm(spyral.Form):
             QuitButton = spyral.widgets.Button("Quit")
             AnswerInput = spyral.widgets.TextInput(100, '', validator = inputValues, text_length = 4)
@@ -237,6 +244,7 @@ class RaceScene(spyral.Scene):
         self.miniMapRect = miniMapRect(self)
         self.miniMapRect.pos = (100, 300)
 
+        #Animations for moving Car
         spyral.event.register('PlayerVehicle.y.animation.end', self.endMoving)
         spyral.event.register("form.RegisterForm.QuitButton.clicked", self.goToMenu)
         spyral.event.register("input.keyboard.down.return", self.checkAnswer)
@@ -244,7 +252,7 @@ class RaceScene(spyral.Scene):
         spyral.event.register("input.keyboard.down.up", self.moveUp)
         spyral.event.register("form.RegisterForm.Sound.clicked", self.SwitchSound)
 
-    #Checks if answer is correct,
+    #Checks if answer is correct, and sets Feedback color based on race background
     def checkAnswer(self):
         if(self.my_form.AnswerInput.visible == True):
             try:
@@ -274,6 +282,7 @@ class RaceScene(spyral.Scene):
                 print ("previous answer: " + str(self.currentQuestion.answer))
                 self.currentQuestion.kill()
                 
+                #Determines questions to be used based on which race is selected
                 if(Model.RaceSelect == "Day"):
                     operands = ['addition']            
                     self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
@@ -305,6 +314,7 @@ class RaceScene(spyral.Scene):
                     self.questionTwo = Questions.Question(self, random.choice(operands), 'OO_Med')
                     self.questionThree = Questions.Question(self, random.choice(operands), 'OO_Hard')
 
+                #Sets question position
                 self.questionOne.anchor ='midleft'        
                 self.questionOne.pos = (WIDTH + 200, 550)
                 self.questionTwo.anchor ='midleft'
@@ -325,33 +335,35 @@ class RaceScene(spyral.Scene):
             except ValueError:
                 print 'Nothing'
 
+    #Updates scene
     def update(self, delta):
         global speedIncrease
+
+        #How long you have been racing so far
         self.currentTime = time.time() - timeStart 
         self.timeText.update("Current Time: %.2f" % self.currentTime)
         
-        #might be able to move speed text out of update and into check answer
+        #Shows current speed
         self.speedText.update("Speed: %d mph" % self.speed)
 
+        #Shows how far you have traveled
         self.distanceText.update("Distance: %d" % self.currentDistance) 
         self.currentDistance += self.speed * delta
+
+        #Moves minimap ball across minimap to show how far along in the race you are
         self.miniMapBall.x = (100 + (self.currentDistance / self.raceDistance) * 600)
-        
+  
+        #Sets animation for each background animation in each race      
         tree = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
         large = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 10.0, loop = False)
-        
         city = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 30, loop = False)
-
         snowman = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
-
         crab = Animation('x', easing.Linear(WIDTH + 100, -100), duration = 4.5, loop = False)
-
         bob = Animation('x', easing.Linear(WIDTH + 150, -150), duration = 4.5, loop = False)
-
         face = Animation('x', easing.Linear(WIDTH + 100, -150), duration = 4.5, loop = False)
-
         star = Animation('x', easing.Linear(0, -225), duration = 1, loop = True)
-    
+   
+        #Sets delta for each backgorund image so that the image floats by every x seconds 
         if(Model.RaceSelect == "Day"):
             self.runningDeltaTree += delta
             self.runningDeltaLrgCloud += delta
@@ -387,21 +399,21 @@ class RaceScene(spyral.Scene):
             if(self.runningDeltaRRFace >= 10):
                 self.RRFace.animate(face)
                 self.runningDeltaRRFace = 0
- #           if(self.runningDeltaRRStar >= 1.1):
-  #              self.RRStar.animate(star)
-   #             self.runningDeltaRRStar = 0
 
+        #Stops music when game is over
         if(self.currentDistance >= self.raceDistance):
             global Game_music
             global Background_Music
             Game_music.stop()
             Background_Music = False
 
+            #Calculates finish time and goes to results screen
             finishTime = time.time() - timeStart                      
             print "Finish Time = %.2f" % finishTime 
             Player.currentTime = finishTime                                            
             self.goToResults()
 
+        #Determines question collision
         if(self.PlayerVehicle.collide_sprite(self.questionOne) or self.PlayerVehicle.collide_sprite(self.questionTwo) or self.PlayerVehicle.collide_sprite(self.questionThree)):
             if(self.PlayerVehicle.y <= (HEIGHT/2)+150):
                 self.questionTwo.kill()
@@ -442,6 +454,7 @@ class RaceScene(spyral.Scene):
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu())
  
+    #Goes to results screen
     def goToResults(self):
         spyral.director.pop
         spyral.director.push(ResultsScreen.ResultsScreen())
@@ -457,7 +470,8 @@ class RaceScene(spyral.Scene):
         elif(Background_Music == False):
             Game_music.play(-1)
             Background_Music = True
-        
+  
+    #Moves vehicle up and down      
     def moveUp(self):
         if(self.PlayerVehicle.y >= (HEIGHT/2 + 200) and self.isMoving == 0):
             self.isMoving = 1
@@ -495,6 +509,7 @@ class RaceScene(spyral.Scene):
         if(Background_Music == True):
            Game_music.play(-1)
 
+#Draws Minimap Ball
 class miniMapBall(spyral.Sprite):
     def __init__(self, scene):
         super(miniMapBall, self).__init__(scene)
@@ -503,6 +518,7 @@ class miniMapBall(spyral.Sprite):
         self.image.draw_circle(WHITE, (10, 10), 10)
         self.anchor = 'center'
 
+#Draws Minimap Line
 class miniMapRect(spyral.Sprite):
     def __init__(self, scene):
         super(miniMapRect, self).__init__(scene)
