@@ -22,7 +22,6 @@ from RaceSelection import RaceSelect
 
 WIDTH = 1200
 HEIGHT = 900
-BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
@@ -42,23 +41,26 @@ class RaceScene(spyral.Scene):
         global manager
         global speedIncrease
         
-
+        #Initializes Time to 0
         timeStart = time.time()
-        self.layers = ["bottom", "middle", "top"]
+
+        #Draws Player Vehicle
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
+        self.layers = ["bottom", "middle", "top"]
         self.PlayerDecal = PlayerDecal(self.scene)
         self.PlayerDecal.pos = (WIDTH/4 - 25, HEIGHT/2 + 215)
         self.PlayerDecal.layer = "middle"
+
         if (Player.WithWheels == True):
             self.PlayerLWheels = PlayerLWheels(self.scene)
-            self.PlayerLWheels.pos.x = self.PlayerVehicle.pos.x - 100
-            self.PlayerLWheels.pos.y = self.PlayerVehicle.pos.y + 30
             self.PlayerRWheels = PlayerRWheels(self.scene)
-            self.PlayerRWheels.pos.x = self.PlayerVehicle.pos.x + 120
-            self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 30
+            self.PlayerLWheels.pos = (self.PlayerVehicle.pos.x - 100, self.PlayerVehicle.pos.y + 30)
+            self.PlayerRWheels.pos = (self.PlayerVehicle.pos.x + 120, self.PlayerVehicle.pos.y + 30)
             self.PlayerLWheels.layer = "top"
             self.PlayerRWheels.layer = "top"
+
+            #Rotates wheels to simulate movement
             animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
             self.PlayerRWheels.animate(animation)
             self.PlayerLWheels.animate(animation)

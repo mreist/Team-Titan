@@ -2,7 +2,6 @@ import spyral
 import random
 import math
 import Vehicle
-import Options
 import Race
 import Garage
 import LeaderBoard
