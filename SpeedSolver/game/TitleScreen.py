@@ -10,9 +10,9 @@ from spyral import Animation, easing
 WIDTH = 1200
 HEIGHT = 900
 SIZE = (WIDTH, HEIGHT)
-pygame.mixer.pre_init(44100, -16, 2, 2048)
-pygame.mixer.init()
-seinfeld = pygame.mixer.Sound("seinfeld.wav")
+#pygame.mixer.pre_init(44100, -16, 2, 2048)
+#pygame.mixer.init()
+#seinfeld = pygame.mixer.Sound("seinfeld.wav")
 
 #Creates Game Title image
 class GameName(spyral.Sprite):
@@ -37,7 +37,7 @@ class Title(spyral.Scene):
         Model.Vtype = "blue"
         Model.Decal = "blank"
 
-        self.slapbass()
+        #self.slapbass()
         self.loadLeaderBoard()
         
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
@@ -48,8 +48,8 @@ class Title(spyral.Scene):
         Name = GameName(self)
 
 
-    def slapbass(self):
-        seinfeld.play(0)
+    #def slapbass(self):
+        #seinfeld.play(0)
  
     #Loads in leaderboard from text file   
     def loadLeaderBoard(self):
