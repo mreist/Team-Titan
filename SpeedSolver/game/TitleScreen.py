@@ -58,7 +58,7 @@ class Title(spyral.Scene):
             i = 0
             initials = True
             for line in f:
-                line = line.rstrip('\n')         
+                line = line.rstrip()         
                 if initials:
                     board[0][i][0] = line
                     print('read initials: ' + line)
