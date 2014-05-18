@@ -442,7 +442,9 @@ class GarageScene(spyral.Scene):
         self.tokenText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), ((WIDTH - 200), (HEIGHT/2) + 400), "Number of Tokens: "+ str(Player.tokens))
         
         self.tokenText.anchor = 'center'
-
+        
+        #Creates the Default Player Vehicle, wheels and decal
+        
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = ((WIDTH/2), (HEIGHT/2) + 200)
         self.PlayerDecal = PlayerDecal(self.scene)
@@ -458,7 +460,10 @@ class GarageScene(spyral.Scene):
             self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 30
             self.PlayerLWheels.layer = "top"
             self.PlayerRWheels.layer = "top"
-
+        
+        
+        
+        #Draws the different paint bucket images
         self.BlueImage = drawBlueImage(self.scene)
         self.RedImage = drawRedImage(self.scene)
         self.BlackImage = drawBlackImage(self.scene)
@@ -469,14 +474,16 @@ class GarageScene(spyral.Scene):
         self.YellowImage = drawYellowImage(self.scene)
         self.OrangeImage = drawOrangeImage(self.scene)
         
-        
+        #Draws the different Wheel Images
         self.LeftWheelImage = drawLeftWheelImage(self.scene)
         self.RightWheelImage = drawRightWheelImage(self.scene)
         self.LeftFWheelImage = drawLeftFWheelImage(self.scene)
         self.RightFWheelImage = drawRightFWheelImage(self.scene)
 
+        #Draws the different Decal Images
         self.FireDecalImage = drawFireDecal(self.scene)
-
+        
+        #Draws the Garage Owner Fancy Bob
         self.FBobImage = drawFBobImage(self.scene)
 
 	#Creates a back button to go back to the Main Menu
@@ -493,6 +500,7 @@ class GarageScene(spyral.Scene):
         spyral.event.register("input.mouse.down.left", self.update)	
         #spyral.event.register('director.update', self.update)
 
+    #Update function that draws the current car, wheels, and decals
     def update(self):
       #  global tempCount        
   #      if (tempCount > 0):
