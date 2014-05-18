@@ -30,6 +30,7 @@ pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.mixer.init()
 Game_music = pygame.mixer.Sound("GameMusic.wav")
 
+
 class RaceScene(spyral.Scene):
     def __init__(self):
         super(RaceScene, self).__init__(SIZE)
@@ -40,6 +41,9 @@ class RaceScene(spyral.Scene):
 
         global manager
         global speedIncrease
+        #1 is top lane, 2 is middle, 3 is bottom
+        global whichLane
+        whichLane = 2
         
         #Initializes Time to 0
         timeStart = time.time()
@@ -335,7 +339,7 @@ class RaceScene(spyral.Scene):
     #Updates scene
     def update(self, delta):
         global speedIncrease
-
+        global whichLane
         #How long you have been racing so far
         self.currentTime = time.time() - timeStart 
         self.timeText.update("Current Time: %.2f" % self.currentTime)
@@ -409,36 +413,39 @@ class RaceScene(spyral.Scene):
             Player.currentTime = finishTime                                            
             self.goToResults()
 
-        #Determines question collision
         if(self.PlayerVehicle.collide_sprite(self.questionOne) or self.PlayerVehicle.collide_sprite(self.questionTwo) or self.PlayerVehicle.collide_sprite(self.questionThree)):
-            if(self.PlayerVehicle.y <= (HEIGHT/2)+150):
+            if (whichLane == 1):
                 self.questionTwo.kill()
                 self.questionThree.kill()
-                print "Collided in top lane, Q1"
                 speedIncrease = 5            
                 self.my_form.AnswerInput.visible = True            
                 self.questionOne.stop_all_animations()
                 self.currentQuestion = self.questionOne
                 self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
-            if(self.PlayerVehicle.y > (HEIGHT/2)+150 and self.PlayerVehicle.y < (HEIGHT/2)+250):
+            elif (whichLane == 2):
                 self.questionOne.kill()
                 self.questionThree.kill()
-                print "Collided in center lane, Q2"
                 speedIncrease = 10
                 self.my_form.AnswerInput.visible = True            
                 self.questionTwo.stop_all_animations()
                 self.currentQuestion = self.questionTwo
                 self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
-            if(self.PlayerVehicle.y >= (HEIGHT/2)+250):
+            elif (whichLane == 3):
                 self.questionOne.kill()
                 self.questionTwo.kill()
-                print "Collided in bottom lane, Q3"
                 speedIncrease = 20
                 self.my_form.AnswerInput.visible = True            
                 self.questionThree.stop_all_animations()
                 self.currentQuestion = self.questionThree
                 self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
- 
+
+
+#Leave this here if need to change collision detection
+#        if(self.PlayerVehicle.collide_sprite(self.questionOne) or self.PlayerVehicle.collide_sprite(self.questionTwo) or self.PlayerVehicle.collide_sprite(self.questionThree)):
+#            if(self.PlayerVehicle.y <= (HEIGHT/2)+150):
+#            if(self.PlayerVehicle.y > (HEIGHT/2)+150 and self.PlayerVehicle.y < (HEIGHT/2)+250):
+#            if(self.PlayerVehicle.y >= (HEIGHT/2)+250):
+
     #Quit button method that stops the music and goes back to Main Menu
     def goToMenu(self):
         global Game_music
@@ -469,7 +476,9 @@ class RaceScene(spyral.Scene):
   
     #Moves vehicle up and down      
     def moveUp(self):
+        global whichLane
         if(self.PlayerVehicle.y >= (HEIGHT/2 + 200) and self.isMoving == 0):
+            whichLane -= 1
             self.isMoving = 1
             chassisUp = Animation('y', easing.Linear(self.PlayerVehicle.y, self.PlayerVehicle.y-100), .5)
             self.PlayerVehicle.animate(chassisUp)
@@ -484,7 +493,9 @@ class RaceScene(spyral.Scene):
                 self.PlayerRWheels.animate(rightWheelUp)
 
     def moveDown(self):
+        global whichLane        
         if(self.PlayerVehicle.y <= (HEIGHT/2 + 200) and self.isMoving == 0):
+            whichLane += 1            
             self.isMoving = 1
             chassisDown = Animation('y', easing.Linear(self.PlayerVehicle.y, self.PlayerVehicle.y+100), .5)
             self.PlayerVehicle.animate(chassisDown)
