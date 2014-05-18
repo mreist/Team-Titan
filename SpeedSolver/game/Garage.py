@@ -14,11 +14,9 @@ from Player import PlayerDecal
 
 WIDTH = 1200
 HEIGHT = 900
-BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
-tempCount = 0
 
 #Boolean value for the Car Unlockables
 RedCarUnlocked = False
@@ -37,6 +35,8 @@ RightFWUnlocked = False
 #Boolean value for the Decal Unlockables
 FireDecalUnlocked = False
 FlowerDecalUnlocked = False
+LightningDecalUnlocked = False
+HeartDecalUnlocked = False
 BobUnlocked = True
 
 #Cost of each Unlockable by tokens
@@ -55,7 +55,7 @@ class drawBlueImage(spyral.Sprite):
 
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)
 	    
-#When the paint bucket is clicked it changes the Car Vtype to the particular color
+    #When the paint bucket is clicked it changes the Car Vtype to the particular color
     def handle_clicked(self, pos):
         if self.collide_point(pos):
             Model.Vtype = "blue"
@@ -306,9 +306,8 @@ class drawRightWheelImage(spyral.Sprite):
 	    self.pos = (WIDTH - 175, (HEIGHT/2)-315)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)
 	    
-#When the RWheel is clicked it changes the Rwheel RWtype to the particular Wheel
-#Default RWheel
-
+    #When the RWheel is clicked it changes the Rwheel RWtype to the particular Wheel
+    #Default RWheel
     def handle_clicked(self, pos):
         if self.collide_point(pos):
             Model.RWtype = "Rwheel"
@@ -323,11 +322,9 @@ class drawLeftFWheelImage(spyral.Sprite):
 	    self.pos = (WIDTH - 1125 , (HEIGHT/2)-290)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
-#When the LFWheel is clicked it changes the Lwheel LWtype to the particular wheel
-#Checks to see if the wheel is unlocked, if it is not then checks how many tokens the player has.
-#If they have enough tokens the wheel is unlocked and the boolean value is set to true.
-
-
+    #When the LFWheel is clicked it changes the Lwheel LWtype to the particular wheel
+    #Checks to see if the wheel is unlocked, if it is not then checks how many tokens the player has.
+    #If they have enough tokens the wheel is unlocked and the boolean value is set to true.
     def handle_clicked(self, pos):
         global LeftFWUnlocked
         
@@ -344,7 +341,6 @@ class drawLeftFWheelImage(spyral.Sprite):
                 Model.LWtype = "LFwheel"
                 
 #Creates a default RWheel Sprite with its image 
-
 class drawRightFWheelImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -354,10 +350,9 @@ class drawRightFWheelImage(spyral.Sprite):
 
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)
 	    
-#When the RFWheel is clicked it changes the Rwheel RWtype to the particular wheel
-#Checks to see if the wheel is unlocked, if it is not then checks how many tokens the player has.
-#If they have enough tokens the wheel is unlocked and the boolean value is set to true.
-
+    #When the RFWheel is clicked it changes the Rwheel RWtype to the particular wheel
+    #Checks to see if the wheel is unlocked, if it is not then checks how many tokens the player has.
+    #If they have enough tokens the wheel is unlocked and the boolean value is set to true.
     def handle_clicked(self, pos):
         global RightFWUnlocked
         if (RightFWUnlocked == False):
@@ -372,19 +367,17 @@ class drawRightFWheelImage(spyral.Sprite):
                 Model.RWtype = "RFwheel"
                 
 #Creates a FireDecal Sprite with its image 
-
 class drawFireDecal(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/Fire.png")
-	    self.pos = ((WIDTH -120, HEIGHT - 300))
+	    self.pos = ((WIDTH - 100, HEIGHT - 300))
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
 
-#When the Decal is clicked it changes the Decal type to the particular Decal
-#Checks to see if the Decal is unlocked, if it is not then checks how many tokens the player has.
-#If they have enough tokens the Decal is unlocked and the boolean value is set to true.
-
+    #When the Decal is clicked it changes the Decal type to the particular Decal
+    #Checks to see if the Decal is unlocked, if it is not then checks how many tokens the player has.
+    #If they have enough tokens the Decal is unlocked and the boolean value is set to true.
     def handle_clicked(self, pos):
         global FireDecalUnlocked
         if (FireDecalUnlocked == False):
@@ -418,6 +411,49 @@ class drawFlowerDecal(spyral.Sprite):
         if (FlowerDecalUnlocked == True):
             if self.collide_point(pos):
                 Model.Decal = "flower"
+
+
+class drawLightningDecal(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/Lightning.png")
+	    self.pos = ((150, HEIGHT - 375))
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        global LightningDecalUnlocked
+        if (LightningDecalUnlocked == False):
+            if self.collide_point(pos):
+                if (Player.tokens >= decalCost):
+                    Model.Decal = "lightning"
+                    Player.tokens = Player.tokens - decalCost
+                    print Player.tokens
+                    LightningDecalUnlocked = True
+        if (LightningDecalUnlocked == True):
+            if self.collide_point(pos):
+                Model.Decal = "lightning"
+
+class drawHeartDecal(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/Heart.png")
+	    self.pos = ((100, HEIGHT - 300))
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        global HeartDecalUnlocked
+        if (HeartDecalUnlocked == False):
+            if self.collide_point(pos):
+                if (Player.tokens >= decalCost):
+                    Model.Decal = "heart"
+                    Player.tokens = Player.tokens - decalCost
+                    print Player.tokens
+                    HeartDecalUnlocked = True
+        if (HeartDecalUnlocked == True):
+            if self.collide_point(pos):
+                Model.Decal = "heart"
 
 
 #Creates a FancyBob Sprite with its image 
@@ -508,11 +544,15 @@ class GarageScene(spyral.Scene):
         self.FireDecalImage.scale = .75     
         self.FlowerDecalImage = drawFlowerDecal(self.scene)
         self.FlowerDecalImage.scale = .75
-        
+        self.LightningDecalImage = drawLightningDecal(self.scene)
+        self.LightningDecalImage.scale = .75
+        self.HeartDecalImage = drawHeartDecal(self.scene)
+        self.HeartDecalImage.scale = .75        
+
         #Draws the Garage Owner Fancy Bob
         self.FBobImage = drawFBobImage(self.scene)
 
-	#Creates a back button to go back to the Main Menu
+        #Creates a back button to go back to the Main Menu
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")
 		

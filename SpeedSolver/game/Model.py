@@ -31,9 +31,9 @@ def loadResources():
     #Decals
     resources["blank"] = spyral.image.Image("images/Blank.png")
     resources["fire"] = spyral.image.Image("images/Fire.png")
-    resources["heart"] = spyral.image.Image("images/Heart.png")
-    resources["lightning"] = spyral.image.Image("images/Lightning.png")
     resources["flower"] = spyral.image.Image("images/Flower.png")
+    resources["lightning"] = spyral.image.Image("images/Lightning.png")
+    resources["heart"] = spyral.image.Image("images/Heart.png")
 
     #Race Backgrounds
     resources["Night"] = spyral.image.Image("images/NightBackground.png")
