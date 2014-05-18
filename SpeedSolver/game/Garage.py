@@ -19,6 +19,8 @@ WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 tempCount = 0
+
+#Boolean value for the Car Unlockables
 RedCarUnlocked = False
 GreenCarUnlocked = False
 BlackCarUnlocked = False
@@ -28,20 +30,22 @@ PinkCarUnlocked = False
 YellowCarUnlocked = False
 OrangeCarUnlocked = False
 
+#Boolean value for the FancyWheel Unlockables
 LeftFWUnlocked =  False
 RightFWUnlocked = False
 
+#Boolean value for the Decal Unlockables
 FireDecalUnlocked = False
 FlowerDecalUnlocked = False
 BobUnlocked = True
 
+#Cost of each Unlockable by tokens
 paintCost = 2
 wheelCost = 4
 decalCost = 6
 
 
-#Creates a Garage Sprite with its image
-
+#Creates a BluePaint Sprite with its image
 class drawBlueImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -49,21 +53,26 @@ class drawBlueImage(spyral.Sprite):
 	    self.image = spyral.image.Image("images/BluePaint.png")
 	    self.pos = ((WIDTH/2 + 150, 87))
 
-	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
-
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)
+	    
+#When the paint bucket is clicked it changes the Car Vtype to the particular color
     def handle_clicked(self, pos):
         if self.collide_point(pos):
             Model.Vtype = "blue"
             Player.WithWheels = True
 
-
+#Creates a RedPaint Sprite with its image
 class drawRedImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/RedPaint.png")
 	    self.pos = ((WIDTH/2 - 150, 87))
-	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)
+	    
+#When the paint bucket is clicked it changes the Car Vtype to the particular color
+#Checks to see if the car is unlocked, if it is not then checks how many tokens the player has.
+#If they have enough tokens the car is unlocked and the boolean value is set to true.
 
     def handle_clicked(self, pos):
         global RedCarUnlocked
@@ -79,7 +88,7 @@ class drawRedImage(spyral.Sprite):
                 Model.Vtype = "red"
         Player.WithWheels = True
         
-        
+ #Creates a BlackPaint Sprite with its image       
 class drawBlackImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -87,6 +96,10 @@ class drawBlackImage(spyral.Sprite):
 	    self.image = spyral.image.Image("images/BlackPaint.png")
 	    self.pos = ((WIDTH/2 + 150, HEIGHT/2 - 87))
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+#When the paint bucket is clicked it changes the Car Vtype to the particular color
+#Checks to see if the car is unlocked, if it is not then checks how many tokens the player has.
+#If they have enough tokens the car is unlocked and the boolean value is set to true.
 
     def handle_clicked(self, pos):
         global BlackCarUnlocked
@@ -102,7 +115,7 @@ class drawBlackImage(spyral.Sprite):
                 Model.Vtype = "black"
         Player.WithWheels = True
 
-
+#Creates a WhitePaint Sprite with its image
 class drawWhiteImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -110,6 +123,10 @@ class drawWhiteImage(spyral.Sprite):
 	    self.image = spyral.image.Image("images/WhitePaint.png")
 	    self.pos = ((WIDTH/2 - 150, HEIGHT/2 - 87))
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+#When the paint bucket is clicked it changes the Car Vtype to the particular color
+#Checks to see if the car is unlocked, if it is not then checks how many tokens the player has.
+#If they have enough tokens the car is unlocked and the boolean value is set to true.
 
     def handle_clicked(self, pos):
         global WhiteCarUnlocked
@@ -126,7 +143,7 @@ class drawWhiteImage(spyral.Sprite):
         Player.WithWheels = True
         
         
-        
+#Creates a GreenPaint Sprite with its image        
 class drawGreenImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -134,6 +151,10 @@ class drawGreenImage(spyral.Sprite):
 	    self.image = spyral.image.Image("images/GreenPaint.png")
 	    self.pos = ((WIDTH/2, HEIGHT/2 - 87))
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+	    
+#When the paint bucket is clicked it changes the Car Vtype to the particular color
+#Checks to see if the car is unlocked, if it is not then checks how many tokens the player has.
+#If they have enough tokens the car is unlocked and the boolean value is set to true.
 
     def handle_clicked(self, pos):
         global GreenCarUnlocked
@@ -149,7 +170,7 @@ class drawGreenImage(spyral.Sprite):
                 Model.Vtype = "green"
         Player.WithWheels = True
 
-
+#Creates a PurplePaint Sprite with its image
 class drawPurpleImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -157,6 +178,10 @@ class drawPurpleImage(spyral.Sprite):
 	    self.image = spyral.image.Image("images/PurplePaint.png")
 	    self.pos = ((WIDTH/2 + 150 , HEIGHT - 671))
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+#When the paint bucket is clicked it changes the Car Vtype to the particular color
+#Checks to see if the car is unlocked, if it is not then checks how many tokens the player has.
+#If they have enough tokens the car is unlocked and the boolean value is set to true.
 
     def handle_clicked(self, pos):
         global PurpleCarUnlocked
@@ -171,7 +196,8 @@ class drawPurpleImage(spyral.Sprite):
             if self.collide_point(pos):
                 Model.Vtype = "purple"
         Player.WithWheels = True       
-        
+ 
+ #Creates a PinkPaint Sprite with its image       
 class drawPinkImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -179,6 +205,10 @@ class drawPinkImage(spyral.Sprite):
 	    self.image = spyral.image.Image("images/PinkPaint.png")
 	    self.pos = ((WIDTH/2 - 150 , HEIGHT - 671))
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+	    
+#When the paint bucket is clicked it changes the Car Vtype to the particular color
+#Checks to see if the car is unlocked, if it is not then checks how many tokens the player has.
+#If they have enough tokens the car is unlocked and the boolean value is set to true.
 
     def handle_clicked(self, pos):
         global PinkCarUnlocked
@@ -195,7 +225,7 @@ class drawPinkImage(spyral.Sprite):
         Player.WithWheels = True
         
         
-        
+#Creates a YellowPaint Sprite with its image        
 class drawYellowImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -203,6 +233,10 @@ class drawYellowImage(spyral.Sprite):
 	    self.image = spyral.image.Image("images/YellowPaint.png")
 	    self.pos = ((WIDTH/2 , HEIGHT - 671))
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+#When the paint bucket is clicked it changes the Car Vtype to the particular color
+#Checks to see if the car is unlocked, if it is not then checks how many tokens the player has.
+#If they have enough tokens the car is unlocked and the boolean value is set to true.
 
     def handle_clicked(self, pos):
         global YellowCarUnlocked
@@ -218,7 +252,7 @@ class drawYellowImage(spyral.Sprite):
                 Model.Vtype = "yellow"
         Player.WithWheels = True
 
-
+#Creates a OrangePaint Sprite with its image
 class drawOrangeImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -226,6 +260,11 @@ class drawOrangeImage(spyral.Sprite):
 	    self.image = spyral.image.Image("images/OrangePaint.png")
 	    self.pos = ((WIDTH/2, HEIGHT - 811))
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+#When the paint bucket is clicked it changes the Car Vtype to the particular color
+#Checks to see if the car is unlocked, if it is not then checks how many tokens the player has.
+#If they have enough tokens the car is unlocked and the boolean value is set to true.
+
 
     def handle_clicked(self, pos):
         global OrangeCarUnlocked
@@ -241,31 +280,40 @@ class drawOrangeImage(spyral.Sprite):
                 Model.Vtype = "orange"
         Player.WithWheels = True        
         
-        
+#Creates a default LWheel Sprite with its image 
+
 class drawLeftWheelImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/Wheel.png")
 	    self.pos = (WIDTH - 1025, (HEIGHT/2)-330)
-	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)
+	    
+#When the LWheel is clicked it changes the Lwheel LWtype to the particular Wheel
+#Default LWheel
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
             Model.LWtype = "Lwheel"
-
+            
+#Creates a default RWheel Sprite with its image 
 class drawRightWheelImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
 	    self.anchor = 'center'
 	    self.image = spyral.image.Image("images/Wheel.png")
 	    self.pos = (WIDTH - 175, (HEIGHT/2)-315)
-	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)
+	    
+#When the RWheel is clicked it changes the Rwheel RWtype to the particular Wheel
+#Default RWheel
 
     def handle_clicked(self, pos):
         if self.collide_point(pos):
             Model.RWtype = "Rwheel"
 
+#Creates a default LFWheel Sprite with its image 
 
 class drawLeftFWheelImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -274,6 +322,11 @@ class drawLeftFWheelImage(spyral.Sprite):
 	    self.image = spyral.image.Image("images/FancyWheel.png")
 	    self.pos = (WIDTH - 1125 , (HEIGHT/2)-290)
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+#When the LFWheel is clicked it changes the Lwheel LWtype to the particular wheel
+#Checks to see if the wheel is unlocked, if it is not then checks how many tokens the player has.
+#If they have enough tokens the wheel is unlocked and the boolean value is set to true.
+
 
     def handle_clicked(self, pos):
         global LeftFWUnlocked
@@ -289,6 +342,8 @@ class drawLeftFWheelImage(spyral.Sprite):
         if (LeftFWUnlocked == True):
             if self.collide_point(pos):
                 Model.LWtype = "LFwheel"
+                
+#Creates a default RWheel Sprite with its image 
 
 class drawRightFWheelImage(spyral.Sprite):
     def __init__(self, Scene):
@@ -297,7 +352,11 @@ class drawRightFWheelImage(spyral.Sprite):
 	    self.image = spyral.image.Image("images/FancyWheel.png")
 	    self.pos = (WIDTH - 75, (HEIGHT/2)-270)
 
-	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)
+	    
+#When the RFWheel is clicked it changes the Rwheel RWtype to the particular wheel
+#Checks to see if the wheel is unlocked, if it is not then checks how many tokens the player has.
+#If they have enough tokens the wheel is unlocked and the boolean value is set to true.
 
     def handle_clicked(self, pos):
         global RightFWUnlocked
@@ -312,6 +371,7 @@ class drawRightFWheelImage(spyral.Sprite):
             if self.collide_point(pos):
                 Model.RWtype = "RFwheel"
                 
+#Creates a FireDecal Sprite with its image 
 
 class drawFireDecal(spyral.Sprite):
     def __init__(self, Scene):
@@ -320,6 +380,10 @@ class drawFireDecal(spyral.Sprite):
 	    self.image = spyral.image.Image("images/Fire.png")
 	    self.pos = ((WIDTH -120, HEIGHT - 300))
 	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+#When the Decal is clicked it changes the Decal type to the particular Decal
+#Checks to see if the Decal is unlocked, if it is not then checks how many tokens the player has.
+#If they have enough tokens the Decal is unlocked and the boolean value is set to true.
 
     def handle_clicked(self, pos):
         global FireDecalUnlocked
@@ -333,7 +397,6 @@ class drawFireDecal(spyral.Sprite):
         if (FireDecalUnlocked == True):
             if self.collide_point(pos):
                 Model.Decal = "fire"
-
 
 class drawFlowerDecal(spyral.Sprite):
     def __init__(self, Scene):
@@ -357,7 +420,7 @@ class drawFlowerDecal(spyral.Sprite):
                 Model.Decal = "flower"
 
 
-
+#Creates a FancyBob Sprite with its image 
 class drawFBobImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -401,7 +464,9 @@ class GarageScene(spyral.Scene):
         self.tokenText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), ((WIDTH - 200), (HEIGHT/2) + 400), "Number of Tokens: "+ str(Player.tokens))
         
         self.tokenText.anchor = 'center'
-
+        
+        #Creates the Default Player Vehicle, wheels and decal
+        
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = ((WIDTH/2), (HEIGHT/2) + 200)
         self.PlayerVehicle.layer = "bottom"
@@ -418,7 +483,10 @@ class GarageScene(spyral.Scene):
             self.PlayerRWheels.pos.y = self.PlayerVehicle.pos.y + 30
             self.PlayerLWheels.layer = "top"
             self.PlayerRWheels.layer = "top"
-
+        
+        
+        
+        #Draws the different paint bucket images
         self.BlueImage = drawBlueImage(self.scene)
         self.RedImage = drawRedImage(self.scene)
         self.BlackImage = drawBlackImage(self.scene)
@@ -429,17 +497,19 @@ class GarageScene(spyral.Scene):
         self.YellowImage = drawYellowImage(self.scene)
         self.OrangeImage = drawOrangeImage(self.scene)
         
-        
+        #Draws the different Wheel Images
         self.LeftWheelImage = drawLeftWheelImage(self.scene)
         self.RightWheelImage = drawRightWheelImage(self.scene)
         self.LeftFWheelImage = drawLeftFWheelImage(self.scene)
         self.RightFWheelImage = drawRightFWheelImage(self.scene)
 
+        #Draws the different Decal Images
         self.FireDecalImage = drawFireDecal(self.scene)
         self.FireDecalImage.scale = .75     
         self.FlowerDecalImage = drawFlowerDecal(self.scene)
         self.FlowerDecalImage.scale = .75
         
+        #Draws the Garage Owner Fancy Bob
         self.FBobImage = drawFBobImage(self.scene)
 
 	#Creates a back button to go back to the Main Menu
@@ -453,6 +523,7 @@ class GarageScene(spyral.Scene):
         spyral.event.register("form.RegisterForm.BackButton.clicked", self.goToMenu)
         spyral.event.register("input.mouse.down.left", self.update)	
 
+    #Update function that draws the current car, wheels, and decals
     def update(self):
         self.tokenText.update("Number of Tokens: " + str(Player.tokens))
         self.PlayerVehicle.kill()
