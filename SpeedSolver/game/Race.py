@@ -38,7 +38,6 @@ class RaceScene(spyral.Scene):
         Model.loadResources()
         
         global timeStart
-
         global manager
         global speedIncrease
         #1 is top lane, 2 is middle, 3 is bottom
@@ -48,10 +47,11 @@ class RaceScene(spyral.Scene):
         #Initializes Time to 0
         timeStart = time.time()
 
+        self.layers = ["bottom", "middle", "top"]
         #Draws Player Vehicle
         self.PlayerVehicle = PlayerVehicle(self.scene)
         self.PlayerVehicle.pos = (WIDTH/4, (HEIGHT/2)+200)
-        self.layers = ["bottom", "middle", "top"]
+        self.PlayerVehicle.layer = "bottom"
 
         #Draws Decal
         self.PlayerDecal = PlayerDecal(self.scene)
@@ -66,19 +66,17 @@ class RaceScene(spyral.Scene):
             self.PlayerRWheels.pos = (self.PlayerVehicle.pos.x + 120, self.PlayerVehicle.pos.y + 30)
             self.PlayerLWheels.layer = "top"
             self.PlayerRWheels.layer = "top"
-
             #Rotates wheels to simulate movement
             animation = Animation('angle', easing.Linear(0, -2.0*math.pi), duration = 3.0, loop = True)
             self.PlayerRWheels.animate(animation)
             self.PlayerLWheels.animate(animation)
-            
+
+        #Initialize race variables            
         self.isMoving = 0
         self.currentTurn = 0
         self.currentDistance = 0
         self.level = 0
-        self.PlayerVehicle.layer = "bottom"
         
-        #Initialize race variables
         #Start game with speed of 5
         self.speed = 5
         
@@ -93,8 +91,8 @@ class RaceScene(spyral.Scene):
             self.raceDistance = 1000            
             self.LrgCloud = Images.LargeCloud(self)
             self.Tree = Images.Tree(self)
-            self.runningDeltaTree = 0
-            self.runningDeltaLrgCloud = 0
+            self.runningDeltaTree = 5
+            self.runningDeltaLrgCloud = 6
             self.questionOne = Questions.Question(self, random.choice(operands), 'AS_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'AS_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'AS_Hard')
@@ -115,7 +113,7 @@ class RaceScene(spyral.Scene):
             self.raceDistance = 1500
             self.Snowman = Images.Snowman(self)
             self.Snowman.scale = .8
-            self.runningDeltaSnowman = 0
+            self.runningDeltaSnowman = 4
             self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
@@ -125,7 +123,7 @@ class RaceScene(spyral.Scene):
             self.background = spyral.Image("images/BeachBackground.png")
             self.raceDistance = 1500            
             self.Crab = Images.Crab(self)
-            self.runningDeltaCrab = 0
+            self.runningDeltaCrab = 2
             self.questionOne = Questions.Question(self, random.choice(operands), 'MD_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'MD_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'MD_Hard')
@@ -136,7 +134,7 @@ class RaceScene(spyral.Scene):
             self.raceDistance = 2000            
             self.Bob = Images.Bob(self)
             self.Bob.scale = .8
-            self.runningDeltaBob = 0
+            self.runningDeltaBob = 4
             self.questionOne = Questions.Question(self, random.choice(operands), 'NEG_Easy')
             self.questionTwo = Questions.Question(self, random.choice(operands), 'NEG_Med')
             self.questionThree = Questions.Question(self, random.choice(operands), 'NEG_Hard')
@@ -147,7 +145,7 @@ class RaceScene(spyral.Scene):
             self.RRFace = Images.RRFace(self)
             self.RRFace.scale = .6
             self.RRStar = Images.RRStar(self)
-            self.runningDeltaRRFace = 0
+            self.runningDeltaRRFace = 2
             self.runningDeltaRRStar = 0
             star = Animation('x', easing.Linear(0, -225), duration = 1, loop = True)
             self.RRStar.animate(star)
@@ -160,7 +158,6 @@ class RaceScene(spyral.Scene):
         self.BottomLine1 = Images.RoadLines(self)
         self.BottomLine2 = Images.RoadLines(self)
         self.BottomLine3 = Images.RoadLines(self)
-
         self.BottomLine1.pos.y = HEIGHT - 180 
         self.BottomLine2.pos.y = HEIGHT - 180
         self.BottomLine3.pos.y = HEIGHT - 180
@@ -168,10 +165,8 @@ class RaceScene(spyral.Scene):
         #Animates Bottom Road Lines
         BottomOne = Animation('x', easing.Linear(WIDTH + 100, -2700), duration = 3.0, loop = True)
         self.BottomLine1.animate(BottomOne)
-
         BottomTwo = Animation('x', easing.Linear(WIDTH + 1400, -1400), duration = 3.0, loop = True)
         self.BottomLine2.animate(BottomTwo)
-
         BottomThree = Animation('x', easing.Linear(WIDTH + 2700, -100), duration = 3.0, loop = True)
         self.BottomLine3.animate(BottomThree)
 
@@ -179,7 +174,6 @@ class RaceScene(spyral.Scene):
         self.TopLine1 = Images.RoadLines(self)
         self.TopLine2 = Images.RoadLines(self)
         self.TopLine3 = Images.RoadLines(self)
-
         self.TopLine1.pos.y = HEIGHT - 300 
         self.TopLine2.pos.y = HEIGHT - 300
         self.TopLine3.pos.y = HEIGHT - 300
@@ -187,31 +181,24 @@ class RaceScene(spyral.Scene):
         #Animates Top Road Lines
         TopOne = Animation('x', easing.Linear(WIDTH + 100, -2700), duration = 3.0, loop = True)
         self.TopLine1.animate(TopOne)
-
         TopTwo = Animation('x', easing.Linear(WIDTH + 1400, -1400), duration = 3.0, loop = True)
         self.TopLine2.animate(TopTwo)
-
         TopThree = Animation('x', easing.Linear(WIDTH + 2700, -100), duration = 3.0, loop = True)
         self.TopLine3.animate(TopThree)
 
         #Initialize Questions and Question   
         self.questionOne.anchor ='midleft'        
         self.questionOne.pos = (WIDTH + 200, 550)
-
         self.questionTwo.anchor ='midleft'                
         self.questionTwo.pos = (WIDTH + 200, 650)
-        
         self.questionThree.anchor ='midleft'
         self.questionThree.pos = (WIDTH + 200, 750)
         
-
         #Animates questions across screen towards car
         self.questionOneAnimation = Animation('x', easing.Linear(self.questionOne.x, self.questionOne.x - (WIDTH + 300)), 8)
         self.questionOne.animate(self.questionOneAnimation)
-
         self.questionTwoAnimation = Animation('x', easing.Linear(self.questionTwo.x, self.questionThree.x - (WIDTH + 300)), 8)
         self.questionTwo.animate(self.questionTwoAnimation)
-
         self.questionThreeAnimation = Animation('x', easing.Linear(self.questionThree.x, self.questionThree.x - (WIDTH + 300)), 8)
         self.questionThree.animate(self.questionThreeAnimation)
 
@@ -223,7 +210,6 @@ class RaceScene(spyral.Scene):
             QuitButton = spyral.widgets.Button("Quit")
             AnswerInput = spyral.widgets.TextInput(100, '', validator = inputValues, text_length = 4)
             Sound = spyral.widgets.Button("Sound")
-
         
         self.my_form = RegisterForm(self)
         self.my_form.focus()
@@ -440,13 +426,6 @@ class RaceScene(spyral.Scene):
                 self.questionThree.stop_all_animations()
                 self.currentQuestion = self.questionThree
                 self.currentQuestion.pos = ((WIDTH/2 - 75), (HEIGHT - 30))
-
-
-#Leave this here if need to change collision detection
-#        if(self.PlayerVehicle.collide_sprite(self.questionOne) or self.PlayerVehicle.collide_sprite(self.questionTwo) or self.PlayerVehicle.collide_sprite(self.questionThree)):
-#            if(self.PlayerVehicle.y <= (HEIGHT/2)+150):
-#            if(self.PlayerVehicle.y > (HEIGHT/2)+150 and self.PlayerVehicle.y < (HEIGHT/2)+250):
-#            if(self.PlayerVehicle.y >= (HEIGHT/2)+250):
 
     #Quit button method that stops the music and goes back to Main Menu
     def goToMenu(self):

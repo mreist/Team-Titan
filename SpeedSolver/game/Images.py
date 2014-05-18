@@ -9,7 +9,7 @@ class Tree(spyral.Sprite):
 
         self.image = spyral.Image("images/Pine-Tree.png")
         self.anchor = 'center'
-        self.pos = (WIDTH + 100, HEIGHT/4)
+        self.pos = (WIDTH + 100, HEIGHT/4+10)
 
 #Creates Large Cloud Image
 class LargeCloud(spyral.Sprite):
@@ -18,7 +18,7 @@ class LargeCloud(spyral.Sprite):
 
         self.image = spyral.Image("images/Large-Cloud.png")
         self.anchor = 'center'
-        self.pos = (WIDTH + 100, HEIGHT/13)
+        self.pos = (WIDTH + 100, HEIGHT/8)
 
 #Creates Small Cloud Image
 class SmallCloud(spyral.Sprite):
