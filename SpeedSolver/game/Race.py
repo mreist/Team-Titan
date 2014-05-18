@@ -279,7 +279,6 @@ class RaceScene(spyral.Scene):
 
                 
                 self.currentTurn += 1
-                print ("previous answer: " + str(self.currentQuestion.answer))
                 self.currentQuestion.kill()
                 
                 #Determines questions to be used based on which race is selected
@@ -326,9 +325,7 @@ class RaceScene(spyral.Scene):
                 self.questionTwo.animate(self.questionTwoAnimation)
                 self.questionThree.animate(self.questionThreeAnimation)
 
-                print ("new answer: " + str(self.currentQuestion.answer))
                 self.my_form.focus()
-                print str(self.level)
                 self.isMoving = 0
                 self.my_form.AnswerInput.visible = False
 
@@ -409,7 +406,6 @@ class RaceScene(spyral.Scene):
 
             #Calculates finish time and goes to results screen
             finishTime = time.time() - timeStart                      
-            print "Finish Time = %.2f" % finishTime 
             Player.currentTime = finishTime                                            
             self.goToResults()
 
