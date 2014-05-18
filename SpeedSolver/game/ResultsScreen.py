@@ -23,7 +23,7 @@ class ResultsScreen(spyral.Scene):
         super(ResultsScreen, self).__init__(SIZE)
         global reawrd
         
-<<<<<<< HEAD
+
         if Model.RaceSelect == "Day":
             top10 = Player.DayTop10
         elif Model.RaceSelect == "Night":
