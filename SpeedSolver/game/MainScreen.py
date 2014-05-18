@@ -1,6 +1,7 @@
 import spyral 
 import random
 import math
+import Instructions
 import Vehicle
 import Options
 import Race
@@ -50,6 +51,7 @@ class MainMenu(spyral.Scene):
 #Creates the Start and Option button
         class RegisterForm(spyral.Form):
             StartGame = spyral.widgets.Button("Start Game")
+            InstructionsButton = spyral.widgets.Button("Instructions")
 #            OptionButton = spyral.widgets.Button("Options")
             LeaderboardButton = spyral.widgets.Button("Leaderboard")
             SoundButton = spyral.widgets.Button("Sound")
@@ -59,6 +61,7 @@ class MainMenu(spyral.Scene):
         my_form = RegisterForm(self)
         my_form.focus()
         my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
+        my_form.InstructionsButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 350)
 #        my_form.OptionButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 300)
         my_form.LeaderboardButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 400)
         my_form.SoundButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 250)
@@ -68,6 +71,7 @@ class MainMenu(spyral.Scene):
 #Functions that will take you to garage/game/options depending on which button is clicked
 #        spyral.event.register("form.RegisterForm.OptionButton.clicked", self.goToOptions)
         spyral.event.register("form.RegisterForm.StartGame.clicked", self.goToRace)
+        spyral.event.register("form.RegisterForm.InstructionsButton.clicked", self.goToInstructions)
         spyral.event.register("form.RegisterForm.LeaderboardButton.clicked", self.goToLeaderboard)
         spyral.event.register("form.RegisterForm.SoundButton.clicked", self.SwitchSound)
         #spyral.event.register("input.mouse.down", self.goToGarage)
@@ -80,6 +84,10 @@ class MainMenu(spyral.Scene):
     def goToRace(self):
         spyral.director.pop
         spyral.director.push(RaceSelection.RaceSelection())
+
+    def goToInstructions(self):
+        spyral.director.pop
+        spyral.director.push(Instructions.InstructionScene())
         
     def goToLeaderboard(self):
         spyral.director.pop
