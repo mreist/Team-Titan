@@ -8,6 +8,9 @@ class Model:
     RWtype = ""
     Decal = ""
     RaceSelect = ""
+    
+    #Either Race or LeaderBoard
+    SelectMode = ""
 
 
 def loadResources():

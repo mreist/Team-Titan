@@ -53,21 +53,22 @@ class Title(spyral.Scene):
  
     #Loads in leaderboard from text file   
     def loadLeaderBoard(self):
-        f = open('LeaderBoard.txt', 'r')
-        i = 0
-        initials = True
-        for line in f:
-            line = line.rstrip('\n')         
-            if initials:
-                Player.top10[i][0] = line
-                print('read initials: ' + line)
-            else:
-                Player.top10[i][1] = float(line)
-                print('read score: ' + line)
-                i += 1
-            initials = not initials
-        print('read!')
-        f.close()
+        for board in Player.LeaderBoards:
+            f = open(board[1] + 'LeaderBoard.txt', 'r')
+            i = 0
+            initials = True
+            for line in f:
+                line = line.rstrip('\n')         
+                if initials:
+                    board[0][i][0] = line
+                    print('read initials: ' + line)
+                else:
+                    board[0][i][1] = float(line)
+                    print('read score: ' + line)
+                    i += 1
+                initials = not initials
+            print('read!')
+            f.close()
 
         #Clicking anywhere will pop the title sceen and push to the Main Menu
         spyral.event.register("input.mouse.down", self.GoToMainMenu)

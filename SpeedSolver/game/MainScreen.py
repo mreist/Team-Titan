@@ -4,6 +4,7 @@ import Race
 import Garage
 import LeaderBoard
 import RaceSelection
+import Model
 
 from spyral import Animation, easing
 
@@ -68,6 +69,7 @@ class MainMenu(spyral.Scene):
         spyral.event.register("form.RegisterForm.SoundButton.clicked", self.SwitchSound)
 		
     def goToRace(self):
+        Model.SelectMode = "Race"
         spyral.director.pop
         spyral.director.push(RaceSelection.RaceSelection())
 
@@ -76,8 +78,9 @@ class MainMenu(spyral.Scene):
         spyral.director.push(Instructions.InstructionScene())
         
     def goToLeaderboard(self):
+        Model.SelectMode = "LeaderBoard"
         spyral.director.pop
-        spyral.director.push(LeaderBoard.LeaderboardScene())
+        spyral.director.push(RaceSelection.RaceSelection())
         
     def SwitchSound(self):
         Race.Background_Music

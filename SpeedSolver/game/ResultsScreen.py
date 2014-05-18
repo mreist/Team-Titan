@@ -7,7 +7,6 @@ import pygame
 import LeaderBoard
 import Model
 
-
 WIDTH = 1200
 HEIGHT = 900
 WHITE = (255, 255, 255)
@@ -24,6 +23,20 @@ class ResultsScreen(spyral.Scene):
         super(ResultsScreen, self).__init__(SIZE)
         global reawrd
         
+
+        if Model.RaceSelect == "Day":
+            top10 = Player.DayTop10
+        elif Model.RaceSelect == "Night":
+            top10 = Player.NightTop10
+        elif Model.RaceSelect == "Snow":
+            top10 = Player.SnowTop10
+        elif Model.RaceSelect == "Beach":
+            top10 = Player.BeachTop10
+        elif Model.RaceSelect == "PreHist":
+            top10 = Player.PreHistTop10
+        else:
+            top10 = Player.RRTop10
+         
         if(Model.RaceSelect == "Day" or Model.RaceSelect == "Night"):
             reward = 1
         elif(Model.RaceSelect == "Snow" or Model.RaceSelect == "Beach"):
@@ -45,8 +58,9 @@ class ResultsScreen(spyral.Scene):
         self.my_form.focus()
         self.my_form.QuitButton.pos = ((WIDTH/2), (HEIGHT-50))
         self.my_form.RetryButton.pos = ((WIDTH/2 - 200), (HEIGHT-50))
-
+        fontsize = 30
         self.my_form.InitialsInput.pos = ((WIDTH/2 - 200), (HEIGHT-100))
+        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)),((WIDTH/2 - 200), (HEIGHT-200)), 'Enter your initials and press Enter!.')
 
 
 
@@ -57,32 +71,31 @@ class ResultsScreen(spyral.Scene):
         self.background = spyral.Image("images/Background.png")
         time = Player.currentTime
         locx = WIDTH/2 - 250
-        fontsize = 30
+        
         self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 100), 'You did it!! Your time was %.2f.' %time)
-        if Player.firstPlay == True:
-            Player.bestTime = Player.currentTime
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Try to beat it next time!')
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You received a token for your speedy racing.')
-            Player.tokens += reward
-            Player.firstPlay = False
-        elif (time < Player.bestTime):
+    #     if Player.firstPlay == True:
+#             Player.bestTime = Player.currentTime
+#             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Try to beat it next time!')
+#             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You received a token for your speedy racing.')
+#             Player.tokens += 1
+#             Player.firstPlay = False
+        if time < top10[0][1]:
             lasttime = Player.bestTime
             yay.play(0)
             Player.bestTime = time
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Wow! You beat your previous best time of ' + str(lasttime) + '.')
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You get your reward plus another token. Nice!')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Wow! You beat the fastest time is score of ' + str(lasttime) + '.')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You got your reward plus an extra token. Nice!')
             Player.tokens += (reward + 1)
         else:
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Your best time is ' + str(Player.bestTime) + '.')
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You received a token for your speedy racing.')
-            Player.tokens += reward
-        
-        if time < Player.top10[0][1]:
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'The fastest time is is ' + str(Player.bestTime) + '.')
             
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), ((WIDTH/2 - 400), (HEIGHT-200)), 'Wow! You got a high score! An extra tokens for you! Enter your initials.')
-            Player.tokens += (reward + 1)
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'Try to beat it next time!')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 400), 'You received a reward for your speedy racing.')
+
+            Player.tokens += reward
+
         
-        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 400), 'Total tokens: ' + str(Player.tokens))
+        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 500), 'Total tokens: ' + str(Player.tokens))
 
 
     def goToMenu(self):
@@ -94,24 +107,49 @@ class ResultsScreen(spyral.Scene):
         spyral.director.push(Race.RaceScene())
 
     def enterInitials(self):
+        if Model.RaceSelect == "Day":
+            top10 = Player.DayTop10
+        elif Model.RaceSelect == "Night":
+            top10 = Player.NightTop10
+        elif Model.RaceSelect == "Snow":
+            top10 = Player.SnowTop10
+        elif Model.RaceSelect == "Beach":
+            top10 = Player.BeachTop10
+        elif Model.RaceSelect == "PreHist":
+            top10 = Player.PreHistTop10
+        else:
+            top10 = Player.RRTop10
         i = 0
         playerAdded = False
         newplayer = [(self.my_form.InitialsInput.value).upper(), Player.currentTime]
-        for player in Player.top10:
+        for player in top10:
             if (player[1] == 1000000) and not playerAdded:
-                Player.top10[i] = newplayer
+                top10[i] = newplayer
                 playerAdded = True
             i += 1 
         if not playerAdded:
-            Player.top10[len(Player.top10)-1] = newplayer
-        Player.top10.sort(key=lambda player: player[1])
+            top10[len(top10)-1] = newplayer
+        top10.sort(key=lambda player: player[1])
         self.writeLeaderboardToFile()
         spyral.director.pop
         spyral.director.push(LeaderBoard.LeaderboardScene())
         
     def writeLeaderboardToFile(self):
-        f = open('LeaderBoard.txt', 'w')
-        for player in Player.top10:
+        if Model.RaceSelect == "Day":
+            top10 = Player.DayTop10
+        elif Model.RaceSelect == "Night":
+            top10 = Player.NightTop10
+        elif Model.RaceSelect == "Snow":
+            top10 = Player.SnowTop10
+        elif Model.RaceSelect == "Beach":
+            top10 = Player.BeachTop10
+        elif Model.RaceSelect == "PreHist":
+            top10 = Player.PreHistTop10
+        else:
+            top10 = Player.RRTop10
+        f = open(Model.RaceSelect + 'LeaderBoard.txt', 'w')
+        for player in top10:
             f.write(player[0] + '\n' + str(player[1]) + '\n')
         print('wrote!')
         f.close()
+
