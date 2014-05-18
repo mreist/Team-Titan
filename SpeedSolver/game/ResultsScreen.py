@@ -9,7 +9,6 @@ import Model
 
 WIDTH = 1200
 HEIGHT = 900
-BG_COLOR = (0,0,0)
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
@@ -17,11 +16,14 @@ pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.mixer.init()
 yay = pygame.mixer.Sound("yay.wav")
 fanfare = pygame.mixer.Sound("fanfare.wav")
+reward = None
 
 class ResultsScreen(spyral.Scene):
     def __init__(self):
         super(ResultsScreen, self).__init__(SIZE)
+        global reawrd
         
+<<<<<<< HEAD
         if Model.RaceSelect == "Day":
             top10 = Player.DayTop10
         elif Model.RaceSelect == "Night":
@@ -34,7 +36,14 @@ class ResultsScreen(spyral.Scene):
             top10 = Player.PreHistTop10
         else:
             top10 = Player.RRTop10
-            
+         
+        if(Model.RaceSelect == "Day" or Model.RaceSelect == "Night"):
+            reward = 1
+        elif(Model.RaceSelect == "Snow" or Model.RaceSelect == "Beach"):
+            reward = 2
+        elif(Model.RaceSelect == "PreHist" or Model.RaceSelect == "RR"):
+            reward = 3
+
         fanfare.play(0)
         
         intials = ''
@@ -51,7 +60,7 @@ class ResultsScreen(spyral.Scene):
         self.my_form.RetryButton.pos = ((WIDTH/2 - 200), (HEIGHT-50))
         fontsize = 30
         self.my_form.InitialsInput.pos = ((WIDTH/2 - 200), (HEIGHT-100))
-        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)),((WIDTH/2 - 200), (HEIGHT-200)), 'The fastest time is is ' + str(Player.bestTime) + '.')
+        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)),((WIDTH/2 - 200), (HEIGHT-200)), 'Enter your initials and press Enter!.')
 
 
 
@@ -75,15 +84,16 @@ class ResultsScreen(spyral.Scene):
             yay.play(0)
             Player.bestTime = time
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Wow! You beat the fastest time is score of ' + str(lasttime) + '.')
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You got 2 tokens. Nice!')
-            Player.tokens += 2
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You got your reward plus an extra token. Nice!')
+            Player.tokens += (reward + 1)
         else:
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'The fastest time is is ' + str(Player.bestTime) + '.')
             
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'Try to beat it next time!')
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 400), 'You received a token for your speedy racing.')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 400), 'You received a reward for your speedy racing.')
 
-            Player.tokens += 1
+            Player.tokens += reward
+
         
         TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 500), 'Total tokens: ' + str(Player.tokens))
 
@@ -142,17 +152,4 @@ class ResultsScreen(spyral.Scene):
             f.write(player[0] + '\n' + str(player[1]) + '\n')
         print('wrote!')
         f.close()
-        
-    # def chooseTop10(self):
-#         if Model.RaceSelect == "Day":
-#             top10 = Player.DayTop10
-#         elif Model.RaceSelect == "Night":
-#             top10 = Player.NightTop10
-#         elif Model.RaceSelect == "Snow":
-#             top10 = Player.SnowTop10
-#         elif Model.RaceSelect == "Beach":
-#             top10 = Player.BeachTop10
-#         elif Model.RaceSelect == "PreHist":
-#             top10 = Player.PreHistTop10
-#         else:
-#             top10 = Player.RRTop10
+
