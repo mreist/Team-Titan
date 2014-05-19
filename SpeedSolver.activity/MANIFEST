@@ -12,7 +12,7 @@ setup.py
 SnowLeaderBoard.txt
 yay.wav
 activity/activity.info
-activity/Icon.svg
+activity/activity.svg
 game/Garage.py
 game/Images.py
 game/Instructions.py
