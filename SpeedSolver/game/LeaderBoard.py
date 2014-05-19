@@ -3,6 +3,7 @@ import random
 import math
 import MainScreen
 import Player
+import Model
 import TextInterface
 
 WIDTH = 1200
@@ -21,10 +22,37 @@ class LeaderboardScene(spyral.Scene):
         spyral.event.register("system.quit", spyral.director.quit)
         i = 0
         n = 1
+        title = Model.RaceSelect
+        if title == "RR":
+            title = "Rainbow Raceway"
+        elif title == "PreHist":
+            title = "Prehistoric Parkway"
+        elif title == "Day":
+            title = "Meadow Lane"
+        elif title == "Night":
+            title = "Midnight Drive" 
+        elif title == "Beach":
+            title = "Sunset Boulevard"
+        elif title == "Snow":
+            title = "Tundra Express"
+        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 28, (255, 255, 0)), (WIDTH/2 - 100, 20), title)
         TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (0, 0, 0)), (WIDTH/2 - 225, 40), "Initials")
         TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (0, 0, 0)), (WIDTH/2 + 100, 40), "Time (seconds)")
         
-        for player in Player.top10:
+        if Model.RaceSelect == "Day":
+            top10 = Player.DayTop10
+        elif Model.RaceSelect == "Night":
+            top10 = Player.NightTop10
+        elif Model.RaceSelect == "Snow":
+            top10 = Player.SnowTop10
+        elif Model.RaceSelect == "Beach":
+            top10 = Player.BeachTop10
+        elif Model.RaceSelect == "PreHist":
+            top10 = Player.PreHistTop10
+        else:
+            top10 = Player.RRTop10
+            
+        for player in top10:
             name = player[0]
             time = str(player[1])
             if time == '1000000':

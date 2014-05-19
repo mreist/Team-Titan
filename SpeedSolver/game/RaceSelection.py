@@ -35,7 +35,10 @@ class drawNightImage(spyral.Sprite):
         if self.collide_point(pos):
             Model.RaceSelect = "Night"
             spyral.director.pop
-            spyral.director.push(Race.RaceScene())
+            if Model.SelectMode == "Race":
+                spyral.director.push(Race.RaceScene())
+            else:
+                spyral.director.push(LeaderBoard.LeaderboardScene())
 
 #Draws Day Icon
 class drawDayImage(spyral.Sprite):
@@ -50,9 +53,12 @@ class drawDayImage(spyral.Sprite):
         if self.collide_point(pos):
             Model.RaceSelect = "Day"
             spyral.director.pop
-            spyral.director.push(Race.RaceScene())
+            if Model.SelectMode == "Race":
+                spyral.director.push(Race.RaceScene())
+            else:
+                spyral.director.push(LeaderBoard.LeaderboardScene())
             
-#Draws Snow Icon            
+#Draws Snow Icon        
 class drawSnowImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -65,7 +71,11 @@ class drawSnowImage(spyral.Sprite):
         if self.collide_point(pos):
             Model.RaceSelect = "Snow"
             spyral.director.pop
-            spyral.director.push(Race.RaceScene())
+            if Model.SelectMode == "Race":
+                spyral.director.push(Race.RaceScene())
+            else:
+                spyral.director.push(LeaderBoard.LeaderboardScene())
+                
 
 #Draws Beach Icon
 class drawBeachImage(spyral.Sprite):
@@ -80,7 +90,10 @@ class drawBeachImage(spyral.Sprite):
         if self.collide_point(pos):
             Model.RaceSelect = "Beach"
             spyral.director.pop
-            spyral.director.push(Race.RaceScene())         
+            if Model.SelectMode == "Race":
+                spyral.director.push(Race.RaceScene())         
+            else:
+                spyral.director.push(LeaderBoard.LeaderboardScene())
             
             
 #Draws Prehistoric Icon            
@@ -96,9 +109,13 @@ class drawPrehistImage(spyral.Sprite):
         if self.collide_point(pos):
             Model.RaceSelect = "PreHist"
             spyral.director.pop
-            spyral.director.push(Race.RaceScene())
+            if Model.SelectMode == "Race":
+                spyral.director.push(Race.RaceScene())
+            else:
+                spyral.director.push(LeaderBoard.LeaderboardScene())
 
-#Draws Rainbow Road Icon       
+
+#Draws Rainbow Road Icon  
 class drawRRImage(spyral.Sprite):
     def __init__(self, Scene):
 	    spyral.Sprite.__init__(self, Scene)
@@ -112,8 +129,10 @@ class drawRRImage(spyral.Sprite):
         if self.collide_point(pos):
             Model.RaceSelect = "RR"
             spyral.director.pop
-            spyral.director.push(Race.RaceScene())            
-                     
+            if Model.SelectMode == "Race":
+                spyral.director.push(Race.RaceScene())            
+            else:
+                spyral.director.push(LeaderBoard.LeaderboardScene())      
 
 class RaceSelection(spyral.Scene):
     def __init__(self):

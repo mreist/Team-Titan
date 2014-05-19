@@ -4,6 +4,7 @@ import Race
 import Garage
 import LeaderBoard
 import RaceSelection
+import Model
 
 from spyral import Animation, easing
 
@@ -33,7 +34,7 @@ class MainMenu(spyral.Scene):
     def __init__(self):
         super(MainMenu, self).__init__(SIZE)
         
-#Loads custom start/option buttons
+        #Loads custom start/option buttons
         #self.load_style("game/style.spys")
 
         #Allows users to quit game via quit button or esc key
@@ -49,7 +50,7 @@ class MainMenu(spyral.Scene):
             StartGame = spyral.widgets.Button("Start Game")
             InstructionsButton = spyral.widgets.Button("Instructions")
             LeaderboardButton = spyral.widgets.Button("Leaderboard")
-            SoundButton = spyral.widgets.Button("Sound")
+            #SoundButton = spyral.widgets.Button("Sound")
 
         #Sets button positions
         my_form = RegisterForm(self)
@@ -57,7 +58,7 @@ class MainMenu(spyral.Scene):
         my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
         my_form.InstructionsButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 350)
         my_form.LeaderboardButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 400)
-        my_form.SoundButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 250)
+        #my_form.SoundButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 250)
 
 
 
@@ -65,9 +66,10 @@ class MainMenu(spyral.Scene):
         spyral.event.register("form.RegisterForm.StartGame.clicked", self.goToRace)
         spyral.event.register("form.RegisterForm.InstructionsButton.clicked", self.goToInstructions)
         spyral.event.register("form.RegisterForm.LeaderboardButton.clicked", self.goToLeaderboard)
-        spyral.event.register("form.RegisterForm.SoundButton.clicked", self.SwitchSound)
+        #spyral.event.register("form.RegisterForm.SoundButton.clicked", self.SwitchSound)
 		
     def goToRace(self):
+        Model.SelectMode = "Race"
         spyral.director.pop
         spyral.director.push(RaceSelection.RaceSelection())
 
@@ -76,13 +78,14 @@ class MainMenu(spyral.Scene):
         spyral.director.push(Instructions.InstructionScene())
         
     def goToLeaderboard(self):
+        Model.SelectMode = "LeaderBoard"
         spyral.director.pop
-        spyral.director.push(LeaderBoard.LeaderboardScene())
+        spyral.director.push(RaceSelection.RaceSelection())
         
-    def SwitchSound(self):
-        Race.Background_Music
+    #def SwitchSound(self):
+        #Race.Background_Music
         
-        if(Race.Background_Music == True):
-            Race.Background_Music = False
-        elif(Race.Background_Music == False):
-            Race.Background_Music = True
+        #if(Race.Background_Music == True):
+            #Race.Background_Music = False
+        #elif(Race.Background_Music == False):
+            #Race.Background_Music = True
