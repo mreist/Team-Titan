@@ -119,8 +119,8 @@ class Question(spyral.Sprite):
                 self.op1 = random.choice(['+', '-', '*'])
                 
         elif digits == 'WordProb':
-            self.num1 = random.randint(6, 20)
-            self.num2 = random.randint(2, self.num1)            
+            self.num1 = random.randint(6, 25)
+            self.num2 = random.randint(6, self.num1)            
             self.num3 = random.randint(0, 2)
             self.font = spyral.Font(DEF_FONT, 12, WHITE)
 
