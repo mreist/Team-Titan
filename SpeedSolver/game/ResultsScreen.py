@@ -78,11 +78,11 @@ class ResultsScreen(spyral.Scene):
             lasttime = Player.bestTime
             yay.play(0)
             Player.bestTime = time
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Wow! You beat the fastest time is score of ' + str(lasttime) + '.')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Wow! You beat the fastest time is ' + str(lasttime) + '.')
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You got your prize plus an extra token. Nice!')
             Player.tokens += (reward + 1)
         else:
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'The fastest time is is ' + str(Player.bestTime) + '.')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'The fastest time is ' + str(Player.bestTime) + '.')
             
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'Try to beat it next time!')
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 400), 'You received a prize for your speedy racing.')

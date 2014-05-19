@@ -30,6 +30,10 @@ def loadResources():
     resources["Rwheel"] = spyral.image.Image("images/Wheel.png")
     resources["LFwheel"] = spyral.image.Image("images/FancyWheel.png")
     resources["RFwheel"] = spyral.image.Image("images/FancyWheel.png")
+    resources["LEwheel"] = spyral.image.Image("images/EdgeyWheel.png")
+    resources["REwheel"] = spyral.image.Image("images/EdgeyWheel.png")
+    resources["LCwheel"] = spyral.image.Image("images/CrazyWheel.png")
+    resources["RCwheel"] = spyral.image.Image("images/CrazyWheel.png")
 
     #Decals
     resources["blank"] = spyral.image.Image("images/Blank.png")
@@ -49,6 +53,3 @@ def loadResources():
     
     #Main Character Bob
     resources["Bob"] = spyral.image.Image("images/Bob.png")
-	    
-	    
-	    

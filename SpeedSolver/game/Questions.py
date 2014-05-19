@@ -13,7 +13,7 @@ DEF_FONT = "libraries/spyral/resources/fonts/DejaVuSans.ttf"
 Operands = ["+", "-", "*", "/"]
 
 FirstString = ["costs $ ","Bob has ","Bob sells "]
-SecondString = [", he has $ ", " , If he used ", (", if he charges $ ")]
+SecondString = [", he has $ ", ", If he used ", (", if he charges $ ")]
 ThirdString = [".how many can he buy?", " in his shop, How many will he have left?", ", What is his profit?"]  
 WordOperands = ["/", "-", "*"]
 Nouns = ["paint buckets", "wheels", "cars", "decals", "rims"]
@@ -170,7 +170,7 @@ class Question(spyral.Sprite):
             if(constant == 0):
                 self.noun1 = random.choice(Nouns)
                 self.answer = eval(str(self.num4) + WordOperands[constant] + str(self.num2))
-                self.image = self.font.render(self.noun1 + " "+ FirstString[constant] + str(self.num2) + SecondString[constant] + str(self.num4) + ThirdString[constant])
+                self.image = self.font.render(self.noun1.title() + " "+ FirstString[constant] + str(self.num2) + SecondString[constant] + str(self.num4) + ThirdString[constant])
                 self.output = (str(self.num4) + WordOperands[constant] + str(self.num2) + "=" + str(self.answer))
             
             elif(constant == 1):
