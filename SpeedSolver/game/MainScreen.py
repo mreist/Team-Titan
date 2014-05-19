@@ -35,11 +35,6 @@ class MainMenu(spyral.Scene):
     def __init__(self):
         super(MainMenu, self).__init__(SIZE)
         
-<<<<<<< HEAD
-=======
-        #Loads custom start/option buttons
-        #self.load_style("game/style.spys")
->>>>>>> origin/master
 
         #Allows users to quit game via quit button or esc key
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
@@ -49,51 +44,14 @@ class MainMenu(spyral.Scene):
         self.background = spyral.Image("images/Background.png")
         self.GarageImage = drawGarageImage(self.scene)
 
-<<<<<<< HEAD
+
         #Sets main menu buttons
         self.leftButton = Images.Instructions_But(self.scene)
         self.midButton = Images.SelectRace_But(self.scene)
         self.rightButton = Images.Leaderboards_But(self.scene)
 
         spyral.event.register("form.RegisterForm.SoundButton.clicked", self.SwitchSound)
-=======
-        #Creates the Start, Instruction, Leaderboard, and Sound Button
-        class RegisterForm(spyral.Form):
-            StartGame = spyral.widgets.Button("Start Game")
-            InstructionsButton = spyral.widgets.Button("Instructions")
-            LeaderboardButton = spyral.widgets.Button("Leaderboard")
-            #SoundButton = spyral.widgets.Button("Sound")
 
-        #Sets button positions
-        my_form = RegisterForm(self)
-        my_form.focus()
-        my_form.StartGame.pos = ((WIDTH/2)-50, (HEIGHT/2) + 200)
-        my_form.InstructionsButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 350)
-        my_form.LeaderboardButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 400)
-        #my_form.SoundButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 250)
-
-
-
-        #Functions that will take you to garage/game/options depending on which button is clicked
-        spyral.event.register("form.RegisterForm.StartGame.clicked", self.goToRace)
-        spyral.event.register("form.RegisterForm.InstructionsButton.clicked", self.goToInstructions)
-        spyral.event.register("form.RegisterForm.LeaderboardButton.clicked", self.goToLeaderboard)
-        #spyral.event.register("form.RegisterForm.SoundButton.clicked", self.SwitchSound)
-		
-    def goToRace(self):
-        Model.SelectMode = "Race"
-        spyral.director.pop
-        spyral.director.push(RaceSelection.RaceSelection())
-
-    def goToInstructions(self):
-        spyral.director.pop
-        spyral.director.push(Instructions.InstructionScene())
-        
-    def goToLeaderboard(self):
-        Model.SelectMode = "LeaderBoard"
-        spyral.director.pop
-        spyral.director.push(RaceSelection.RaceSelection())
->>>>>>> origin/master
         
     #def SwitchSound(self):
         #Race.Background_Music
