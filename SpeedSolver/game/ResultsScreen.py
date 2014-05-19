@@ -75,9 +75,9 @@ class ResultsScreen(spyral.Scene):
         self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 100), 'You did it!! Your time was %.2f.' %time)
         
         if time < top10[0][1]:
-            lasttime = Player.currentTime
+            lasttime = Player.bestTime
             yay.play(0)
-            Player.currentTime = time
+            Player.bestTime = time
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Wow! You beat the fastest time is ' + str(lasttime) + '.')
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You got your prize plus an extra token. Nice!')
             Player.tokens += (reward + 1)
