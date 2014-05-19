@@ -10,9 +10,9 @@ from spyral import Animation, easing
 WIDTH = 1200
 HEIGHT = 900
 SIZE = (WIDTH, HEIGHT)
-pygame.mixer.pre_init(44100, -16, 2, 2048)
-pygame.mixer.init()
-seinfeld = pygame.mixer.Sound("seinfeld.wav")
+#pygame.mixer.pre_init(44100, -16, 2, 2048)
+#pygame.mixer.init()
+#seinfeld = pygame.mixer.Sound("seinfeld.wav")
 
 #Creates Game Title image
 class GameName(spyral.Sprite):
@@ -36,8 +36,9 @@ class Title(spyral.Scene):
         Model.RWtype = "Rwheel"
         Model.Vtype = "blue"
         Model.Decal = "blank"
+        Model.RaceSelect = "Day"
 
-        self.slapbass()
+        #self.slapbass()
         self.loadLeaderBoard()
         
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
@@ -48,26 +49,27 @@ class Title(spyral.Scene):
         Name = GameName(self)
 
 
-    def slapbass(self):
-        seinfeld.play(0)
+    #def slapbass(self):
+        #seinfeld.play(0)
  
     #Loads in leaderboard from text file   
     def loadLeaderBoard(self):
-        f = open('LeaderBoard.txt', 'r')
-        i = 0
-        initials = True
-        for line in f:
-            line = line.rstrip('\n')         
-            if initials:
-                Player.top10[i][0] = line
-                print('read initials: ' + line)
-            else:
-                Player.top10[i][1] = float(line)
-                print('read score: ' + line)
-                i += 1
-            initials = not initials
-        print('read!')
-        f.close()
+        for board in Player.LeaderBoards:
+            f = open(board[1] + 'LeaderBoard.txt', 'r')
+            i = 0
+            initials = True
+            for line in f:
+                line = line.rstrip()         
+                if initials:
+                    board[0][i][0] = line
+                    print('read initials: ' + line)
+                else:
+                    board[0][i][1] = float(line)
+                    print('read score: ' + line)
+                    i += 1
+                initials = not initials
+            print('read!')
+            f.close()
 
         #Clicking anywhere will pop the title sceen and push to the Main Menu
         spyral.event.register("input.mouse.down", self.GoToMainMenu)

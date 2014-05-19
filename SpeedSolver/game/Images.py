@@ -13,7 +13,7 @@ class Tree(spyral.Sprite):
 
         self.image = spyral.Image("images/Pine-Tree.png")
         self.anchor = 'center'
-        self.pos = (WIDTH + 100, HEIGHT/4)
+        self.pos = (WIDTH + 100, HEIGHT/4+10)
 
 #Creates Large Cloud Image
 class LargeCloud(spyral.Sprite):
@@ -22,7 +22,7 @@ class LargeCloud(spyral.Sprite):
 
         self.image = spyral.Image("images/Large-Cloud.png")
         self.anchor = 'center'
-        self.pos = (WIDTH + 100, HEIGHT/13)
+        self.pos = (WIDTH + 100, HEIGHT/8)
 
 #Creates Small Cloud Image
 class SmallCloud(spyral.Sprite):
@@ -57,7 +57,7 @@ class Snowman(spyral.Sprite):
 
         self.image = spyral.Image("images/Snowman.png")
         self.anchor = 'center'
-        self.pos = (WIDTH + 100, HEIGHT/4 +150)
+        self.pos = (WIDTH + 100, HEIGHT/4 +125)
 
 #Creates Crab Image
 class Crab(spyral.Sprite):
@@ -75,7 +75,7 @@ class Bob(spyral.Sprite):
 
         self.image = spyral.Image("images/Bob.png")
         self.anchor = 'center'
-        self.pos = (WIDTH + 150, HEIGHT/4 +125)
+        self.pos = (WIDTH + 150, HEIGHT/4 +100)
 
 #Creates Face Image
 class RRFace(spyral.Sprite):
@@ -84,7 +84,7 @@ class RRFace(spyral.Sprite):
 
         self.image = spyral.Image("images/RRFace.png")
         self.anchor = 'center'
-        self.pos = (WIDTH + 150, HEIGHT/4+25)
+        self.pos = (WIDTH + 150, HEIGHT/4 - 25)
 
 #Creates Star Image
 class RRStar(spyral.Sprite):
