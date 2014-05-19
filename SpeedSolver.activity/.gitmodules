@@ -1,0 +1,9 @@
+[submodule "libraries/requests"]
+	path = libraries/requests
+	url = git://github.com/kennethreitz/requests.git
+[submodule "libraries/envoy"]
+	path = libraries/envoy
+	url = git://github.com/kennethreitz/envoy.git
+[submodule "libraries/sugargame2"]
+	path = libraries/sugargame2
+	url = https://github.com/platipy/sugargame2

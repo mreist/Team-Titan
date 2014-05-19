@@ -1,0 +1,45 @@
+RegisterForm.AdditionBox {
+    image_up: "images/AdditionBox.png"
+    image_up_hovered: "images/AdditionBox.png"
+    image_up_focuses: "images/AdditionBox.png"
+    image_down: "images/AdditionBoxChecked.png"
+    image_down_hovered: "images/AdditionBoxChecked.png"
+    image_down_focuses: "images/AdditionBoxChecked.png"
+}
+
+RegisterForm.SubtractionBox {
+    image_up: "images/SubtractionBox.png"
+    image_up_hovered: "images/SubtractionBox.png"
+    image_up_focuses: "images/SubtractionBox.png"
+    image_down: "images/SubtractionBoxChecked.png"
+    image_down_hovered: "images/SubtractionBoxChecked.png"
+    image_down_focuses: "images/SubtractionBoxChecked.png"
+}
+
+RegisterForm.MultiplicationBox {
+    image_up: "images/MultiplicationBox.png"
+    image_up_hovered: "images/MultiplicationBox.png"
+    image_up_focuses: "images/MultiplicationBox.png"
+    image_down: "images/MultiplicationBoxChecked.png"
+    image_down_hovered: "images/MultiplicationBoxChecked.png"
+    image_down_focuses: "images/MultiplicationBoxChecked.png"
+}
+
+RegisterForm.DivisionBox {
+    image_up: "images/DivisionBox.png"
+    image_up_hovered: "images/DivisionBox.png"
+    image_up_focuses: "images/DivisionBox.png"
+    image_down: "images/DivisionBoxChecked.png"
+    image_down_hovered: "images/DivisionBoxChecked.png"
+    image_down_focuses: "images/DivisionBoxChecked.png"
+}
+
+RegisterForm.OptionButton {
+    image_up: "images/Car.png"
+    image_up_hovered: "images/Car.png"
+    image_up_focuses: "images/Car.png"
+    image_down: "images/Car.png"
+    image_down_hovered: "images/Car.png"
+    image_down_focuses: "images/Car.png"
+    nine_slice: False
+}
