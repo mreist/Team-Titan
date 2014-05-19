@@ -8,7 +8,7 @@ currentTime = 0
 bestTime = 100000
 # Number of tokens a player has. 
 #Tokens allow a player to buy items in the Garage such as new wheels, decays and vehicles.
-tokens = 10
+tokens = 1
 
 #Top ten players in the leaderboard for each race
 DayTop10 = [['JFR', 1], ['MTR', 30], ['JTW', 60], ['NNA', 75], ['FAP', 1000], ['',1000000], ['',1000000], ['',1000000], ['',1000000], ['',1000000]]
