@@ -95,6 +95,16 @@ class RRStar(spyral.Sprite):
         self.image = spyral.Image("images/RRStars.png")
         self.anchor = 'midleft'
         self.pos = (0, HEIGHT/2 - 90)
+        
+#Creates SpeechBubble Image
+
+class FBSpeechBubble(spyral.Sprite):
+    def __init__(self, scene):
+        super(FBSpeechBubble, self).__init__(scene)
+        
+        self.image = spyral.Image("images/SpeechBubbleT.png")
+        self.anchor = 'midright'
+        self.pos = ((WIDTH/2 + 200, HEIGHT/2 + 60))        
 
 #Creates Instructions Button
 class Instructions_But(spyral.Sprite):
