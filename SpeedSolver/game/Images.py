@@ -1,5 +1,6 @@
 import spyral
 import Instructions
+import Model
 import Race
 import RaceSelection
 import LeaderBoard
@@ -124,6 +125,7 @@ class SelectRace_But(spyral.Sprite):
 
     def goToRace(self, pos):
         if self.collide_point(pos):
+            Model.SelectMode = "Race"
             spyral.director.pop
             spyral.director.push(RaceSelection.RaceSelection())
 
@@ -140,5 +142,6 @@ class Leaderboards_But(spyral.Sprite):
 
     def goToLeaderboard(self, pos):
         if self.collide_point(pos):
+            Model.SelectMode = "LeaderBoard"
             spyral.director.pop
             spyral.director.push(LeaderBoard.LeaderboardScene())
