@@ -13,6 +13,7 @@ HEIGHT = 900
 WHITE = (255, 255, 255)
 SIZE = (WIDTH, HEIGHT)
 
+   
 class RaceSelect(spyral.Sprite):
     def __init__(self, Scene):
         super(RaceSelect, self).__init__(scene)

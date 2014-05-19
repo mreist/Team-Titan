@@ -71,8 +71,9 @@ class Title(spyral.Scene):
             print('read!')
             f.close()
 
-        #Clicking anywhere will pop the title sceen and push to the Main Menu
+        #Clicking anywhere or pressing enter will pop the title sceen and push to the Main Menu
         spyral.event.register("input.mouse.down", self.GoToMainMenu)
+        spyral.event.register("input.keyboard.down.return", self.GoToMainMenu)
 		
     def GoToMainMenu(self):
         spyral.director.pop
