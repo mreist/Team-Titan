@@ -7,7 +7,7 @@ from spyral import Animation, easing
 currentTime = 0
 bestTime = 100000
 # Number of tokens a player has. 
-#Tokens allow a player to buy items in the Garage such as new wheels, decays and vehicles.
+#Tokens allow a player to buy items in the Garage such as new wheels, decals and vehicles.
 tokens = 1
 
 #Top ten players in the leaderboard for each race
