@@ -36,6 +36,7 @@ class Title(spyral.Scene):
         Model.RWtype = "Rwheel"
         Model.Vtype = "blue"
         Model.Decal = "blank"
+        Model.RaceSelect = "Day"
 
         #self.slapbass()
         self.loadLeaderBoard()
