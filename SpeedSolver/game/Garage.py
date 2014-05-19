@@ -31,6 +31,10 @@ OrangeCarUnlocked = False
 #Boolean value for the FancyWheel Unlockables
 LeftFWUnlocked =  False
 RightFWUnlocked = False
+LeftEWUnlocked = False
+RightEWUnlocked = False
+LeftCWUnlocked = False
+RightCWUnlocked = False
 
 #Boolean value for the Decal Unlockables
 FireDecalUnlocked = False
@@ -365,6 +369,96 @@ class drawRightFWheelImage(spyral.Sprite):
         if (RightFWUnlocked == True):
             if self.collide_point(pos):
                 Model.RWtype = "RFwheel"
+
+class drawLeftEWheelImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/EdgeyWheel.png")
+	    self.pos = (WIDTH - 1125 , (HEIGHT/2)-90)
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        global LeftEWUnlocked
+        
+        if (LeftEWUnlocked == False):
+            if self.collide_point(pos):
+                if (Player.tokens >= wheelCost):
+                    Model.LWtype = "LEwheel"
+                    Player.tokens = Player.tokens - wheelCost
+                    LeftEWUnlocked = True
+                print Player.tokens
+                
+        if (LeftEWUnlocked == True):
+            if self.collide_point(pos):
+                Model.LWtype = "LEwheel"
+                
+class drawRightEWheelImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/EdgeyWheel.png")
+	    self.pos = (WIDTH - 75, (HEIGHT/2)-70)
+
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)
+	    
+    def handle_clicked(self, pos):
+        global RightEWUnlocked
+        if (RightEWUnlocked == False):
+            if self.collide_point(pos):
+                if (Player.tokens >= wheelCost):
+                    Model.RWtype = "REwheel"
+                    Player.tokens = Player.tokens - wheelCost
+                    RightEWUnlocked = True
+                print Player.tokens
+        if (RightEWUnlocked == True):
+            if self.collide_point(pos):
+                Model.RWtype = "REwheel"
+
+class drawLeftCWheelImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/CrazyWheel.png")
+	    self.pos = (WIDTH - 1025, (HEIGHT/2)-150)
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+
+    def handle_clicked(self, pos):
+        global LeftCWUnlocked
+        
+        if (LeftCWUnlocked == False):
+            if self.collide_point(pos):
+                if (Player.tokens >= wheelCost):
+                    Model.LWtype = "LCwheel"
+                    Player.tokens = Player.tokens - wheelCost
+                    LeftCWUnlocked = True
+                print Player.tokens
+                
+        if (LeftCWUnlocked == True):
+            if self.collide_point(pos):
+                Model.LWtype = "LCwheel"
+                
+class drawRightCWheelImage(spyral.Sprite):
+    def __init__(self, Scene):
+	    spyral.Sprite.__init__(self, Scene)
+	    self.anchor = 'center'
+	    self.image = spyral.image.Image("images/CrazyWheel.png")
+	    self.pos = (WIDTH - 175, (HEIGHT/2)-135)
+
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)
+	    
+    def handle_clicked(self, pos):
+        global RightCWUnlocked
+        if (RightCWUnlocked == False):
+            if self.collide_point(pos):
+                if (Player.tokens >= wheelCost):
+                    Model.RWtype = "RCwheel"
+                    Player.tokens = Player.tokens - wheelCost
+                    RightCWUnlocked = True
+                print Player.tokens
+        if (RightCWUnlocked == True):
+            if self.collide_point(pos):
+                Model.RWtype = "RCwheel"
                 
 #Creates a FireDecal Sprite with its image 
 class drawFireDecal(spyral.Sprite):
@@ -538,6 +632,10 @@ class GarageScene(spyral.Scene):
         self.RightWheelImage = drawRightWheelImage(self.scene)
         self.LeftFWheelImage = drawLeftFWheelImage(self.scene)
         self.RightFWheelImage = drawRightFWheelImage(self.scene)
+        self.LeftEWheelImage = drawLeftEWheelImage(self.scene)
+        self.RightEWheelImage = drawRightEWheelImage(self.scene)
+        self.LeftCWheelImage = drawLeftCWheelImage(self.scene)
+        self.RightCWheelImage = drawRightCWheelImage(self.scene)
 
         #Draws the different Decal Images
         self.FireDecalImage = drawFireDecal(self.scene)
