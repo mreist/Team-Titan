@@ -6,6 +6,7 @@ import MainScreen
 import Race
 import Player
 import TextInterface
+import sets
 from Model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
