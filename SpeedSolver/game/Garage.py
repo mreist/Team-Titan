@@ -7,6 +7,7 @@ import Race
 import Player
 import TextInterface
 import sets
+import Questions
 from Model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
@@ -510,7 +511,7 @@ class GarageScene(spyral.Scene):
         spyral.event.register("system.quit", spyral.director.quit)
 
         self.background = spyral.Image("images/GarageScene.png")
-        self.CurrentTurn = 0
+        self.currentTurn = 0
 
         self.currentCarText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), ((WIDTH/2, HEIGHT/2 + 135)), "Current Car:")
         self.currentCarText.anchor = 'midbottom'
@@ -626,14 +627,14 @@ class GarageScene(spyral.Scene):
                         self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,255,0)), (WIDTH/2, 50), ("Correct: " + question.output))
                         
                         self.feedback.anchor = 'bottomleft'
-                        self.feedback.pos = (50, HEIGHT)
+                        self.feedback.pos = ((WIDTH/2)-50, (HEIGHT/2) + 350)
                         Player.tokens = Player.tokens + 1 
                 else:
                         if(self.currentTurn > 0):
                             self.feedback.kill()
                         self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (150,0,0)), (WIDTH/2, 50), ("Incorrect: " + question.output))
                         self.feedback.anchor = 'bottomleft'            
-                        self.feedback.pos = (50, HEIGHT) 
+                        self.feedback.pos = ((WIDTH/2)-50, (HEIGHT/2) + 350) 
                     
                        
                 self.currentTurn =+ 1
