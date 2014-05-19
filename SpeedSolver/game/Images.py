@@ -1,4 +1,8 @@
 import spyral
+import Instructions
+import Race
+import RaceSelection
+import LeaderBoard
 WIDTH = 1200
 HEIGHT = 900
 
@@ -90,3 +94,51 @@ class RRStar(spyral.Sprite):
         self.image = spyral.Image("images/RRStars.png")
         self.anchor = 'midleft'
         self.pos = (0, HEIGHT/2 - 90)
+
+#Creates Instructions Button
+class Instructions_But(spyral.Sprite):
+    def __init__(self, scene):
+        super(Instructions_But, self).__init__(scene)
+
+        self.image = spyral.Image("images/InstructionsButton.png")
+        self.anchor = 'topleft'
+        self.pos = (100, 600)
+
+        spyral.event.register("input.mouse.down.left", self.goToInstructions)	
+
+    def goToInstructions(self, pos):
+        if self.collide_point(pos):
+            spyral.director.pop
+            spyral.director.push(Instructions.InstructionScene())
+
+#Creates Select Race Button
+class SelectRace_But(spyral.Sprite):
+    def __init__(self, scene):
+        super(SelectRace_But, self).__init__(scene)
+        
+        self.image = spyral.Image("images/SelectRaceButton.png")
+        self.anchor = 'topleft'
+        self.pos = (450, 575)
+
+        spyral.event.register("input.mouse.down.left", self.goToRace)	
+
+    def goToRace(self, pos):
+        if self.collide_point(pos):
+            spyral.director.pop
+            spyral.director.push(RaceSelection.RaceSelection())
+
+#Creates Leaderboard Button
+class Leaderboards_But(spyral.Sprite):
+    def __init__(self, scene):
+        super(Leaderboards_But, self).__init__(scene)
+        
+        self.image = spyral.Image("images/LeaderboardsButton.png")
+        self.anchor = 'topleft'
+        self.pos = (900, 600)
+
+        spyral.event.register("input.mouse.down.left", self.goToLeaderboard)	
+
+    def goToLeaderboard(self, pos):
+        if self.collide_point(pos):
+            spyral.director.pop
+            spyral.director.push(LeaderBoard.LeaderboardScene())
