@@ -144,4 +144,4 @@ class Leaderboards_But(spyral.Sprite):
         if self.collide_point(pos):
             Model.SelectMode = "LeaderBoard"
             spyral.director.pop
-            spyral.director.push(LeaderBoard.LeaderboardScene())
+            spyral.director.push(RaceSelection.RaceSelection())
