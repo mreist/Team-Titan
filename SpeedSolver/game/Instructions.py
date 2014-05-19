@@ -1,6 +1,7 @@
 import spyral
 import MainScreen
 
+
 WIDTH = 1200
 HEIGHT = 900
 SIZE = (WIDTH, HEIGHT)

@@ -6,6 +6,8 @@ import MainScreen
 import Race
 import Player
 import TextInterface
+import sets
+import Questions
 from Model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
@@ -48,6 +50,11 @@ paintCost = 2
 wheelCost = 4
 decalCost = 6
 
+QuestionVisible = False
+AnswerVisible = False
+question = None
+questionanswer = None
+question1 = 0
 
 #Creates a BluePaint Sprite with its image
 class drawBlueImage(spyral.Sprite):
@@ -559,34 +566,46 @@ class drawFBobImage(spyral.Sprite):
 	    self.pos = (WIDTH - 300, (HEIGHT/2) + 150)
 	    #self.PlayerLWheels = PlayerLWheels(self.scene)
 	  #  self.PlayerRWheels = PlayerRWheels(self.scene)
-	   # spyral.event.register("input.mouse.down.left", self.handle_clicked)	
+	    spyral.event.register("input.mouse.down.left", self.handle_clicked)
+	    	
 
-    #def handle_clicked(self, pos):
-       # global BobUnlocked
-       # if (BobUnlocked == False):
-         #   if self.collide_point(pos):
-        #        if (Player.tokens > 0):
-          #          Model.Vtype = "Bob"
-         #           Player.tokens = Player.tokens - 1
-          #          BobUnlocked = True
-                    
-          #      print Player.tokens
-        #if (BobUnlocked == True):
-        #    if self.collide_point(pos):
-        #        Model.Vtype = "Bob"        
-       #Player.WithWheels = False
+    def handle_clicked(self, pos):
+        global AnswerVisible
+        global QuestionVisible
+        global question
+        global questionanswer
+        global question1
+        if self.collide_point(pos):
+            QuestionVisible = True
+            AnswerVisible = True
+            if(QuestionVisible == True and question1 == 0):
+                operands = ['WordProb']
+                question = Questions.Question(self.scene, random.choice(operands), 'WordProb')
+        
+                
+                question.anchor ='center'
+                question.pos = ((WIDTH/2 - 25), (HEIGHT/2) + 300)
+                questionanswer = question.answer
+                question1 = question1 + 1
+            elif (question1 > 0):
+                question.kill()   
+                question1 = question1 - 1
+                AnswerVisible = False
 
 #Creates a Garage scene
 class GarageScene(spyral.Scene):
     def __init__(self):
 	global manager
+	global AnswerVisible
+	global QuestionVisible
+	
         super(GarageScene, self).__init__(SIZE)
 
         spyral.event.register('input.keyboard.down.esc', spyral.director.quit)
         spyral.event.register("system.quit", spyral.director.quit)
 
         self.background = spyral.Image("images/GarageScene.png")
-        
+        self.currentTurn = 0
 
         self.currentCarText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), ((WIDTH/2, HEIGHT/2 + 135)), "Current Car:")
         self.currentCarText.anchor = 'midbottom'
@@ -649,16 +668,21 @@ class GarageScene(spyral.Scene):
 
         #Draws the Garage Owner Fancy Bob
         self.FBobImage = drawFBobImage(self.scene)
-
+        inputValues = sets.Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'])
         #Creates a back button to go back to the Main Menu
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")
-		
+	    AnswerInput = spyral.widgets.TextInput(100, '', validator = inputValues, text_length = 4)	
         self.my_form = RegisterForm(self)
         self.my_form.focus()
         self.my_form.BackButton.pos = ((WIDTH/2)-50, (HEIGHT/2) + 400)
 
+
+        self.my_form.AnswerInput.pos = ((WIDTH/2)-50, (HEIGHT/2) + 350)
+        self.my_form.AnswerInput.visible = AnswerVisible
+        
         spyral.event.register("form.RegisterForm.BackButton.clicked", self.goToMenu)
+        spyral.event.register("input.keyboard.down.return", self.checkAnswer)
         spyral.event.register("input.mouse.down.left", self.update)	
 
     #Update function that draws the current car, wheels, and decals
@@ -685,8 +709,44 @@ class GarageScene(spyral.Scene):
             self.PlayerLWheels.layer = "top"
             self.PlayerRWheels.layer = "top"
             
-
+        self.my_form.AnswerInput.visible = AnswerVisible
+        
+        
+        
+    def checkAnswer(self):
+        global AnswerVisible
+        global question
+        global questionanswer
+        if(self.my_form.AnswerInput.visible == True):
+            try:
+                if int(self.my_form.AnswerInput.value) == questionanswer:
+                        if(self.currentTurn > 0):
+                            self.feedback.kill()
+                        self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (0,255,0)), (WIDTH/2, 50), ("Correct: " + question.output))
+                        
+                        self.feedback.anchor = 'bottomleft'
+                        self.feedback.pos = ((WIDTH/2)-50, (HEIGHT/2) + 350)
+                        Player.tokens = Player.tokens + 1 
+                else:
+                        if(self.currentTurn > 0):
+                            self.feedback.kill()
+                        self.feedback = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 32, (150,0,0)), (WIDTH/2, 50), ("Incorrect: " + question.output))
+                        self.feedback.anchor = 'bottomleft'            
+                        self.feedback.pos = ((WIDTH/2)-50, (HEIGHT/2) + 350) 
+                    
+                       
+                self.currentTurn =+ 1
+                question.kill()       
+                self.my_form.focus()
+                self.tokenText
+                self.tokenText.update("Number of Tokens: " + str(Player.tokens)) 
+                AnswerVisible = False
+                self.my_form.AnswerInput.visible = AnswerVisible
+            except ValueError:
+                print 'Nothing'        
     #Pops the Garage Scene and pushes the Main Menu to the front	
     def goToMenu(self):
+    	global AnswerVisible
+        AnswerVisible = False
         spyral.director.pop
         spyral.director.push(MainScreen.MainMenu()) 

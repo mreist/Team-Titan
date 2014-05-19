@@ -73,21 +73,16 @@ class ResultsScreen(spyral.Scene):
         locx = WIDTH/2 - 250
         
         self.timeText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 100), 'You did it!! Your time was %.2f.' %time)
-    #     if Player.firstPlay == True:
-#             Player.bestTime = Player.currentTime
-#             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Try to beat it next time!')
-#             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You received a token for your speedy racing.')
-#             Player.tokens += 1
-#             Player.firstPlay = False
+        
         if time < top10[0][1]:
-            lasttime = Player.bestTime
+            lasttime = Player.currentTime
             yay.play(0)
-            Player.bestTime = time
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Wow! You beat the fastest time is score of ' + str(lasttime) + '.')
+            Player.currentTime = time
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'Wow! You beat the fastest time is ' + str(lasttime) + '.')
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'You got your prize plus an extra token. Nice!')
             Player.tokens += (reward + 1)
         else:
-            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'The fastest time is is ' + str(Player.bestTime) + '.')
+            TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 200), 'The fastest time is ' + str(Player.bestTime) + '.')
             
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 300), 'Try to beat it next time!')
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, fontsize, (255, 255, 255)), (locx, 400), 'You received a prize for your speedy racing.')
