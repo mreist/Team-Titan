@@ -50,7 +50,7 @@ class MainMenu(spyral.Scene):
         self.midButton = Images.SelectRace_But(self.scene)
         self.rightButton = Images.Leaderboards_But(self.scene)
 
-        spyral.event.register("form.RegisterForm.SoundButton.clicked", self.SwitchSound)
+#        spyral.event.register("form.RegisterForm.SoundButton.clicked", self.SwitchSound)
 
         
     #def SwitchSound(self):
