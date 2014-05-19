@@ -8,6 +8,7 @@ import Player
 import TextInterface
 import sets
 import Questions
+import Images
 from Model import resources
 from Player import PlayerVehicle
 from Player import PlayerLWheels
@@ -607,7 +608,7 @@ class GarageScene(spyral.Scene):
         self.background = spyral.Image("images/GarageScene.png")
         self.currentTurn = 0
 
-        self.currentCarText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), ((WIDTH/2, HEIGHT/2 + 135)), "Current Car:")
+        self.currentCarText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), ((WIDTH/2, HEIGHT/2 + 150)), "Current Car:")
         self.currentCarText.anchor = 'midbottom'
         
         self.tokenText = TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, WHITE), ((WIDTH - 200), (HEIGHT/2) + 400), "Number of Tokens: "+ str(Player.tokens))
@@ -668,6 +669,9 @@ class GarageScene(spyral.Scene):
 
         #Draws the Garage Owner Fancy Bob
         self.FBobImage = drawFBobImage(self.scene)
+        self.BubbleImage = Images.FBSpeechBubble(self)
+        self.BubbleImage.scale = .3
+        
         inputValues = sets.Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'])
         #Creates a back button to go back to the Main Menu
         class RegisterForm(spyral.Form):
