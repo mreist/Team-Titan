@@ -36,20 +36,25 @@ class LeaderboardScene(spyral.Scene):
         elif title == "Snow":
             title = "Tundra Express"
         TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 28, (255, 255, 0)), (WIDTH/2 - 100, 20), title)
-        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (0, 0, 0)), (WIDTH/2 - 225, 40), "Initials")
-        TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (0, 0, 0)), (WIDTH/2 + 100, 40), "Time (seconds)")
+
         
         if Model.RaceSelect == "Day":
+            self.background = spyral.Image("images/DayLeaderboard.png")
             top10 = Player.DayTop10
         elif Model.RaceSelect == "Night":
+            self.background = spyral.Image("images/NightLeaderboard.png")
             top10 = Player.NightTop10
         elif Model.RaceSelect == "Snow":
+            self.background = spyral.Image("images/SnowLeaderboard.png")
             top10 = Player.SnowTop10
         elif Model.RaceSelect == "Beach":
+            self.background = spyral.Image("images/BeachLeaderboard.png")
             top10 = Player.BeachTop10
         elif Model.RaceSelect == "PreHist":
+            self.background = spyral.Image("images/PrehistoricLeaderboard.png")
             top10 = Player.PreHistTop10
         else:
+            self.background = spyral.Image("images/RainbowRoadLeaderboard.png")
             top10 = Player.RRTop10
             
         for player in top10:
@@ -61,7 +66,7 @@ class LeaderboardScene(spyral.Scene):
             TextInterface.TextInterface(self, spyral.Font(DEF_FONT, 24, (0, 0, 0)), (WIDTH/2 + 100, 110 + i), time)
             i += 70
             n += 1
-        self.background = spyral.Image("images/LeaderboardBackground.png")
+        
 
         class RegisterForm(spyral.Form):
             BackButton = spyral.widgets.Button("Go Back")
