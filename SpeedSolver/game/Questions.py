@@ -14,7 +14,7 @@ Operands = ["+", "-", "*", "/"]
 
 FirstString = ["costs $ ","Bob has ","Bob sells "]
 SecondString = [", he has $ ", ", if he used ", (", if he charges $ ")]
-ThirdString = [".how many can he buy?", " in his shop, how many will he have left?", ", what is his profit?"]  
+ThirdString = [", how many can he buy?", " in his shop, how many will he have left?", ", what is his profit?"]  
 WordOperands = ["/", "-", "*"]
 Nouns = ["paint buckets", "wheels", "cars", "decals", "rims"]
 
